@@ -19,6 +19,7 @@ The complete source file inventory is available from `git ls-tree -r --name-only
 
 ## Verified locally
 
+- The product suite passed 49 tests on both local environments below. All six GitHub CI jobs passed at release revision `7447c04ff8eb74e754ae573234b40478b687596a`, including macOS 26 ARM64 and macOS 15 Intel. The [completed run](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41902956177) includes tarball install/removal checks. The published `v0.1.0-rc.1` artifact was downloaded, its SHA-256 verified, and installation of ten skill files across both isolated client homes, a no-op update and full rollback passed.
 - Windows x64, Node.js 24.15.0. CLI, installer, concurrency, recovery, metadata, privacy, subprocess and RTK tests.
 - Ubuntu under WSL2 x64, Linux Node.js 24.15.0. The same suite and package smoke ran on the mounted Windows checkout. The volume grants execute access even after chmod 0600. The test reports that filesystem behavior explicitly.
 - The package smoke installs a tarball with npm into a temporary prefix containing spaces, runs its CLI, installs both agents' skills into a synthetic home and removes them. It invokes the real Windows CMD launcher or the POSIX executable.
@@ -30,7 +31,7 @@ The complete source file inventory is available from `git ls-tree -r --name-only
 
 The CI workflow covers Windows, Ubuntu, macOS Intel and macOS Apple Silicon across selected Node.js 22, 24 and 26 combinations. Its actual run history is the evidence for those runners. A platform matrix does not establish agent-client compatibility by itself.
 
-Claude Code is absent on the development Windows PATH, so discovery in a real Claude Code session remains a manual acceptance step. Codex app-server's isolated Windows home probe returned bundled skills only, so global discovery was not counted as verified in that probe. Run the documented fresh-session selectors to check each installed client on your own account. Neither discovery nor structural tests establish how reliably a model will invoke or follow a skill.
+Claude Code is absent on the development Windows PATH, so discovery in a real Claude Code session remains a manual acceptance step. Native Codex 0.166.0 app-server discovered all five manifests in an isolated directory with repository scope. Its isolated Windows user-home probe returned bundled skills only, so global discovery was not counted as verified. Run the documented fresh-session selectors to check each installed client on your own account. Neither discovery nor structural tests establish how reliably a model will invoke or follow a skill.
 
 No comparative model runs or measured total token savings ship in this release. No collector backend has been deployed. Upstream tools remain opt-in separate installs documented in the integration guide. Their models, services and licenses have separate terms.
 

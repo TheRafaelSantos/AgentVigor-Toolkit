@@ -19,7 +19,7 @@ AgentVigor is an independent Node.js CLI and a set of portable, on-demand skills
 | M3 Global integration | Profiles, agent selection, dry-run, state, install, update and rollback | Isolated tests for both clients, idempotency, conflicts and restoration |
 | M4 Reliability | Original skills and diagnosis | Manifest tests and manual skill discovery steps |
 | M5 RTK | Official RTK monitor | Mocked lifecycle tests and local one-shot RTK run |
-| M6 Documentation | Three README languages and three original visuals | Local link and command checks |
+| M6 Documentation | Three README languages and four supplied PNG visuals | Local link and command checks, lossless compression and conceptual-metric captions |
 | M7 Quality | Platform CI, test matrix, offline benchmark and consent design | CI plus an explicit record of manual coverage |
 | M8 Public candidate | Reviewed commit and versioned GitHub artifact | Clean checkout, passing jobs and install smoke test from package |
 
