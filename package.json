@@ -1,0 +1,14 @@
+{
+  "name": "agentvigor",
+  "version": "0.1.0-rc.1",
+  "description": "Global coding-agent skills and local diagnostics for Codex and Claude Code",
+  "type": "module",
+  "license": "MIT",
+  "author": "Rafael Pereira",
+  "repository": "github:TheRafaelSantos/AgentVigor-Toolkit",
+  "homepage": "https://github.com/TheRafaelSantos/AgentVigor-Toolkit",
+  "engines": { "node": "^22.0.0 || ^24.0.0 || ^26.0.0" },
+  "bin": { "agentvigor": "bin/agentvigor.mjs" },
+  "files": ["bin/", "lib/", "skills/", "docs/", "benchmarks/", "README.pt-BR.md", "README.es.md", "THIRD_PARTY_NOTICES.md", "CHANGELOG.md", "CONTRIBUTING.md"],
+  "scripts": { "test": "node --test \"test/*.test.mjs\"", "smoke:package": "node scripts/smoke-package.mjs" }
+}

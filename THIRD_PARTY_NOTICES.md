@@ -1,0 +1,23 @@
+# Third-party notices
+
+Rafael Pereira created and maintains AgentVigor Toolkit. The original
+AgentVigor code and skills use the repository's [MIT license](LICENSE).
+
+The integrations below are separate upstream projects. AgentVigor does
+not bundle their code, binaries, skills, or plugins. Its RTK monitor calls
+the separately installed `rtk` executable. Links describe the observed
+upstream terms for the relevant release or reference revision.
+
+| Project | Credit and relationship | Upstream terms |
+| --- | --- | --- |
+| [Vibe Coding Toolkit](https://github.com/soumatheusgomes/vibe-coding-toolkit/tree/21b71b68679c11184f49c23168852014bf6dde8b) | Matheus Gomes. Reviewed as a technical reference. No files, prompts, templates, or artwork from it are redistributed. | [MIT, copyright 2026 Matheus Gomes](https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/LICENSE) |
+| [RTK](https://github.com/rtk-ai/rtk/tree/v1.1.0) | RTK contributors. Optional command-output filtering and source of the monitor's displayed data. | [Apache-2.0 CLI](https://github.com/rtk-ai/rtk/blob/v1.1.0/LICENSE), [BUSL-1.1 engine](https://github.com/rtk-ai/rtk/blob/v1.1.0/engine/LICENSE) in the full binary, and [BUSL-1.1 separate proxy](https://github.com/rtk-ai/rtk/blob/v1.1.0/proxy/LICENSE). The `rtk-oss` edition omits the engine. |
+| [Superpowers](https://github.com/obra/superpowers/tree/v7.0.2) | Jesse Vincent and contributors. Optional development workflow plugin. | [MIT](https://github.com/obra/superpowers/blob/v7.0.2/LICENSE) |
+| [Ponytail](https://github.com/DietrichGebert/ponytail/tree/v5.3.3) | DietrichGebert and contributors. Optional implementation and review guidance. | [MIT](https://github.com/DietrichGebert/ponytail/blob/v5.3.3/LICENSE) |
+| [Skills CLI and Find Skills](https://github.com/vercel-labs/skills/tree/v1.7.6) | Vercel, Inc. and contributors. Optional skills catalog and installer. | [MIT](https://github.com/vercel-labs/skills/blob/v1.7.6/LICENSE) and the upstream [third-party notices](https://github.com/vercel-labs/skills/blob/v1.7.6/ThirdPartyNoticeText.txt) |
+| [Graphify](https://github.com/Graphify-Labs/graphify/tree/v0.9.102) | Safi Shamsi and Graphify contributors. Optional code graph tool. | [Apache-2.0](https://github.com/Graphify-Labs/graphify/blob/v0.9.102/LICENSE) with [NOTICE](https://github.com/Graphify-Labs/graphify/blob/v0.9.102/NOTICE). Previously MIT-licensed contributions remain available under the [preserved MIT terms](https://github.com/Graphify-Labs/graphify/blob/v0.9.102/LICENSE-MIT). |
+
+The skill manifests follow the [Agent Skills specification](https://agentskills.io/specification).
+See [Integrations](docs/INTEGRATIONS.md) for the audited versions, setup
+mechanisms, and checks. Review applicable terms and preserve required notices
+before including any upstream material in future releases.
