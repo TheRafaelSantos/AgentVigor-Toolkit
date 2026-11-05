@@ -39,3 +39,5 @@ jobs:
       - run: npm run smoke:package
       - name: Verify official RTK binaries and offline rollback
         run: node scripts/smoke-rtk-binary.mjs
+      - name: Verify official Find Skills installation and offline rollback
+        run: node scripts/smoke-find-skills.mjs --allow-network
