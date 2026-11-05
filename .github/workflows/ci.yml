@@ -50,4 +50,5 @@ jobs:
           version: '0.11.26'
           enable-cache: 'false'
       - name: Verify official Graphify runtime, AST extraction and offline rollback
-        run: node scripts/smoke-graphify-runtime.mjs "${{ steps.uv.outputs.uv-path }}" --allow-network
+        # setup-uv's uv-path output omits the executable extension on Windows.
+        run: node scripts/smoke-graphify-runtime.mjs "${{ steps.uv.outputs.uv-path }}${{ runner.os == 'Windows' && '.exe' || '' }}" --allow-network
