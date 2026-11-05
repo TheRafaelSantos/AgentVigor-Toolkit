@@ -130,10 +130,81 @@ result summary in ignored `out/codex-acceptance-<scenario>.json` files.
 
 ## Remaining acceptance categories
 
+### Complete procedure attempts
+
+Two Windows runs loaded the complete original multi-agent review prompt and its
+guide, found both planted defects, and preserved the source. The second also
+verified the base revision. However, the JSON stream only exposed `wait` calls
+with empty receiver IDs, despite reviewer attribution in the final narrative.
+The runner therefore returned `nativeDispatchObserved: false` and did not accept
+independent dispatch. A narrative alone does not prove a native panel.
+
+The first complete security-audit attempt timed out after writing two artifacts.
+The second wrote all four but timed out before session completion. Both were
+recorded as failed; the second's artifacts were inspected before cleanup, not
+published as an accepted audit. The runner now preserves artifacts even after
+a process error, supplies per-command Git fixture overrides for the sandbox,
+and disables native subagents only in its sequential audit session. This
+session-only feature setting does not edit the user's configuration.
+
+```powershell
+node scripts/smoke-codex-full-procedures.mjs 'C:\path\to\codex.exe' --allow-live panel
+node scripts/smoke-codex-full-procedures.mjs 'C:\path\to\codex.exe' --allow-live audit
+```
+
+The panel has a ten-minute limit; the sequential audit has fifteen minutes.
+The runner requires no existing managed AgentVigor installation, temporarily
+installs the six skills and restores the prior state in `finally`. Reports and
+observations stay in ignored `out/`. A timeout or missing observation remains a
+failure even when an artifact exists.
+
+Português: as duas revisões FULL encontraram os defeitos, mas não comprovaram
+despacho independente. As duas primeiras auditorias excederam o tempo; escrever
+relatórios sem concluir a sessão não foi contado como aprovação.
+
+Español: ambas revisiones FULL encontraron los defectos, pero no probaron el
+despacho independiente. Las dos primeras auditorías excedieron el tiempo;
+escribir informes sin completar la sesión no se contó como aprobación.
+
+### Native RTK hook observation
+
+On Windows with the same Codex build, the native `hooks/list` RPC reported an
+enabled, trusted user `preToolUse` RTK hook. A fresh session received a plain
+Git status command; its execution event contained `rtk git ...`. The first
+attempt failed to launch the WinGet link; resolving the target still produced
+access denied under the sandbox account. These failures were retained privately.
+
+The successful fixture copied the existing RTK binary byte-for-byte into its
+temporary project and prepended only the child process's PATH. It submitted
+`git -c safe.directory=<that exact fixture> status --short`, without an RTK
+prefix. The native event showed the rewritten RTK command, exit zero and the
+fixture in its output. The source stayed unchanged. The versioned runner passed
+all six observations and removed the temporary project:
+
+```powershell
+node scripts/smoke-codex-rtk.mjs 'C:\path\to\codex.exe' --allow-live
+```
+
+This requires an existing authenticated client, RTK and a trusted native hook.
+It neither registers nor trusts a hook. It proves scoped automatic rewriting;
+it does not prove that the current WinGet path works inside the sandbox or that
+a managed private runtime has been invoked there. No global PATH, Git trust,
+account, sandbox permissions or hook configuration was changed. The client also
+warned about hooks represented in both TOML and JSON; that personal configuration
+was preserved. Token compression and database recording were not measured.
+
+Português: o hook reescreveu e executou o comando no teste isolado. O caminho do
+WinGet falhou no sandbox. A cópia temporária e a confiança Git limitada a um
+comando da fixture permitiram a prova; nenhuma configuração pessoal foi alterada.
+
+Español: el hook reescribió y ejecutó el comando en la prueba aislada. La ruta de
+WinGet falló dentro del sandbox. Se usaron una copia temporal y confianza Git
+limitada al comando de esa fixture, sin cambiar la configuración personal.
+
 | Category | Existing executable evidence | Native behavior still required |
 | --- | --- | --- |
 | Development | Real bounded Grounded Code change and independent assertions passed | Extend to the complete original project workflow as applicable. |
-| Review | Diff Guardian found the seeded invoice defect in both source review and a real Git diff fixture | Automatic RTK hook rewriting and the full multi-agent procedure remain unverified. |
+| Review | Diff Guardian found the seeded invoice defect in source and Git diff fixtures. A separate native RTK rewrite executed successfully in an isolated fixture | Full multi-agent dispatch and RTK execution from the normal installed path remain unverified. |
 | Debugging | Real failure, production correction and rerun of an unchanged test observed | Additional project-specific cases remain selectable. |
 | Security | Real Grounded Code review found the cross-tenant authorization defect | Validate the full upstream security audit and its multi-part checks. |
 | Context economy | Real targeted search in a large synthetic log, plus on-demand FULL loading | Controlled paired token measurement before any savings claim. |

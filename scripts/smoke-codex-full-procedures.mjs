@@ -79,15 +79,22 @@ try {
       '-c', 'commit.gpgsign=false', 'commit', '--quiet', '-m', 'Synthetic procedure baseline']);
     if (sample.id === 'panel') await writeFile(join(cwd, 'service.mjs'), source);
     const revision = await invokeGit(['rev-parse', 'HEAD']);
-    const prompt = `Use $agentvigor-toolkit explicitly. Load the complete original FULL procedure ${sample.workflow} and the linked usage guide from the global skill resources. ${sample.prompt} Target revision is ${revision}; the working tree may contain the seeded changes. Scope is this repository and its original skill resources only. All data is synthetic. Do not inspect host credentials, call external connectors, access other projects, create accounts, change client settings or contact services. Native subagents are explicitly authorized only for the panel. Record observations without inventing successful commands.`;
+    const prompt = `Use $agentvigor-toolkit explicitly. Load the complete original FULL procedure ${sample.workflow} and the linked usage guide from the global skill resources. ${sample.prompt} Target revision is ${revision}; the working tree may contain the seeded changes. The Windows sandbox can use a different OS account. For Git commands only, use -c safe.directory=${JSON.stringify(cwd.replaceAll('\\', '/'))} and -c core.excludesFile=${JSON.stringify(join(cwd, '.gitignore').replaceAll('\\', '/'))}; never persist these overrides. If the RTK executable is inaccessible, invoke the detected Git executable ${JSON.stringify(git)} directly and record that limitation. Scope is this repository and its original skill resources only. All data is synthetic. Do not inspect host credentials, call external connectors, access other projects, create accounts, change client settings or contact services. Native subagents are explicitly authorized only for the panel. Record observations without inventing successful commands.`;
     try {
-      const result = await runFile(executable, ['exec', '--ephemeral', '--skip-git-repo-check', '--sandbox', sample.sandbox,
-        '--json', '--cd', cwd, prompt], { cwd, env, timeoutMs: 600000, maxOutputBytes: 4 * 1024 * 1024 });
+      let result;
+      try {
+        result = await runFile(executable, ['exec', '--ephemeral', '--skip-git-repo-check', '--sandbox', sample.sandbox,
+          ...(sample.id === 'audit' ? ['-c', 'features.multi_agent=false'] : []),
+          '--json', '--cd', cwd, prompt], { cwd, env, timeoutMs: sample.id === 'audit' ? 900000 : 600000, maxOutputBytes: 4 * 1024 * 1024 });
+      } catch (error) {
+        result = { code: null, stdout: '', processError: error.code ?? error.name };
+      }
       const events = result.stdout.split(/\r?\n/).flatMap(line => { try { return [JSON.parse(line)]; } catch { return []; } });
       const completed = events.filter(event => event.type === 'item.completed').map(event => event.item);
       const commands = completed.filter(item => item?.type === 'command_execution' && item.exit_code === 0);
       const final = completed.filter(item => item?.type === 'agent_message').at(-1)?.text ?? '';
       const observed = { case: sample.id, code: result.code,
+        ...(result.processError ? { processError: result.processError } : {}),
         fullRead: commands.some(command => command.command.includes(sample.sourceFile)),
         revisionPreserved: await invokeGit(['rev-parse', 'HEAD']) === revision,
         sourcePreserved: (await Promise.all(Object.entries(files).map(async ([name, bytes]) =>

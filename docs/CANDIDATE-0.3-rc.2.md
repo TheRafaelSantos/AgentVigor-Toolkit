@@ -28,8 +28,9 @@ instalação temporária das skills é revertida ao fim de cada runner. Não hou
 alteração persistente de conta, modelo ou provedor.
 
 Limites: Claude Code não foi encontrado no PATH; seus testes reais e o lifecycle
-gerenciado dos plugins continuam pendentes. A execução automática de RTK requer
-evidência própria. Graphify, Find Skills e plugins têm smokes oficiais Windows;
+gerenciado dos plugins continuam pendentes. O hook RTK executou um comando na
+fixture isolada; o caminho WinGet falhou no sandbox e runtimes gerenciados ainda
+precisam de teste dentro do cliente. Graphify, Find Skills e plugins têm smokes oficiais Windows;
 a homologação equivalente fora do Windows continua pendente. A migração em
 PostgreSQL real e a economia de tokens não foram medidas.
 
@@ -54,7 +55,7 @@ Nenhuma atualização automática de instalações pessoais é aplicada pela rel
 The candidate keeps all sixteen complete original procedures offline and adds
 verified executable improvements. Native Codex cases are bounded acceptance
 evidence, not a claim that every original procedure is fully validated. Claude
-acceptance, automatic RTK rewriting, non-Windows official smokes for the other
+acceptance, managed RTK runtime execution inside the client, non-Windows official smokes for the other
 optional integrations, live PostgreSQL migrations and controlled token metrics
 remain separate gates. Use `npm` instead of `npm.cmd` on Linux and macOS.
 
@@ -63,7 +64,9 @@ remain separate gates. Use `npm` instead of `npm.cmd` on Linux and macOS.
 El candidato conserva los dieciséis procedimientos originales completos sin
 conexión y añade el preset opcional PostgreSQL y la corrección WSL. Hay casos
 reales acotados en las siete categorías de Codex. No prueban todas las etapas
-de cada procedimiento original. Siguen pendientes Claude Code, hooks automáticos,
+de cada procedimiento original. El hook RTK ejecutó un comando en una fixture
+aislada; la ruta WinGet falló en el sandbox. Siguen pendientes Claude Code,
+ejecución del runtime RTK gestionado dentro del cliente,
 smokes oficiales fuera de Windows para las otras integraciones, migraciones
 PostgreSQL reales y una medición controlada de tokens. Usa `npm` en Linux/macOS.
 Revisa SHA-256, la vista previa y las instrucciones de reversión antes de instalar.

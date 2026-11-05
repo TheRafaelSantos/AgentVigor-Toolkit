@@ -59,7 +59,7 @@ security-audit
 | Prioridade | Lacuna | Impacto / próximo critério |
 | --- | --- | --- |
 | P1 | Revisão multiagente, dispatch e auditoria completa ainda sem execução integral do procedimento original | Casos delimitados de uma skill não provam todas as etapas. Executar procedimentos com evidências por etapa |
-| P1 | Hooks automáticos e uso das integrações dentro dos clientes | Registro e instalação estão testados. Observar evento de hook e efeito real, com o cliente selecionado |
+| P1 | Uso das integrações dentro dos clientes | O hook RTK reescreveu e executou um comando na fixture isolada. O caminho WinGet falha no sandbox; os runtimes gerenciados e demais integrações precisam de provas próprias dentro do cliente |
 | P1 | Claude Code indisponível no PATH inspecionado | Homologação real e lifecycle dos plugins dependem de um cliente disponível. Manter handoff nativo e estados BLOCKED/UNVERIFIED |
 | P2 | PostgreSQL real e aplicação de migração | Testes de pool usam mocks. SQL foi gerado sem conexão. Docker indisponível impede a prova local da migração |
 | P2 | Smokes oficiais fora do Windows | RTK OSS/Full passou em todos os seis jobs, incluindo macOS Intel/ARM. Graphify, Find Skills e plugins precisam de smokes oficiais próprios fora do Windows |
@@ -90,8 +90,9 @@ The A–J table above links the requested deliverables and their evidence. All
 AgentVigor adds global skills, five original specialists, the CLI, scoped plans,
 optional integration management and rollback to the upstream Vibe resources.
 
-Bounded native Codex cases ran in all seven requested categories. Full multi-agent
-procedures, automatic hook execution and Claude Code acceptance remain pending.
+Bounded native Codex cases ran in all seven requested categories. RTK rewriting
+executed in an isolated native fixture. Full multi-agent procedures, managed
+integration invocation and Claude Code acceptance remain pending.
 The local inventory separates installation from configuration, discovery and
 invocation. Windows official smokes and the six-job package/code matrix cover
 different validation scopes. The PostgreSQL preset passed lint, types, nine
@@ -109,8 +110,9 @@ procedimientos originales completos y el snapshot de 121 archivos están
 disponibles sin conexión. AgentVigor añade skills globales, cinco especialistas
 propias, CLI, planes acotados, gestión opcional de integraciones y reversión.
 
-Se ejecutó un caso nativo delimitado en cada categoría de Codex. Siguen pendientes
-los procedimientos multiagente completos, los hooks automáticos y Claude Code.
+Se ejecutó un caso nativo delimitado en cada categoría de Codex y el hook RTK
+ejecutó un comando en una fixture aislada. Siguen pendientes los procedimientos
+multiagente completos, la invocación de integraciones gestionadas y Claude Code.
 El inventario distingue instalación, configuración, descubrimiento e invocación.
 Los smokes oficiales Windows y la matriz de seis jobs validan alcances distintos.
 El preset PostgreSQL pasó lint, tipos, nueve pruebas, compilación y generación
