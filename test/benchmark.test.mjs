@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { compare } from '../lib/benchmark.mjs';
+import { compare, benchmark } from '../lib/benchmark.mjs';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
 
 const metadata = {
   environment: 'Test runner', revision: 'fixture', agent: 'Codex', agentVersion: 'test',
@@ -8,6 +10,18 @@ const metadata = {
 };
 const result = durationMs => ({ durationMs, testsPassed: 2, testsFailed: 0 });
 const report = pairs => ({ schemaVersion: 1, metadata, pairs });
+
+test('benchmark reads valid observations beyond a single filesystem chunk', async t => {
+  const root = await mkdtemp(resolve('.agentvigor-test-benchmark-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const input = join(root, 'observations.json');
+  await writeFile(input, ' '.repeat(200000) + JSON.stringify(report([
+    { baseline: result(10), agentvigor: result(6) },
+  ])));
+  const outcome = await benchmark(input);
+  assert.equal(outcome.repetitions, 1);
+  assert.equal(outcome.metrics.durationMs.pairedDeltaMedian, -4);
+});
 
 test('reports paired deltas and keeps unavailable token metrics empty', () => {
   const pairs = [[1, 2], [4, 5], [8, 1]].map(([baseline, agentvigor]) => ({

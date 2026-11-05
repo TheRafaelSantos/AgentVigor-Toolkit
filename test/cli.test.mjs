@@ -102,6 +102,11 @@ test('doctor reports malformed Claude settings and duplicate hooks without leaki
   assert.ok(JSON.parse(result.stdout).checks.some(({ id, duplicates }) => id === 'claudeHooks' && duplicates === 1));
   assert.ok(!result.stdout.includes(secret));
   assert.ok(!result.stdout.includes(home));
+  await writeFile(malformed, JSON.stringify({ privateNote: 'x'.repeat(180000), hooks: {} }));
+  result = run(['doctor', '--json'], env);
+  assert.equal(result.status, 0, result.stderr);
+  assert.ok(JSON.parse(result.stdout).checks.some(({ id, state }) => id === 'claudeHooks' && state === 'ok'));
+  assert.ok(result.stdout.length < 20000);
 });
 
 test('Find Skills CLI previews offline and refuses noninteractive installs without consent', async t => {

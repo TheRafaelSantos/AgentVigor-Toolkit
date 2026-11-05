@@ -4,6 +4,7 @@ import { homedir, tmpdir } from 'node:os';
 import { isAbsolute, join, resolve } from 'node:path';
 import { install, installationStatus, rollback } from '../lib/install.mjs';
 import { runFile } from '../lib/process.mjs';
+import { detectTools } from '../lib/platform.mjs';
 import pkg from '../package.json' with { type: 'json' };
 
 const executable = process.argv[2];
@@ -37,6 +38,20 @@ try {
     const cwd = join(root, sample.id);
     await mkdir(cwd);
     await writeFile(join(cwd, sample.file), sample.content);
+    if (sample.id === 'review') {
+      const git = (await detectTools({ env })).git?.path;
+      assert.ok(git, 'Git is required for the review fixture');
+      const invoke = async args => {
+        const result = await runFile(git, args, { cwd, env, timeoutMs: 15000 });
+        assert.equal(result.code, 0, result.stderr);
+      };
+      await invoke(['init', '--quiet']);
+      await writeFile(join(cwd, sample.file), sample.content.replace('row.unitCents,', 'row.unitCents * row.quantity,'));
+      await invoke(['add', sample.file]);
+      await invoke(['-c', 'user.name=AgentVigor Fixture', '-c', 'user.email=fixture@example.invalid',
+        '-c', 'commit.gpgsign=false', 'commit', '--quiet', '-m', 'Seed synthetic review baseline']);
+      await writeFile(join(cwd, sample.file), sample.content);
+    }
     const prompt = `Use $${sample.skill} explicitly. ${sample.prompt} Inspect only the seeded fixture and the requested skill. Do not use connectors, credentials, other repositories, network tools or subagents.`;
     const result = await runFile(executable, ['exec', '--ephemeral', '--skip-git-repo-check', '--sandbox', 'read-only',
       '-c', 'mcp_servers={}', '--json', '--cd', cwd, prompt], { cwd, env, timeoutMs: 150000, maxOutputBytes: 2 * 1024 * 1024 });
@@ -46,10 +61,12 @@ try {
     const observed = { case: sample.id, code: result.code, skillRead: commands.some(event =>
       event.item.exit_code === 0 && event.item.command.includes(sample.skill) && event.item.command.includes('SKILL.md')),
     fixtureRead: commands.some(event => event.item.exit_code === 0 && event.item.command.includes(sample.file)),
+    ...(sample.id === 'review' ? { gitDiffRead: commands.some(event => event.item.exit_code === 0 &&
+      /\bgit\b.*\bdiff\b/.test(event.item.command)) } : {}),
     seededFinding: sample.verify(final), final };
     await writeFile(resolve(`out/codex-acceptance-${sample.id}.json`), JSON.stringify(observed, null, 2));
     console.log(JSON.stringify({ ...observed, final: undefined }));
-    if (observed.code !== 0 || !observed.skillRead || !observed.fixtureRead || !observed.seededFinding) failed = true;
+    if (observed.code !== 0 || !observed.skillRead || !observed.fixtureRead || !observed.seededFinding || observed.gitDiffRead === false) failed = true;
   }
 } finally {
   if (installed) {

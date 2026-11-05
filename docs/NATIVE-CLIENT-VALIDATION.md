@@ -85,6 +85,13 @@ node scripts/smoke-codex-review-security.mjs 'C:\path\to\codex.exe' --allow-live
 The command requires an absolute native Codex executable and an account with no
 existing managed AgentVigor installation. Results go to ignored `out/` files.
 
+A later review fixture initialized a real Git repository, committed the correct
+calculation and introduced the regression as an unstaged change. The native
+session read the skill, read the fixture and successfully executed a `git diff`
+command before reporting the seeded finding. The versioned runner now prepares
+that baseline. This verifies the diff-based review case. Automatic RTK hook
+rewriting still requires its own observed hook evidence.
+
 ## Additional bounded Codex workflow cases
 
 The versioned runner `scripts/smoke-codex-workflows.mjs` launches fresh sessions
@@ -125,7 +132,7 @@ result summary in ignored `out/codex-acceptance-<scenario>.json` files.
 | Category | Existing executable evidence | Native behavior still required |
 | --- | --- | --- |
 | Development | Real bounded Grounded Code change and independent assertions passed | Extend to the complete original project workflow as applicable. |
-| Review | Real source review found a seeded invoice defect with Diff Guardian | Validate the Git diff path, RTK behavior and multi-agent procedure. |
+| Review | Diff Guardian found the seeded invoice defect in both source review and a real Git diff fixture | Automatic RTK hook rewriting and the full multi-agent procedure remain unverified. |
 | Debugging | Real failure, production correction and rerun of an unchanged test observed | Additional project-specific cases remain selectable. |
 | Security | Real Grounded Code review found the cross-tenant authorization defect | Validate the full upstream security audit and its multi-part checks. |
 | Context economy | Real targeted search in a large synthetic log, plus on-demand FULL loading | Controlled paired token measurement before any savings claim. |
