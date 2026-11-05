@@ -6,6 +6,7 @@ import { isAbsolute, join, resolve } from 'node:path';
 import { install, installationStatus, rollback } from '../lib/install.mjs';
 import { detectTools } from '../lib/platform.mjs';
 import { runFile } from '../lib/process.mjs';
+import { readProjectFile } from '../skills/agentvigor-toolkit/scripts/process.mjs';
 import pkg from '../package.json' with { type: 'json' };
 
 const executable = process.argv[2];
@@ -78,6 +79,10 @@ try {
     await invokeGit(['-c', 'user.name=AgentVigor Fixture', '-c', 'user.email=fixture@example.invalid',
       '-c', 'commit.gpgsign=false', 'commit', '--quiet', '-m', 'Synthetic procedure baseline']);
     if (sample.id === 'panel') await writeFile(join(cwd, 'service.mjs'), source);
+    if (sample.id === 'audit') {
+      await mkdir(join(cwd, 'private-audit'), { mode: 0o700 });
+      sample.prompt += ' The coordinator already provisioned private-audit/. Preserve its existing owner and permissions; do not run chmod, icacls, takeown or change ACLs. Verify ignore status and write access, and record any unverified privacy property instead of excluding the coordinator from its own output directory.';
+    }
     const revision = await invokeGit(['rev-parse', 'HEAD']);
     const prompt = `Use $agentvigor-toolkit explicitly. Load the complete original FULL procedure ${sample.workflow} and the linked usage guide from the global skill resources. ${sample.prompt} Target revision is ${revision}; the working tree may contain the seeded changes. The Windows sandbox can use a different OS account. For Git commands only, use -c safe.directory=${JSON.stringify(cwd.replaceAll('\\', '/'))} and -c core.excludesFile=${JSON.stringify(join(cwd, '.gitignore').replaceAll('\\', '/'))}; never persist these overrides. If the RTK executable is inaccessible, invoke the detected Git executable ${JSON.stringify(git)} directly and record that limitation. Scope is this repository and its original skill resources only. All data is synthetic. Do not inspect host credentials, call external connectors, access other projects, create accounts, change client settings or contact services. Native subagents are explicitly authorized only for the panel. Record observations without inventing successful commands.`;
     try {
@@ -99,6 +104,7 @@ try {
         revisionPreserved: await invokeGit(['rev-parse', 'HEAD']) === revision,
         sourcePreserved: (await Promise.all(Object.entries(files).map(async ([name, bytes]) =>
           digest(await readFile(join(cwd, name))) === digest(bytes)))).every(Boolean) };
+      await writeFile(resolve(`out/codex-full-${sample.id}-receipt.json`), JSON.stringify({ ...observed, final, eventItemTypes: [...new Set(completed.map(item => item?.type))] }, null, 2));
       if (sample.id === 'panel') {
         const collaboration = events.map(event => event.item).filter(item => /collab|agent.*tool/i.test(item?.type ?? ''));
         observed.collaboration = collaboration;
@@ -112,7 +118,8 @@ try {
         await mkdir(output, { recursive: true });
         for (const name of names) {
           try {
-            const bytes = await readFile(join(cwd, 'private-audit', name));
+            const bytes = await readProjectFile(cwd, `private-audit/${name}`, 256 * 1024, 'AUDIT_ARTIFACT_INVALID');
+            if (!bytes) continue;
             await writeFile(join(output, name), bytes, { mode: 0o600 });
             observed.artifacts.push({ name, bytes: bytes.length, sha256: digest(bytes) });
           } catch (error) { if (error.code !== 'ENOENT') throw error; }

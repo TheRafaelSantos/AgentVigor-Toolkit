@@ -25,10 +25,10 @@ preservada. Rafael Pereira mantém as implementações originais do AgentVigor.
 | Ferramenta | Instalação observada | Configuração | Descoberta / invocação |
 | --- | --- | --- | --- |
 | RTK | 1.1.0 no PATH | UNVERIFIED no inventário do perfil real | UNVERIFIED |
-| Superpowers | Manifesto nativo presente | UNVERIFIED no perfil real | UNVERIFIED no perfil real. Registro nativo validado em perfil descartável |
-| Ponytail | Manifesto nativo presente | UNVERIFIED no perfil real | UNVERIFIED no perfil real. Registro nativo validado em perfil descartável |
-| Find Skills | Manifesto da versão auditada presente | CONFIGURED | UNVERIFIED |
-| Graphify | 0.9.10 no PATH. Versão gerenciada auditada é 0.9.102 | UNVERIFIED no perfil real | UNVERIFIED |
+| Superpowers | Registro nativo 7.0.2 instalado e habilitado | Gerenciamento do perfil real UNVERIFIED | DISCOVERED no cache nativo; invocação TDD delimitada VERIFIED. Demais skills/hooks UNVERIFIED |
+| Ponytail | Registro nativo 5.3.3 instalado e habilitado | Gerenciamento do perfil real UNVERIFIED | DISCOVERED no cache nativo; invocação delimitada VERIFIED junto ao TDD. Demais skills/hooks UNVERIFIED |
+| Find Skills | Manifesto da versão auditada presente | CONFIGURED | DISCOVERED no Codex, scope user e enabled. Invocação UNVERIFIED |
+| Graphify | 0.9.10 no PATH. Versão gerenciada auditada é 0.9.102 | UNVERIFIED no perfil real | Skill pessoal DISCOVERED no Codex. Invocação da versão gerenciada UNVERIFIED |
 
 O inventário preservou as instalações pessoais. As seis skills AgentVigor usadas
 nas sessões foram registradas temporariamente e revertidas para o estado inicial.

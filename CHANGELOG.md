@@ -6,6 +6,7 @@
 - Bound Tailwind source discovery to the project source directory. Read regular files through EOF to handle short asynchronous reads on WSL, including diagnostics and benchmarks.
 - Record bounded real Codex cases across development, diff review, debugging, security, selective context search, recovery and project bootstrap. Keep full-procedure and external integration acceptance separate.
 - Observe native RTK command rewriting and execution with a byte-verified temporary binary copy. Record the Windows sandbox failures of the existing WinGet executable and preserve personal configuration.
+- Verify qualified native Ponytail and Superpowers TDD invocation in a bounded real-client repair, including an observed failing test, a passing unchanged test and independent assertions.
 - Run official RTK OSS and Full binary installation, version verification and offline rollback in all six CI jobs, including both macOS architectures.
 - Add the A–J delivery report, reproducible native procedure runner and updated limitations. Preserve the published rc.1 artifact. See the [new candidate record](docs/CANDIDATE-0.3-rc.2.md).
 

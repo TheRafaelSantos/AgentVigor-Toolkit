@@ -24,7 +24,9 @@ Matheus Gomes. Rafael Pereira mantém os componentes autorais do AgentVigor.
 
 Há casos reais delimitados nas sete categorias solicitadas do Codex. Isso não
 homologa automaticamente todas as etapas dos procedimentos originais. A
-instalação temporária das skills é revertida ao fim de cada runner. Não houve
+instalação temporária das skills é revertida ao fim de cada runner. Ponytail e
+Superpowers TDD foram carregados do cache nativo e passaram um caso real de
+correção com teste vermelho/verde e checagem independente. Não houve
 alteração persistente de conta, modelo ou provedor.
 
 Limites: Claude Code não foi encontrado no PATH; seus testes reais e o lifecycle

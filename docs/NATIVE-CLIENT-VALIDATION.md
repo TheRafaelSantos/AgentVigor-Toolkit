@@ -130,6 +130,53 @@ result summary in ignored `out/codex-acceptance-<scenario>.json` files.
 
 ## Remaining acceptance categories
 
+### Existing optional capabilities: read-only native inventory
+
+A fresh native app-server `skills/list` call reported `find-skills`, `graphify`,
+`ponytail` and `using-superpowers` enabled with user scope and zero discovery
+errors. Their selected skill paths were in user skill directories, not the
+native plugin cache. This proves discovery of those personal skills; it does
+not establish that the selected files came from AgentVigor-managed installations.
+
+Separately, `codex plugin list --json` reported `ponytail@ponytail` version 5.3.3
+and `superpowers@superpowers-dev` version 7.0.2 installed and enabled in the real
+profile. A broader skill query also enumerated qualified `ponytail:*` and
+`superpowers:*` resources from the native plugin cache. Model-driven invocation
+has the bounded proof below. No existing capability was adopted,
+reinstalled, overwritten or removed by these read-only observations.
+
+Português: o cliente descobriu as quatro skills pessoais e listou os dois plugins
+habilitados. Isso não comprova invocação nem propriedade pelo instalador AgentVigor.
+
+Español: el cliente descubrió las cuatro skills personales y enumeró ambos plugins
+habilitados. Esto no prueba invocación ni propiedad por el instalador AgentVigor.
+
+### Native plugin behavior
+
+The real Codex client explicitly loaded `$ponytail:ponytail` and
+`$superpowers:test-driven-development` from their native caches. In an isolated
+invoice fixture it observed the supplied test fail, corrected quantity handling,
+and passed the unchanged test. Independent assertions checked quantities three,
+zero and omitted. The test and user note stayed byte-identical. All seven checks
+passed and the temporary project was removed. The existing plugin registrations,
+account, model/provider and persistent configuration were preserved.
+
+```powershell
+node scripts/smoke-codex-plugins.mjs 'C:\path\to\codex.exe' --allow-live
+```
+
+The runner requires the existing native plugin registrations. It disables native
+subagents for this one sequential session. This verifies explicit invocation and
+the bounded red/green behavior, not every plugin skill or automatic hook.
+
+Português: Ponytail e Superpowers foram invocados pelos nomes qualificados do
+cache nativo. O mesmo teste falhou antes e passou depois; a checagem independente
+confirmou a correção e a preservação dos arquivos do usuário.
+
+Español: Ponytail y Superpowers se invocaron por sus nombres cualificados desde
+el caché nativo. La misma prueba falló antes y pasó después; una ejecución
+independiente confirmó la corrección y la conservación de los archivos del usuario.
+
 ### Complete procedure attempts
 
 Two Windows runs loaded the complete original multi-agent review prompt and its
@@ -153,6 +200,16 @@ node scripts/smoke-codex-full-procedures.mjs 'C:\path\to\codex.exe' --allow-live
 ```
 
 The panel has a ten-minute limit; the sequential audit has fifteen minutes.
+The third audit's coordinator could not read the output after the client changed
+its ACL. Access was recovered only on that synthetic directory; four reports
+with consistent finding IDs were retained privately. Partial cleanup had already
+removed source files, so preservation could not be independently rechecked for
+that attempt. The runner now provisions the output directory and explicitly
+preserves its ACL. The fourth audit read FULL, preserved HEAD and every source
+file, and produced all four structured artifacts, but the client exited one
+before final validation. It remains a failure, with `passed: false`; artifacts
+and the pre-extraction receipt are retained. No full-audit acceptance is claimed.
+
 The runner requires no existing managed AgentVigor installation, temporarily
 installs the six skills and restores the prior state in `finally`. Reports and
 observations stay in ignored `out/`. A timeout or missing observation remains a
