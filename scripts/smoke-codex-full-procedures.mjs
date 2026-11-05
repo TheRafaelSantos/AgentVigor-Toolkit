@@ -9,6 +9,7 @@ import { runFile } from '../lib/process.mjs';
 import { readProjectFile } from '../skills/agentvigor-toolkit/scripts/process.mjs';
 import pkg from '../package.json' with { type: 'json' };
 import { validateAuditArtifacts } from './audit-artifacts.mjs';
+import { dispatchedReviewers } from './panel-evidence.mjs';
 
 const executable = process.argv[2];
 assert.ok(isAbsolute(executable || '') && process.argv.includes('--allow-live'),
@@ -110,10 +111,9 @@ try {
           digest(await readFile(join(cwd, name))) === digest(bytes)))).every(Boolean) };
       await writeFile(resolve(`out/codex-full-${sample.id}-receipt.json`), JSON.stringify({ ...observed, final, eventItemTypes: [...new Set(completed.map(item => item?.type))] }, null, 2));
       if (sample.id === 'panel') {
-        const collaboration = events.map(event => event.item).filter(item => /collab|agent.*tool/i.test(item?.type ?? ''));
+        const collaboration = events.map(event => event.item).filter(item => /collab|agent.*tool|subAgentActivity/i.test(item?.type ?? ''));
         observed.collaboration = collaboration;
-        const receivers = new Set(collaboration.flatMap(item => item.receiver_thread_ids ?? item.receiverThreadIds ?? []));
-        observed.nativeDispatchObserved = receivers.size >= 2;
+        observed.nativeDispatchObserved = dispatchedReviewers(collaboration).length >= 2;
         observed.reportedBothSeededDefects = /tenant/i.test(final) && /quantity|quantidade/i.test(final);
       } else {
         const names = ['SECURITY-AUDIT.md', 'SECURITY-FINDINGS.json', 'REMEDIATION-PROMPTS.md', 'AUDIT-HANDOFF.md'];

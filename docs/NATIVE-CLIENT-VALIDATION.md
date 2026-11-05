@@ -186,6 +186,16 @@ with empty receiver IDs, despite reviewer attribution in the final narrative.
 The runner therefore returned `nativeDispatchObserved: false` and did not accept
 independent dispatch. A narrative alone does not prove a native panel.
 
+A later native app-server observation exposed two distinct `subAgentActivity`
+items with `kind: started`, one quality reviewer and one security reviewer.
+The previous detector recognized only legacy collaboration calls. The updated
+detector accepts these native starts, deduplicates reviewer IDs and rejects
+wait-only events or narrative claims. Its regression test covers both protocol
+forms. Two native starts are now observed; the initial app-server transport
+stopped on a child turn completion, so that attempt does not establish completion
+of the coordinator's validation and consolidated report. A root-thread-aware
+transport is being checked separately before being adopted by the runner.
+
 The first complete security-audit attempt timed out after writing two artifacts.
 The second wrote all four but timed out before session completion. Both were
 recorded as failed; the second's artifacts were inspected before cleanup, not
