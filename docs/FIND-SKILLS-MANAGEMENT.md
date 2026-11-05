@@ -76,6 +76,9 @@ review found no blocking issue. CI still provides the separate macOS and Linux
 checks; the previous macOS RTK temporary-path failure was fixed and all six
 matrix jobs passed for that fix.
 
+The Find Skills implementation commit `b072432` also passed all six platform
+jobs in [CI run 41957648159](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41957648159).
+
 Sources: [official CLI commands](https://github.com/vercel-labs/skills/blob/v1.7.6/docs/commands.md),
 [native destinations](https://github.com/vercel-labs/skills/blob/v1.7.6/src/agents.ts),
 [telemetry opt-out](https://github.com/vercel-labs/skills/blob/v1.7.6/src/telemetry.ts),

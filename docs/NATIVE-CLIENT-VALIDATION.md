@@ -1,0 +1,161 @@
+# Native-client validation
+
+This record distinguishes a real client observation from file-manifest checks,
+simulated installers and automated harness evaluation. It is partial validation;
+the seven requested behavior categories are not yet all accepted.
+
+## Observed Codex result
+
+Environment: Windows, Codex CLI `0.166.0-alpha.6`, AgentVigor implementation
+`b072432`, source snapshot `21b71b68679c11184f49c23168852014bf6dde8b`.
+The run used an existing authenticated native client, its current model/provider,
+a fresh ephemeral session and a disposable project outside this checkout.
+The preparation and execution crossed midnight on 2026-11-04/05, Brazil time.
+
+The real account's user skill root was populated temporarily through the managed
+installer, with the rigorous profile. The native app-server `skills/list` RPC
+then reported all six names with `scope: user` and zero discovery errors:
+
+- `agentvigor-agent-doctor`
+- `agentvigor-diff-guardian`
+- `agentvigor-grounded-code`
+- `agentvigor-safe-resume`
+- `agentvigor-token-budget`
+- `agentvigor-toolkit`
+
+A separate native `codex exec --ephemeral --sandbox read-only` session explicitly
+invoked `$agentvigor-toolkit`, selected `harness-evaluation` in FULL mode, read
+the complete local procedure and returned the pinned source revision. Execution
+events showed nine successful read commands, all with exit code zero:
+
+1. Router `SKILL.md`.
+2. Local `references/catalog.json`.
+3. Local Portuguese QUICK procedure.
+4. Provenance file.
+5. Complete original `14-harness-evaluation.md` prompt.
+6. Harness provenance entries.
+7. Linked `07-harness-evaluation.md` guide.
+8. Linked `tools/23-harness2.md` guide.
+9. Adjacent complete `15-harness-improvement.md` prompt.
+
+The final answer described an authorization check from that procedure and
+explicitly said the exercise had not been executed. This proves observed router
+invocation and FULL resource loading in that session. It does not prove the
+specialist skills' behavioral effectiveness, automatic invocation, an actual
+authorization repair or token reduction.
+
+The session exited zero without a turn failure. Its existing environment logged
+13 MCP startup failures and one PowerShell snapshot warning. Those unrelated
+connectors were not part of this acceptance case; no connector health claim is
+made. A session-only `mcp_servers={}` override did not eliminate their startup
+attempts, so future fixtures need more precise per-server isolation. No persisted
+model, provider, authentication or MCP configuration was edited.
+
+The installer rollback restored the prior managed state: `not-installed`, zero
+managed skill files. The disposable project was removed. The private AgentVigor
+transaction state was retained; credentials and raw private session logs were
+not committed.
+
+An earlier test redirected HOME/USERPROFILE and used a simulated user directory.
+That native Windows invocation did not discover the six files installed there.
+The result was recorded as a failed discovery attempt, not a pass. It establishes
+that this simulated-home fixture is insufficient for that client build; it does
+not establish a defect in the real user-root installation. The later real-root
+test above is the positive evidence.
+
+## Remaining acceptance categories
+
+| Category | Existing executable evidence | Native behavior still required |
+| --- | --- | --- |
+| Development | Disposable project foundations and quality runner tests | Complete a bounded development change with the relevant skill, then verify resulting files. |
+| Review | Complete upstream procedures and original diff-guardian manifest | Observe a review finding a seeded defect and distinguishing unsupported claims. |
+| Debugging | Quality failure handling and harness fixture tests | Observe diagnosis and correction of a seeded failing test. |
+| Security | Authorization harness before/after checks | Observe a bounded security review identifying a seeded authorization defect. |
+| Context economy | On-demand catalog, paired-observation benchmark and native FULL loading above | Observe proportional resource loading; measure token comparisons before any savings claim. |
+| Recovery | Managed install/project rollback and safe-resume manifest | Observe continuity from a handoff while preserving pending work and user edits. |
+| Bootstrap | Disposable Next lint/type/test/build evidence and project adoption tests | Observe a native client selecting and completing a supported bootstrap in a disposable project. |
+
+Claude Code was not found on the inspected Windows PATH. No account was created,
+login changed or success assumed. Its actual discovery and invocation remain
+MISSING/UNVERIFIED until an installed, authenticated client can run the same
+bounded cases.
+
+## Português brasileiro
+
+O Codex real descobriu as seis skills no escopo do usuário e invocou o roteador
+em uma sessão nova, fora do repositório. O modo FULL de `harness-evaluation` foi
+lido junto com referências locais. Nove comandos de leitura terminaram com
+código zero; a sessão também terminou com código zero.
+
+O teste usou uma instalação temporária gerenciada no diretório real do usuário.
+Depois, o rollback voltou para `not-installed`, com zero arquivos gerenciados.
+O diretório temporário do projeto foi removido. Nenhum modelo, provedor ou login
+foi reconfigurado. O diário privado do instalador foi mantido. A tentativa
+anterior com HOME/USERPROFILE simulados não descobriu as skills e não foi contada
+como sucesso. O ambiente também teve falhas de inicialização de MCP; a saúde
+desses conectores não foi homologada.
+
+Este resultado comprova descoberta global, invocação explícita do roteador e
+leitura FULL nesse caso. Ainda faltam os sete cenários comportamentais completos,
+testes das cinco especialistas e medições de economia de tokens. Claude Code
+não foi encontrado no PATH verificado; seus testes reais continuam pendentes.
+
+Para repetir a parte de leitura, no PowerShell aberto na pasta do AgentVigor:
+
+```powershell
+node bin/agentvigor.mjs status --json
+codex --version
+```
+
+Anote o estado atual. Se as seis skills já estiverem instaladas, use-as sem
+alterar a instalação. Caso precise de uma instalação temporária, confira a
+prévia e confirme no segundo comando. Instalações preexistentes não gerenciadas
+serão bloqueadas para preservar seus arquivos:
+
+```powershell
+node bin/agentvigor.mjs install --agent codex --profile rigorous --dry-run --lang pt-BR
+node bin/agentvigor.mjs install --agent codex --profile rigorous --lang pt-BR
+$testProject = Join-Path $env:TEMP ('agentvigor-native-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $testProject | Out-Null
+$testPrompt = 'Use $agentvigor-toolkit explicitamente. Selecione harness-evaluation no modo FULL e leia o procedimento original completo e suas referências locais. Informe a revisão de origem e um check concreto. Somente leitura: não execute o exercício, não instale dependências, não acesse credenciais, configurações, conectores ou outros projetos e não altere arquivos. Informe qualquer skill ausente sem presumir descoberta.'
+codex exec --ephemeral --skip-git-repo-check --sandbox read-only --cd $testProject --json $testPrompt
+```
+
+O comando usa a conta/modelo atuais e uma chamada real do agente. Confira os
+eventos de leitura, a revisão de origem e a ausência de exercício executado.
+Uma resposta declarando FULL sem eventos de leitura não comprova o carregamento.
+Erros do cliente ou de recursos necessários devem ser registrados como limites.
+
+Se você aplicou a instalação temporária, restaure a versão anterior com os
+comandos abaixo. Não faça rollback se apenas usou uma instalação preexistente:
+
+```powershell
+node bin/agentvigor.mjs rollback --dry-run --lang pt-BR
+node bin/agentvigor.mjs rollback --lang pt-BR
+node bin/agentvigor.mjs status --json
+```
+
+O status deve corresponder ao estado anotado antes. Revise a pasta indicada por
+`$testProject` antes de removê-la; ela contém somente o projeto descartável criado
+por este procedimento quando nenhuma outra atividade foi realizada nela.
+
+## Español
+
+El cliente Codex real enumeró las seis skills con alcance de usuario e invocó
+el router en una sesión efímera fuera del repositorio. Leyó el procedimiento
+FULL `harness-evaluation` y sus referencias locales: nueve comandos de lectura
+y la sesión terminaron con código cero. Se usaron modelo, proveedor y login
+existentes. La instalación global temporal se revirtió a `not-installed`, con
+cero archivos gestionados, y se eliminó el proyecto desechable.
+
+La simulación anterior con HOME/USERPROFILE no descubrió las skills y no se contó
+como éxito. Hubo fallos de inicio de MCP ajenos al escenario; su salud no quedó
+validada. No se cambió configuración persistente. El diario privado se conservó.
+Este caso demuestra descubrimiento, invocación explícita del router y lectura
+FULL; aún faltan los siete escenarios completos, eficacia de las especialistas
+y mediciones de ahorro. Claude Code no se encontró en el PATH inspeccionado;
+no se creó ninguna cuenta ni se presumió funcionamiento.
+
+Primary references:
+[local skill discovery](https://learn.chatgpt.com/docs/build-skills),
+[native ephemeral execution](https://learn.chatgpt.com/docs/non-interactive-mode).
