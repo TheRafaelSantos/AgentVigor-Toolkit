@@ -52,7 +52,7 @@ function environmentValue(env, name) {
   return windows ? Object.entries(env).find(([key]) => key.toUpperCase() === name.toUpperCase())?.[1] : env[name];
 }
 
-async function npmEntry(env) {
+export async function npmEntry(env) {
   const directories = (environmentValue(env, 'PATH') ?? '').split(delimiter)
     .map(path => path.trim().replace(/^"(.*)"$/, '$1'))
     .filter(path => windows ? /^[a-z]:[\\/]/i.test(path) : isAbsolute(path));

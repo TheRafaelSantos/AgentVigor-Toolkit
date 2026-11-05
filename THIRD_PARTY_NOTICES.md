@@ -23,3 +23,11 @@ The skill manifests follow the [Agent Skills specification](https://agentskills.
 See [Integrations](docs/INTEGRATIONS.md) for the audited versions, setup
 mechanisms, and checks. Review applicable terms and preserve required notices
 before including any upstream material in future releases.
+
+## Find Skills
+
+The optional integration preserves Find Skills from `vercel-labs/skills`
+tag `v1.7.6`, copyright (c) 2026 Vercel, Inc., under MIT. Exact source and license
+bytes are in `lib/assets/find-skills`. Managed installation uses the official
+Skills CLI with scoped consent; its downloaded npm dependencies retain their
+respective licenses. See [managed installation](docs/FIND-SKILLS-MANAGEMENT.md).

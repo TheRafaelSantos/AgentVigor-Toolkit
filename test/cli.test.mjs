@@ -103,3 +103,18 @@ test('doctor reports malformed Claude settings and duplicate hooks without leaki
   assert.ok(!result.stdout.includes(secret));
   assert.ok(!result.stdout.includes(home));
 });
+
+test('Find Skills CLI previews offline and refuses noninteractive installs without consent', async t => {
+  const home = await mkdtemp(join(testDir, '.tmp-find-skills-cli-'));
+  t.after(() => rm(home, { recursive: true, force: true }));
+  const env = { HOME: home, USERPROFILE: home, PATH: '', Path: '', CLAUDE_CONFIG_DIR: join(home, '.claude') };
+  const args = ['integrations', '--tool', 'find-skills', '--agent', 'claude', '--mode', 'install', '--json'];
+  const preview = run([...args, '--dry-run'], env);
+  assert.equal(preview.status, 0, preview.stderr);
+  const plan = JSON.parse(preview.stdout);
+  assert.equal(plan.changes.length, 2);
+  assert.equal(plan.networkRequired, true);
+  assert.equal(plan.source.version, '1.7.6');
+  assert.equal(run(args, env).status, 2);
+  assert.deepEqual(await readdir(home), []);
+});

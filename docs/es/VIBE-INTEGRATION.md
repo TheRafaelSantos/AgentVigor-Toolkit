@@ -60,6 +60,10 @@ node bin/agentvigor.mjs harness --path "./Fixture de Harness" --lang es --yes
 
 ## Fuentes y límites
 
+La [instalación gestionada de Find Skills](../FIND-SKILLS-MANAGEMENT.md#español)
+usa el instalador oficial con versión fija, consentimiento específico y
+reversión offline. Descubrimiento e invocación aún requieren sesiones observadas.
+
 La preparación del equipo, la revisión de seguridad, la memoria y la delegación son flujos guiados por el agente. El catálogo entrega sus instrucciones. El catálogo no invoca gestores globales ni servicios externos. Matheus Gomes conserva el copyright de Vibe Coding Toolkit bajo MIT. Las configuraciones y módulos originales seleccionados son referencias. La auditoría y la guía de integración registran el alcance y los pendientes.
 
 [Auditoría upstream](../upstream-audit/CONTENT-AUDIT.md) · [Referencias upstream incluidas](../../skills/agentvigor-toolkit/references/upstream/README.md) · [Guía de recuperación](../RECOVERY.md) · [Avisos de terceros](../../THIRD_PARTY_NOTICES.md).

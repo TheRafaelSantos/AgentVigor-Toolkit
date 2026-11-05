@@ -39,6 +39,11 @@ try {
   const entry = isWindows ? join(prefix, 'node_modules', pkg.name, pkg.bin.agentvigor) : shim;
   const env = { HOME: home, USERPROFILE: home, CLAUDE_CONFIG_DIR: '', CODEX_HOME: '', CI: 'true' };
   assert.equal(node([entry, '--version'], env).trim(), pkg.version);
+  const findSkills = JSON.parse(node([entry, 'integrations', '--tool', 'find-skills', '--agent', 'codex',
+    '--mode', 'install', '--dry-run', '--json'], env));
+  assert.equal(findSkills.changes.length, 2);
+  assert.equal(findSkills.source.version, '1.7.6');
+  assert.equal(findSkills.networkRequired, true);
   if (isWindows) {
     const command = process.env.ComSpec;
     assert.ok(isAbsolute(command ?? ''), 'ComSpec must identify cmd.exe');

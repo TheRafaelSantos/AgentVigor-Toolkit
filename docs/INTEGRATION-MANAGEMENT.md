@@ -1,7 +1,8 @@
 # Optional integration management
 
 The current implementation provides executable inventory, scoped setup plans,
-and managed configuration for an existing official RTK 1.1.0 executable.
+managed configuration for an existing official RTK 1.1.0 executable, and
+[managed Find Skills installation and offline rollback](FIND-SKILLS-MANAGEMENT.md).
 Run from the AgentVigor checkout or use the installed CLI.
 
 ```text
@@ -13,7 +14,9 @@ node bin/agentvigor.mjs integrations --mode plan --tool graphify --agent claude 
 `INSTALLED` records an executable lookup and version probe or a native Find
 Skills manifest. `CONFIGURED` requires a validated client registration.
 `DISCOVERED` requires fresh-session enumeration. `VERIFIED` requires an
-observed scoped invocation. These later checks currently return `UNVERIFIED`.
+observed scoped invocation. Find Skills reports `CONFIGURED` when the native
+manifest matches the pinned official bytes; discovery and invocation remain
+`UNVERIFIED` until observed in the native client.
 Plugin installation also remains `UNVERIFIED` pending native registry probing.
 `MISSING` records an absent inspected prerequisite. `BLOCKED` records a failed
 probe. Unsupported versions or client interfaces require evidence before being
@@ -21,8 +24,9 @@ classified `INCOMPATIBLE`.
 
 Plans identify native client commands separately from shell commands. They
 include the audited version, license and official setup source. All steps carry
-`executed: false`. RTK has a separate configure/rollback executor below. Other
-third-party changes, backups and rollback remain under development. The plan token
+`executed: false`. RTK has a separate configure/rollback executor below. Find
+Skills has a separate install/rollback executor. The other tools' managed
+lifecycle remains under development. The plan token
 identifies this preview and does not authorize a future installer with broader
 effects. Existing tools and credentials are left to their current owners.
 
@@ -67,7 +71,9 @@ checkout to reproduce the disposable two-client test. No client login is needed.
 O comando `integrations` inspeciona executáveis e o manifesto do Find Skills,
 com saída JSON. Use `--mode plan`, selecione `--tool` e escolha `--agent codex`
 ou `--agent claude` para consultar o procedimento oficial aplicável. Os passos
-das demais ferramentas aguardam executor, backup e rollback. Para RTK 1.1.0
+de Superpowers, Ponytail e Graphify aguardam executor, backup e rollback.
+O Find Skills já oferece [instalação oficial gerenciada](FIND-SKILLS-MANAGEMENT.md#português-brasileiro)
+com `--mode install` e reversão com `--mode rollback`. Para RTK 1.1.0
 já instalado, use `--mode configure` ou `--mode rollback`, primeiro com
 `--dry-run` e depois confirme. Guarde os backups privados em
 `~/.agentvigor/integrations/rtk-codex` ou `rtk-claude`. Um
@@ -79,7 +85,9 @@ uma sessão nova. Os estados não observados aparecem como `UNVERIFIED`.
 El comando `integrations` inspecciona ejecutables y el manifiesto de Find
 Skills mediante JSON. Usa `--mode plan`, elige `--tool` y selecciona
 `--agent codex` o `--agent claude` para consultar el procedimiento oficial.
-Los pasos de otras herramientas esperan ejecutor, copias y reversión.
+Los pasos de Superpowers, Ponytail y Graphify esperan ejecutor, copias y reversión.
+Find Skills ya ofrece [instalación oficial gestionada](FIND-SKILLS-MANAGEMENT.md#español)
+con `--mode install` y reversión con `--mode rollback`.
 Para RTK 1.1.0 ya instalado, usa `--mode configure` o `--mode rollback`,
 primero con `--dry-run` y después confirma. Conserva las copias privadas en
 `~/.agentvigor/integrations/rtk-codex` o `rtk-claude`.

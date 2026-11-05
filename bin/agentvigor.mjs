@@ -79,7 +79,7 @@ function help(t, command) {
     monitor: '--interval <1..3600>  --once  --no-clear',
     benchmark: '--input <file.json>  --json',
     catalog: '--id <workflow>  --mode quick|full  --lang en|pt-BR|es  --json',
-    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan|configure|rollback  --dry-run  --yes  --json',
+    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan|install|configure|rollback  --dry-run  --yes  --json',
     project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
@@ -93,6 +93,9 @@ function show(result, json, t) {
     return;
   }
   console.log(`AgentVigor | ${t(result.status)}`);
+  if (result.destination) console.log(`  ${t('integrationDestination')}: ${result.destination}`);
+  if (result.source?.version) console.log(`  ${result.tool} ${result.source.version} · ${result.source.license} · ${result.source.source}`);
+  if (result.networkRequired) console.log(`  ${t('integrationNetwork')}: ${result.networkHosts.join(', ')}`);
   for (const { agent, profile, version } of result.installations ?? []) {
     console.log(`  ${agent} · ${profile} · ${version}`);
   }
@@ -255,12 +258,16 @@ async function main(args) {
     if (!['22', '24', '26'].includes(process.versions.node.split('.')[0])) throw new UsageError('UNSUPPORTED_NODE');
     const context = { home: homedir(), env, version: pkg.version };
     if (command === 'integrations') {
-      if (['configure', 'rollback'].includes(values.mode)) {
-        if (values.tool !== 'rtk') throw new UsageError('INTEGRATION_TOOL');
-        const { configureRtk } = await import('../lib/rtk-integration.mjs');
+      if (['install', 'configure', 'rollback'].includes(values.mode)) {
+        let execute;
+        if (values.tool === 'rtk' && values.mode !== 'install') {
+          ({ configureRtk: execute } = await import('../lib/rtk-integration.mjs'));
+        } else if (values.tool === 'find-skills' && values.mode !== 'configure') {
+          ({ manageFindSkills: execute } = await import('../lib/find-skills-integration.mjs'));
+        } else throw new UsageError('INTEGRATION_TOOL');
         const tools = await detectTools(context);
         const options = { ...context, agent: values.agent, mode: values.mode, executable: tools.rtk?.path };
-        const preview = await configureRtk({ ...options, dryRun: true });
+        const preview = await execute({ ...options, dryRun: true });
         if (values['dry-run']) return show(preview, values.json, t);
         if (!values.yes) {
           if (!process.stdin.isTTY || !process.stdout.isTTY || !process.stderr.isTTY || values.json || env.CI) {
@@ -269,7 +276,7 @@ async function main(args) {
           show(preview, false, t);
           if (!await confirm(t, 'confirm')) { process.exitCode = 2; return; }
         }
-        return show(await configureRtk({ ...options, expectedPlan: preview.planToken }), values.json, t);
+        return show(await execute({ ...options, expectedPlan: preview.planToken }), values.json, t);
       }
       const { integrations } = await import('../lib/integrations.mjs');
       const result = await integrations({ ...context, tool: values.tool, agent: values.agent,
