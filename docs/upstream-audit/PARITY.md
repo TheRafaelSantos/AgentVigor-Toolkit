@@ -4,6 +4,15 @@ The baseline is Vibe Coding Toolkit revision `21b71b68679c11184f49c23168852014bf
 
 FULL identifies complete offline source procedures. ADAPTED identifies executable behavior with documented differences. CONDENSED identifies QUICK instructions alone. REFERENCE identifies examples. EXTERNAL requires separate tooling. MISSING identifies absent implementation. UNVERIFIED identifies present implementation without sufficient observed evidence. A FULL document does not establish execution parity.
 
+## Client support policy for v1.0.0
+
+**OpenAI Codex is STABLE and the primary supported client.** The native evidence
+below records bounded discovery, invocation, review, audit and multi-agent
+scenarios; it does not generalize to every workflow or project. **Claude Code is
+EXPERIMENTAL.** Its installer adapter, manifests, compatible skills and
+QUICK/FULL procedures are preserved, but native discovery and execution remain
+`UNVERIFIED`. No Claude session is claimed, and this does not block Codex v1.0.0.
+
 | Resource | Instruction delivery | Executable parity | Evidence and differences |
 | --- | --- | --- | --- |
 | project-sanitation | FULL plus localized QUICK | UNVERIFIED | Complete [original procedure](../../skills/agentvigor-toolkit/references/full/source/docs/prompts/01-project-sanitation.md), pinned source hash and FULL tests. See the [delivery matrix](MATRIX.md) for executor coverage and differences. |
@@ -26,15 +35,15 @@ FULL identifies complete offline source procedures. ADAPTED identifies executabl
 | Related resource | State | Evidence or remaining work |
 | --- | --- | --- |
 | Guides, onboarding, templates, rules and validators | FULL | All 121 source files and their bytes are covered by the offline snapshot test. Original validators remain reference code until separately selected and validated. |
-| Project adoption, Next foundations, quality runner and harness | ADAPTED | Transactional project operations and quality/harness tests. Optional `next-postgres` executes the original environment/logging/pool tests, passes Windows lint/types/build, and generates synthetic SQL. Live PostgreSQL migration remains pending. See [preset validation](../NEXT-POSTGRES-PRESET.md). |
+| Project adoption, Next foundations, quality runner and harness | ADAPTED | Transactional project operations and quality/harness tests. Optional `next-postgres` executes original environment/logging/pool tests, passes Windows lint/types/build, generates SQL and was applied/repeated against temporary PostgreSQL 16.15 in WSL/Linux with transaction rollback. This is a synthetic fixture, not production certification. See [preset validation](../NEXT-POSTGRES-PRESET.md). |
 | Five original skills and router | ADAPTED | Native Windows Codex enumerated all six in USER scope; explicit router invocation, complete harness FULL loading and bounded cases across all seven categories observed. [Native validation](../NATIVE-CLIENT-VALIDATION.md) separates these cases from full-procedure and automatic invocation acceptance. |
 | RTK | ADAPTED / UNVERIFIED | Official 1.1.0 OSS/full binary lifecycle in a private store, pinned checksums, separate staged client configuration and offline rollback. Both binaries passed all six CI jobs across Windows, Ubuntu and macOS Intel/ARM. Native rewriting executed with a temporary binary copy; the WinGet path failed in the sandbox. Managed-runtime invocation inside the client remains pending. See [binary management](../RTK-BINARY-MANAGEMENT.md) and [native observations](../NATIVE-CLIENT-VALIDATION.md). |
 | Find Skills | ADAPTED / UNVERIFIED | Official Skills CLI 1.7.6 runs in an isolated home after scoped consent; package integrity and exact native manifest checked; private transaction, unmanaged-skill protection and offline rollback. Both destinations passed all six official CI jobs across Windows, Ubuntu and macOS Intel/ARM, plus WSL. A personal skill was discovered by Codex; invocation and managed-installation discovery remain separate gates. See [procedure and limits](../FIND-SKILLS-MANAGEMENT.md). |
-| Superpowers and Ponytail | ADAPTED (Codex) / EXTERNAL (Claude) | Pinned native CLI staging, verified checkout revision, shared-profile coexistence and independent rollback. Native cache discovery and explicit Ponytail/TDD invocation passed a bounded invoice repair with independent assertions. Automatic plugin hooks and other skills remain unverified. Claude managed operations return `BLOCKED` with the native handoff. See [plugin management](../NATIVE-PLUGIN-MANAGEMENT.md) and [native evidence](../NATIVE-CLIENT-VALIDATION.md). |
+| Superpowers and Ponytail | ADAPTED (Codex) / EXPERIMENTAL (Claude) | Pinned native Codex staging, verified checkout revision, shared-profile coexistence and independent rollback. Native cache discovery and explicit Ponytail/TDD invocation passed a bounded invoice repair with independent assertions. Automatic plugin hooks and other skills remain unverified. Claude managed plugin operations are not natively accepted; see the experimental [plugin handoff](../NATIVE-PLUGIN-MANAGEMENT.md) and [native evidence](../NATIVE-CLIENT-VALIDATION.md). |
 | Graphify | ADAPTED / UNVERIFIED | Private pinned `uv` runtime, staged official global setup, eight sidecars, license notices and offline rollback. Windows official smoke for both configuration roots and CLI runtime lifecycle. Project hooks and native discovery/invocation remain unverified. See [management](../GRAPHIFY-MANAGEMENT.md) and [source audit](GRAPHIFY-LIFECYCLE-AUDIT.md). |
 | Context7, browsers, account-specific integrations | EXTERNAL | Complete upstream guides and examples are offline. Availability and access depend on the selected client. |
-| Real Codex sessions across seven categories | ADAPTED / UNVERIFIED | A bounded case ran in each category: development, diff-based review, debugging, security, selective log search, recovery and bootstrap. Global discovery and FULL loading also observed. Automatic RTK rewriting, complete upstream procedures and external project capabilities have separate gates. See [observations and limits](../NATIVE-CLIENT-VALIDATION.md). |
-| Real Claude Code sessions | MISSING | No Claude launcher found on the current Windows PATH. Authentication was not changed. |
+| Real Codex sessions across seven categories | ADAPTED (bounded native PASS) | A bounded case ran in each category: development, diff-based review, debugging, security, selective log search, recovery and bootstrap. Global discovery, QUICK/FULL loading and selected native invocation were also observed. Automatic RTK rewriting, complete upstream procedures and external project capabilities retain separate states. See [observations and limits](../NATIVE-CLIENT-VALIDATION.md). |
+| Real Claude Code sessions | EXPERIMENTAL / UNVERIFIED | Native session, discovery and invocation were not run. The adapter, paths, compatible skills and procedures remain available; no parity with Codex is claimed. |
 
 ## Integration state contract
 
@@ -42,7 +51,7 @@ INSTALLED requires a resolved executable or installed native package and observe
 
 ## Open priorities
 
-1. Validate discovery, invocation and hook behavior for the managed integrations. Complete native Claude plugin management when its registry can be tested.
+1. Validate discovery, invocation and hook behavior for managed integrations as optional follow-up work. Native Claude/plugin validation is future experimental work and is not a Codex v1.0.0 release gate.
 2. Observe fresh native-client discovery and explicit invocation in disposable projects for development, review, debugging, security, context economy, recovery and bootstrap.
 3. Extend disposable proofs for detailed upstream project and data-layer practices, retaining prerequisites and recording manual checks.
-4. Keep platform and package evidence attached to each candidate. [rc.2 validation](../CANDIDATE-0.3-rc.2.md) records the next candidate; the [rc.1 record](../CANDIDATE-0.3.md) preserves its original scope.
+4. Keep platform and package evidence attached to each release. The [rc.3 record](../CANDIDATE-0.3-rc.3.md) is historical; v1.0.0 is the current Codex stable distribution.

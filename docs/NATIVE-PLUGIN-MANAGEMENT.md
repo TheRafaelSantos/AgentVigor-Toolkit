@@ -1,5 +1,11 @@
 # Managed Superpowers and Ponytail
 
+For v1.0.0, native plugin management is supported only through the tested
+Codex workflow below. Claude Code remains experimental; its managed adapter and
+native plugin commands have not been verified in a Claude session. The
+`BLOCKED` result described below is the adapter's current behavior, not Claude
+acceptance evidence or a Codex release gate.
+
 | Plugin | Codex managed version | Pinned source |
 | --- | --- | --- |
 | Superpowers | 7.0.2 | [obra/superpowers](https://github.com/obra/superpowers/tree/22f0b463e7a5e579904dd6211a520321035526f7) |
@@ -41,10 +47,11 @@ and use its plugin selector to verify discovery. Plugin hook trust and execution
 remain under Codex control. The install preserves hook files supplied by the
 plugin, so review those files before trusting them in the client.
 
-Claude Code returns `BLOCKED` for managed operations until its native registry
-can be tested. Use the official in-client commands below if you already have
-Claude Code. These marketplaces can serve a different release. Check the version
-shown by `/plugin` before using it and use the same screen to uninstall.
+The managed Claude operation returns `BLOCKED`; native Claude installation and
+execution are `UNVERIFIED` because no Claude session was available. The official
+in-client commands below are reference instructions only and were not run. If
+you use them independently, marketplace versions may differ; check the version
+shown by `/plugin` before installing and use the same screen to uninstall.
 
 ```text
 /plugin install superpowers@claude-plugins-official
@@ -69,10 +76,11 @@ Em caso de interrupção, reverta primeiro o plugin cuja operação falhou e gua
 o diário privado até concluir. Se o arquivo gerenciado tiver sido editado, o
 rollback pode parar para preservar a edição.
 
-Para Claude Code, o executor gerenciado retorna `BLOCKED`. Os comandos nativos
-acima podem ser usados em uma sessão Claude Code já instalada. Confira a versão
-em `/plugin`, pois o marketplace pode oferecer outra versão, e use a mesma tela
-para desinstalar. A execução real no Claude Code continua pendente.
+Para Claude Code, a operação gerenciada retorna `BLOCKED`; instalação e execução
+nativas permanecem `UNVERIFIED`, pois não houve sessão Claude disponível. Os
+comandos acima são apenas referência e não foram executados. Se você os usar,
+confira a versão em `/plugin`, pois o marketplace pode oferecer outra versão, e
+use a mesma tela para desinstalar.
 
 ### Español
 
@@ -90,10 +98,11 @@ del plugin seleccionado. El otro plugin permanece instalado. Tras una operación
 interrumpida, revierte primero el plugin afectado y conserva el diario privado.
 Si se editó un archivo gestionado, la reversión puede detenerse para conservarlo.
 
-Claude Code devuelve `BLOCKED` para operaciones gestionadas. Los comandos
-nativos indicados requieren una sesión Claude Code instalada. Revisa la versión
-en `/plugin`, pues el marketplace puede ofrecer otra, y usa la misma pantalla
-para desinstalar. La ejecución real en Claude Code sigue pendiente.
+La operación gestionada de Claude Code devuelve `BLOCKED`; la instalación y
+ejecución nativas siguen `UNVERIFIED`, porque no hubo una sesión de Claude
+disponible. Los comandos anteriores son solo referencias y no se ejecutaron. Si
+los usas, comprueba la versión en `/plugin`, pues el marketplace puede ofrecer
+otra, y utiliza la misma pantalla para desinstalar.
 
 ### Reproducible verification
 

@@ -1,5 +1,10 @@
 # Optional integration management
 
+The stable supported client for v1.0.0 is OpenAI Codex. Claude Code remains
+experimental: its installation adapter and skill paths are preserved, while
+native discovery and invocation remain `UNVERIFIED`. Automated filesystem tests
+for both destinations do not upgrade Claude to stable support.
+
 The current implementation provides executable inventory, scoped setup plans,
 managed installation and rollback of [RTK 1.1.0](RTK-BINARY-MANAGEMENT.md),
 [Graphify 0.9.102](GRAPHIFY-MANAGEMENT.md), and [Find Skills](FIND-SKILLS-MANAGEMENT.md).

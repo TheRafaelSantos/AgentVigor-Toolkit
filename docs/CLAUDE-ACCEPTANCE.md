@@ -1,9 +1,9 @@
 # Claude Code acceptance / Homologação / Homologación
 
-Status on 2026-11-05: **BLOCKED — native acceptance NOT RUN**. The `claude`
-launcher and common per-user install paths were absent during the retake.
-Authentication was not checked because no launcher was available. Installer and
-configuration smokes do not establish native client behavior.
+Support tier: **EXPERIMENTAL**. Native execution status: **UNVERIFIED; no Claude
+session was run or claimed**. On 2026-11-05 the `claude` launcher and common
+per-user install paths were absent. Authentication was not checked. This
+optional future acceptance does not block the Codex stable v1.0.0 release.
 Use an already installed, authenticated client. Do not create an account, change
 provider/model/authentication, enable API billing or bypass permissions for these
 tests. Native model calls use the current account's allowance.
@@ -16,10 +16,10 @@ name. A custom `CLAUDE_CONFIG_DIR` must match the root selected by AgentVigor.
 
 | Requirement | State | Evidence / remaining check |
 | --- | --- | --- |
-| Client launcher | BLOCKED | Not found on PATH or in the common per-user paths checked on 2026-11-05 |
+| Client launcher | UNVERIFIED | Not found on PATH or in the common per-user paths checked on 2026-11-05 |
 | Authentication | UNVERIFIED | Not queried because the client launcher was absent |
-| Global skill discovery and invocation | BLOCKED | No real Claude session was available |
-| QUICK/FULL workflow acceptance | BLOCKED | No real Claude session was available; the cases below are instructions only |
+| Global skill discovery and invocation | UNVERIFIED | No real Claude session was available |
+| QUICK/FULL workflow acceptance | UNVERIFIED | No real Claude session was available; the cases below are instructions only |
 | Managed integration execution inside Claude | UNVERIFIED | CLI/package tests do not prove execution by the native client |
 | Claude skill install/update/idempotency/rollback in the client | UNVERIFIED | Isolated package smokes exercise filesystem roots, not a live Claude session |
 

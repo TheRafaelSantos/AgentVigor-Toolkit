@@ -1,10 +1,10 @@
-# AgentVigor Toolkit
+# AgentVigor Toolkit v1.0.0
 
 Os procedimentos detalhados estão disponíveis offline com `agentvigor catalog --id development-environment-setup --mode full --lang pt-BR`. QUICK continua como padrão. FULL preserva o idioma original da fonte e acrescenta orientações localizadas. Consulte a [auditoria de paridade](docs/upstream-audit/PARITY.md) para ver as evidências e pendências.
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-`0.3.0-rc.3` é um pré-release candidato, não uma versão estável `1.0.0`. O pacote e a matriz CI de seis plataformas precisam passar antes da publicação. A homologação nativa do Claude Code está BLOCKED porque o cliente não estava disponível na última verificação; a documentação de compatibilidade não significa que essa homologação passou. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md), a [matriz de paridade](docs/upstream-audit/PARITY.md) e a [validação e limitações do candidato](docs/CANDIDATE-0.3-rc.3.md#português-brasileiro).
+**AgentVigor Toolkit v1.0.0 é estável para OpenAI Codex, o cliente principal com suporte.** Claude Code é uma **integração experimental**: o instalador, os diretórios de skills, as skills compatíveis e os procedimentos QUICK/FULL foram preservados, mas a descoberta e a execução nativas no Claude permanecem **UNVERIFIED**. As evidências do Codex cobrem os cenários delimitados no [registro de validação nativa](docs/NATIVE-CLIENT-VALIDATION.md); não representam garantia universal nem paridade completa com o upstream. Consulte a [matriz de suporte e aceitação](docs/DELIVERY-STATUS.md), a [auditoria de paridade](docs/upstream-audit/PARITY.md) e o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md).
 
 ![AgentVigor Toolkit e seu slogan](docs/assets/readme/hero.png)
 
@@ -12,15 +12,15 @@ Os procedimentos detalhados estão disponíveis offline com `agentvigor catalog 
 
 **Smarter agents. Leaner runs. Safer code.**
 
-O AgentVigor combina cinco skills autorais com uma skill que seleciona fluxos sob demanda, bases de projeto, controles de qualidade, um avaliador de harness e o monitor RTK para Codex e Claude Code. O CLI usa recursos nativos do Node.js e funciona sem serviço em segundo plano.
+O AgentVigor combina cinco skills autorais com uma skill que seleciona fluxos sob demanda, bases de projeto, controles de qualidade, um avaliador de harness e o monitor RTK. Codex é o cliente nativo estável; Claude Code continua experimental. O CLI usa recursos nativos do Node.js e funciona sem serviço em segundo plano.
 
 ## Requisitos e instalação
 
-Instale uma atualização recente do Node.js 22, 24 ou 26 pelos [downloads oficiais](https://nodejs.org/en/download). A versão de referência é o Node.js 24 LTS. Instale Git para usar o checkout e pelo menos um agente pelas [instruções do Codex](https://developers.openai.com/codex/cli/) ou pelo [guia do Claude Code](https://code.claude.com/docs/en/setup). O RTK é opcional.
+Instale uma atualização recente do Node.js 22, 24 ou 26 pelos [downloads oficiais](https://nodejs.org/en/download). A versão de referência é o Node.js 24 LTS. Para a configuração estável com suporte, instale o [OpenAI Codex](https://developers.openai.com/codex/cli/). Claude Code pode usar o adaptador experimental preservado; seu comportamento nativo não foi homologado nem é equivalente ao Codex. O RTK é opcional.
 
 ![Prévia de instalação para Windows, macOS, Linux e WSL](docs/assets/readme/platforms.png)
 
-> **Arte conceitual.** Instale pelo repositório ou por um pacote de release verificado seguindo os comandos abaixo. O comando `npm install -g agentvigor-toolkit` e a configuração automática do RTK na imagem são ilustrativos. O pacote ainda não foi publicado no registro npm. RTK significa Rust Token Killer.
+> **Arte conceitual.** Instale o pacote verificado `agentvigor-1.0.0.tgz` pela [release no GitHub](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v1.0.0), usando os comandos abaixo. O comando `npm install -g agentvigor-toolkit` e a configuração automática do RTK na imagem são ilustrativos. O pacote é distribuído por GitHub Releases, não pelo registro npm. RTK significa Rust Token Killer.
 
 ### Windows · PowerShell
 
@@ -45,8 +45,9 @@ node bin/agentvigor.mjs --version
 ## Skills globais e perfis
 
 ```text
-node bin/agentvigor.mjs install --agent codex --dry-run --lang pt-BR
-node bin/agentvigor.mjs install --agent codex --lang pt-BR
+node bin/agentvigor.mjs doctor
+node bin/agentvigor.mjs install --agent codex --profile balanced --dry-run --lang pt-BR
+node bin/agentvigor.mjs install --agent codex --profile balanced --lang pt-BR
 node bin/agentvigor.mjs status
 ```
 
@@ -60,18 +61,21 @@ Em automações, revise a prévia e passe `--yes`. Use `--json` em instalação,
 
 Todos os perfis instalam a skill `agentvigor-toolkit`. O `minimal` inclui também Grounded Code e Agent Doctor. `balanced`, o padrão, acrescenta Diff Guardian e Token Budget. `rigorous` inclui também Safe Resume. Você pode mudar o perfil de um cliente sem alterar os arquivos de skills do outro.
 
-O Codex procura skills pessoais em `~/.agents/skills`. Abra uma nova sessão e digite `$agentvigor-grounded-code` para encontrar a skill. O Claude Code usa `~/.claude/skills` ou o caminho definido em `CLAUDE_CONFIG_DIR`. Reinicie o Claude Code, abra o menu de comandos com `/` e procure `/agentvigor-grounded-code`. `status` verifica os arquivos no disco. O seletor do cliente confirma a descoberta. As skills carregam sob demanda conforme a tarefa e a política do cliente.
+O Codex procura skills pessoais em `~/.agents/skills`; a descoberta e invocação nativas em cenários delimitados fazem parte das evidências estáveis da v1.0.0. Abra uma sessão nova e digite `$agentvigor-grounded-code`. O Claude Code usa `~/.claude/skills` ou `CLAUDE_CONFIG_DIR`. O adaptador de instalação e as instruções compatíveis foram preservados, mas a descoberta e invocação nativas no Claude permanecem UNVERIFIED. Instalar arquivos não equivale a homologar o Claude nem a oferecer o mesmo nível de suporte do Codex.
 
-### CLI global opcional por pacote local
+### Instalar o CLI global pela GitHub Release
 
-Execute os comandos abaixo dentro do checkout. No PowerShell, use `npm.cmd` se `npm.ps1` estiver bloqueado. Use um prefixo global do npm gravável pela sua conta e presente no PATH. Se `agentvigor` estiver ausente, reabra o terminal. O pacote `.tgz` do pré-release, quando disponível, equivale ao arquivo de `npm pack`. Compare o SHA-256 publicado antes de instalar.
+Baixe `agentvigor-1.0.0.tgz` e `SHA256SUMS.txt` da [release v1.0.0](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v1.0.0). Compare o SHA-256 do pacote com a linha correspondente antes de instalar. No PowerShell, use `npm.cmd`; macOS/Linux usam `npm`. O prefixo global do npm precisa ser gravável pela sua conta e estar no PATH.
 
 ```text
-npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.3.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-1.0.0.tgz
 agentvigor --version
-agentvigor --help
+agentvigor doctor
+agentvigor install --agent codex --profile balanced --dry-run --lang pt-BR
 ```
+
+No PowerShell do Windows, substitua `npm` por `npm.cmd` e use
+`.\agentvigor-1.0.0.tgz` como caminho do pacote.
 
 ## Fluxos do Vibe e configuração de projetos
 
@@ -95,7 +99,7 @@ node bin/agentvigor.mjs monitor --interval 30 --no-clear
 
 ## Segurança, atualização e desinstalação
 
-O instalador gerencia apenas os arquivos `SKILL.md` do AgentVigor e o estado privado em `~/.agentvigor`, onde ficam as cópias de recuperação. Em caso de conflito ou alteração manual, ele para. `update` reaplica as skills da versão local do CLI. Para atualizar a versão, faça checkout da tag revisada ou instale o novo pacote verificado e depois rode `update`. `rollback` restaura a alteração anterior. `rollback --all` remove os arquivos de skills gerenciados. Revise a prévia antes de confirmar.
+O instalador gerencia apenas os arquivos `SKILL.md` do AgentVigor e o estado privado em `~/.agentvigor`, onde ficam as cópias de recuperação. Em caso de conflito ou alteração manual, ele para. `update` reaplica as skills da versão local do CLI. Para atualizar a versão, instale primeiro o pacote verificado da GitHub Release e depois rode `update`. `rollback` restaura a alteração anterior. `rollback --all` remove os arquivos de skills gerenciados. Revise a prévia antes de confirmar.
 
 ```text
 node bin/agentvigor.mjs update --dry-run
@@ -127,6 +131,7 @@ Compare medições de execuções pareadas com `agentvigor benchmark --input obs
 - [Como contribuir](CONTRIBUTING.md)
 - [Avisos de terceiros](THIRD_PARTY_NOTICES.md)
 - [Política de segurança](SECURITY.md)
+- [Suporte de clientes e aceitação](docs/DELIVERY-STATUS.md)
 - [Changelog](CHANGELOG.md)
 
 ## Criado e mantido por Rafael Pereira

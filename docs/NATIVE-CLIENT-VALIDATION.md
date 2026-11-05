@@ -1,5 +1,12 @@
 # Native-client validation
 
+Support policy for v1.0.0: **OpenAI Codex is the stable primary client**;
+Claude Code is **experimental**, with native discovery and execution
+`UNVERIFIED`. The Codex observations below are bounded and apply only to their
+stated fixtures and scenarios. They do not establish universal behavior,
+complete Vibe parity or production security certification. Claude is optional
+and does not block the Codex stable release.
+
 This record distinguishes a real client observation from file-manifest checks,
 simulated installers and automated harness evaluation. It is partial validation;
 all seven requested categories have bounded observed cases, with full-procedure

@@ -2,9 +2,10 @@
 
 ## Supported versions
 
-There is no stable `1.0.0` release. Check the repository's GitHub Releases page
-for the current pre-release and its exact commit. Security fixes are prepared
-against `main`; check release notes before relying on a fix in an older artifact.
+Version `1.0.0` is stable for OpenAI Codex. Claude Code is experimental and its
+native discovery/invocation are unverified. Check GitHub Releases for the exact
+tag and commit; security fixes are prepared against `main`, so consult release
+notes before relying on a fix in an older artifact.
 
 ## Reporting a vulnerability
 
@@ -25,15 +26,17 @@ Reports about the CLI, managed installer, rollback, downloads, hooks, or changes
 to global agent files are in scope. Integrations may execute third-party code
 under their own licenses and permissions. A synthetic audit or passing CI does
 not certify the security of a production environment or third-party service.
+The v1.0.0 release does not claim a general scanner/advisory audit or production
+security certification.
 
 ## Português brasileiro
 
 ### Versões com suporte
 
-Não há uma versão estável `1.0.0`. Consulte a página de Releases no GitHub para
-identificar o pré-release atual e seu commit exato. As correções são preparadas
-na branch `main`; confira as notas antes de depender de uma correção em um
-artefato anterior.
+A versão `1.0.0` é estável para OpenAI Codex. Claude Code é experimental e sua
+descoberta/execução nativas não foram verificadas. Consulte as Releases do GitHub
+para identificar a tag e o commit exatos. As correções são preparadas em `main`;
+confira as notas antes de depender de uma correção em artefato anterior.
 
 ### Como reportar uma vulnerabilidade
 
@@ -51,16 +54,18 @@ Falhas no CLI, instalador gerenciado, rollback, downloads, hooks ou alterações
 de arquivos globais de agentes estão no escopo. Integrações podem executar
 código de terceiros sob licenças e permissões próprias. Uma auditoria sintética
 ou CI aprovada não certifica a segurança de ambiente de produção ou serviço
-externo.
+externo. A v1.0.0 não reivindica auditoria geral com scanners/advisories nem
+certificação de segurança de produção.
 
 ## Español
 
 ### Versiones con soporte
 
-No existe una versión estable `1.0.0`. Consulta la página Releases de GitHub
-para identificar el pre-release actual y su commit exacto. Las correcciones se
-preparan en la rama `main`; revisa las notas antes de confiar en una corrección
-de un artefacto anterior.
+La versión `1.0.0` es estable para OpenAI Codex. Claude Code es experimental y
+su descubrimiento/ejecución nativos no están verificados. Consulta Releases de
+GitHub para identificar la etiqueta y el commit exactos. Las correcciones se
+preparan en `main`; revisa las notas antes de depender de una corrección de un
+artefacto anterior.
 
 ### Cómo reportar una vulnerabilidad
 
@@ -79,4 +84,6 @@ Los informes sobre el CLI, el instalador gestionado, rollback, descargas, hooks
 o cambios en archivos globales del agente están dentro del alcance. Las
 integraciones pueden ejecutar código de terceros bajo sus propias licencias y
 permisos. Una auditoría sintética o una CI aprobada no certifica la seguridad
-de un entorno de producción ni de un servicio externo.
+de un entorno de producción ni de un servicio externo. La v1.0.0 no afirma una
+auditoría general con scanners/advisories ni una certificación de seguridad de
+producción.

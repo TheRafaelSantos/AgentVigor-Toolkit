@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0
+
+- Declare OpenAI Codex the primary stable client based on the bounded native discovery, invocation, workflow, review, audit, multi-agent, installation and rollback evidence documented in `docs/NATIVE-CLIENT-VALIDATION.md`.
+- Preserve Claude Code's installer, manifests, compatible skills and QUICK/FULL procedures as an experimental integration. Native Claude discovery and execution remain UNVERIFIED; no Claude session is claimed.
+- Update package and lockfile to stable version 1.0.0; clarify installation, diagnosis, skill setup, rollback, support limits, security scope and third-party attribution in English, Brazilian Portuguese and Spanish.
+- Preserve the four README illustrations and identify the 90% token-savings graphic as conceptual; no controlled benchmark supports a general savings claim.
+
 ## 0.3.0-rc.3
 
 - Correct the delivery status for the accepted Codex audit, multi-agent wave and real PostgreSQL migration evidence; separate those fixture results from production security claims.

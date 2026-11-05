@@ -1,7 +1,7 @@
 {
   "name": "agentvigor",
-  "version": "0.3.0-rc.3",
-  "description": "On-demand coding workflows, project foundations and quality gates for Codex and Claude Code",
+  "version": "1.0.0",
+  "description": "Codex-first on-demand coding workflows with an experimental Claude Code integration",
   "type": "module",
   "license": "MIT",
   "author": "Rafael Pereira",

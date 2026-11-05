@@ -1,5 +1,11 @@
 # Agent discovery and optional integrations
 
+For v1.0.0, OpenAI Codex is the stable primary client. Claude Code is an
+experimental integration: the installer and compatible resources are retained,
+but native Claude discovery and invocation are `UNVERIFIED`. Steps mentioning
+Claude are optional procedures for future validation, not evidence they were
+run or a gate for Codex support. See the [support matrix](DELIVERY-STATUS.md).
+
 The AgentVigor installer manages its specialist skills and the Vibe workflow router.
 The monitor can run
 an RTK executable already installed by the user. The other integrations on this

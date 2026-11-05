@@ -1,14 +1,14 @@
 # AgentVigor development and release
 
-AgentVigor is an independent Node.js CLI and a set of portable, on-demand skills. Each release is auditable from the Git tag and can be installed from a local checkout or a GitHub Release tarball. The CLI uses Node.js built-ins and has no runtime dependencies.
+AgentVigor is an independent Node.js CLI and a set of portable, on-demand skills. v1.0.0 is stable for OpenAI Codex; Claude Code remains experimental and native discovery/invocation are unverified. Each release is auditable from the Git tag and can be installed from a local checkout or a GitHub Release tarball. The CLI uses Node.js built-ins and has no runtime dependencies.
 
 ## Design decisions
 
 - Node.js 24 LTS is the reference runtime. The CI matrix also covers the supported Node.js 22 and 26 lines. One codebase handles PowerShell, CMD, POSIX shells and WSL.
-- The package contains five original instruction-only skills. Their manifests drive discovery. The installer writes only AgentVigor-owned skill files and its private transaction state. Codex and Claude Code have separate destinations. Upstream tools retain their official installation and update paths.
-- Third-party hook installation and agent settings edits need their own review and recovery model. The release candidate leaves those to documented, opt-in upstream procedures.
+- The package contains five original instruction-only skills. Their manifests drive discovery. The installer writes only AgentVigor-owned skill files and its private transaction state. Codex and Claude Code have separate destinations; only Codex is the stable native client. Upstream tools retain their official installation and update paths.
+- Third-party hook installation and agent settings edits need their own review and recovery model. The stable release leaves those to documented, opt-in upstream procedures.
 - Update applies the skills shipped with the local CLI. The user chooses a reviewed GitHub package before updating the global skill files. Package version changes and skill rollback are distinct operations.
-- The benchmark is an offline comparison of paired, independently observed runs. It uses no credentials or agent API calls. Optional telemetry requires one-time consent and an operator-configured endpoint. The project hosts no endpoint in this candidate.
+- The benchmark is an offline comparison of paired, independently observed runs. It uses no credentials or agent API calls. Optional telemetry requires one-time consent and an operator-configured endpoint. The project hosts no endpoint.
 
 ## Checkpoints
 
@@ -21,10 +21,10 @@ AgentVigor is an independent Node.js CLI and a set of portable, on-demand skills
 | M5 RTK | Official RTK monitor | Mocked lifecycle tests and local one-shot RTK run |
 | M6 Documentation | Three README languages and four supplied PNG visuals | Local link and command checks, lossless compression and conceptual-metric captions |
 | M7 Quality | Platform CI, test matrix, offline benchmark and consent design | CI plus an explicit record of manual coverage |
-| M8 Public candidate | Reviewed commit and versioned GitHub artifact | Clean checkout, passing jobs and install smoke test from package |
+| M8 Stable release | Reviewed Codex support policy, commit and versioned GitHub artifact | Clean checkout, passing suite/CI, install smoke from exact package, package inventory and checksum |
 
 ## Local development
 
 Open a shell in the checkout root. Use a current patch of Node.js 22, 24 or 26. Run `npm ci --ignore-scripts --no-audit --no-fund`, then `npm test`, `npm run smoke:package` and `npm pack --dry-run --json`. ESLint is pinned for development tests. In Windows PowerShell, `npm.cmd` is also available when script execution policy blocks `npm.ps1`.
 
-Read the README for the exact installation, update and removal commands. For a release, review all staged files and the package manifest, run the suite, inspect CI, then create a pre-release with the packed tarball and SHA-256 checksum. Use regular fast-forward pushes and preserve the existing license and upstream notices.
+Read the README for the exact installation, update and removal commands. For a stable release, review the support matrix, staged files, package manifest and licenses; run the suite and package smoke once; push the candidate without skipping CI; publish only after the six-job matrix passes. Tag the reviewed commit and attach the packed tarball with its SHA-256 checksum. Keep Claude marked experimental until native acceptance exists. Use regular fast-forward pushes and preserve upstream notices.
