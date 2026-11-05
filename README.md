@@ -4,7 +4,7 @@ Detailed procedures are available offline with `agentvigor catalog --id developm
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-Candidate `0.3.0-rc.2` adds complete offline QUICK/FULL workflows and optional managed integrations. See the [Vibe integration guide](docs/en/VIBE-INTEGRATION.md), [parity matrix](docs/upstream-audit/PARITY.md), and [candidate validation and limitations](docs/CANDIDATE-0.3-rc.2.md).
+`0.3.0-rc.3` is a pre-release candidate, not a stable `1.0.0` release. Its package and six-platform CI gates must pass before publication. Native Claude Code acceptance is BLOCKED because the client was unavailable during the latest check; compatibility documentation does not claim that native acceptance passed. See the [Vibe integration guide](docs/en/VIBE-INTEGRATION.md), [parity matrix](docs/upstream-audit/PARITY.md), and [candidate validation and limitations](docs/CANDIDATE-0.3-rc.3.md).
 
 ![AgentVigor Toolkit with its slogan](docs/assets/readme/hero.png)
 
@@ -68,7 +68,7 @@ Inside the checkout, run the commands below. Use `npm.cmd` in Windows PowerShell
 
 ```text
 npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.2.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.3.tgz
 agentvigor --version
 agentvigor --help
 ```
@@ -126,6 +126,7 @@ Compare observations from paired runs with `agentvigor benchmark --input observa
 - [Development](docs/DEVELOPMENT.md)
 - [Contributing](CONTRIBUTING.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
+- [Security policy](SECURITY.md)
 - [Changelog](CHANGELOG.md)
 
 ## Created and maintained by Rafael Pereira

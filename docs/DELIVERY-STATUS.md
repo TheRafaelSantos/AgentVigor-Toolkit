@@ -18,7 +18,7 @@ preservada. Rafael Pereira mantém as implementações originais do AgentVigor.
 | G. Compatibilidade | O commit `1dbdf09` passou nos seis jobs de CI, incluindo download oficial, versão e rollback offline de RTK OSS e Full em Windows x64, Ubuntu x64 e macOS Intel/ARM. CLI/benchmark e transações também foram executados em WSL. [CI](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41977347205). |
 | H. Comparação | Vibe fornece procedimentos, templates, regras ESLint, harness e práticas. AgentVigor acrescenta roteamento global, cinco skills próprias, CLI, planos vinculados ao conteúdo, instalação opcional, inventário e rollback. [Comparação detalhada](upstream-audit/MATRIX.md). |
 | I. Lacunas | Prioridades e impactos abaixo. Referências e arquivos presentes são classificados separadamente de comportamento homologado. |
-| J. Publicação e reprodução | [Candidato rc.2](CANDIDATE-0.3-rc.2.md) e comandos abaixo. O rc.2 reúne o preset PostgreSQL e a correção WSL. O [rc.1](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.1) e seu tarball são preservados. |
+| J. Publicação e reprodução | [Candidato rc.3](CANDIDATE-0.3-rc.3.md), [rc.2](CANDIDATE-0.3-rc.2.md) e comandos abaixo. Os dois pré-releases anteriores permanecem preservados. |
 
 ### Inventário observado na máquina
 
@@ -54,17 +54,25 @@ harness-improvement
 security-audit
 ```
 
-### Lacunas por prioridade e impacto
+### Estado de aceitação (5 de novembro de 2026)
 
-| Prioridade | Lacuna | Impacto / próximo critério |
-| --- | --- | --- |
-| P1 | Auditoria FULL e ondas de implementação | A revisão FULL concluiu em fixture com dois revisores nativos e validação do coordenador. A auditoria ainda não concluiu uma sessão aceita; ondas de implementação requerem prova própria |
-| P1 | Uso das integrações dentro dos clientes | O hook RTK reescreveu e executou um comando na fixture isolada. O caminho WinGet falha no sandbox; os runtimes gerenciados e demais integrações precisam de provas próprias dentro do cliente |
-| P1 | Claude Code indisponível no PATH inspecionado | Homologação real e lifecycle dos plugins dependem de um cliente disponível. Manter handoff nativo e estados BLOCKED/UNVERIFIED |
-| P2 | PostgreSQL real e aplicação de migração | Testes de pool usam mocks. SQL foi gerado sem conexão. Docker indisponível impede a prova local da migração |
-| P2 | Smokes oficiais fora do Windows | RTK OSS/Full e Find Skills passaram em todos os seis jobs, incluindo macOS Intel/ARM. Find Skills também passou em WSL para os dois destinos. Graphify/plugins fora do Windows seguem pendentes |
-| P2 | Economia de tokens | Busca seletiva observada. Comparação controlada e custo por modelo ainda sem medição |
-| Concluído | Publicação do rc.2 com as correções de WSL e o preset PostgreSQL | Publicado de `11e7762` após seis jobs verdes e tarball verificado em Windows/WSL. [Release](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2). O rc.1 foi preservado |
+| Requisito | Estado | Evidência | Pendência |
+| --- | --- | --- | --- |
+| Revisão FULL e auditoria FULL em fixture | PASS | [Registro nativo](NATIVE-CLIENT-VALIDATION.md); quatro artefatos conferidos e revisão com dois revisores | Scanners, advisories, privacidade exclusiva e segurança de produção não foram homologados |
+| Ondas multiagentes | PASS | [Registro nativo](NATIVE-CLIENT-VALIDATION.md); dois workers sobrepostos, testes independentes aprovados e fixture preservada | Não generaliza para projetos ou cargas arbitrárias |
+| Migração PostgreSQL real | PASS | [Preset PostgreSQL](NEXT-POSTGRES-PRESET.md); PostgreSQL 16.15 no WSL/Linux, repetição sem duplicação e transação revertida | Reproduzir somente se o script ou preset mudar |
+| Claude Code nativo | BLOCKED | [Homologação Claude](CLAUDE-ACCEPTANCE.md); launcher ausente no PATH e locais padrão verificados nesta retomada | Executar a matriz quando houver cliente e sessão autenticada |
+| Invocação de integrações gerenciadas no cliente | UNVERIFIED | [Inventário](INTEGRATION-MANAGEMENT.md) e provas delimitadas no [registro nativo](NATIVE-CLIENT-VALIDATION.md) | Separar descoberta pessoal, instalação gerenciada e execução real por integração |
+| Segurança de produção, scanners e advisories | UNVERIFIED | Auditoria nativa em fixture sintética; [política de segurança](../SECURITY.md) | Nenhuma certificação de produção ou varredura geral nesta retomada |
+| Instalação limpa do pacote rc.3 | PASS | Smoke Windows isolado, 320 arquivos, CLI, ambos os roots, catálogo QUICK/FULL, instalação repetida, update idempotente e rollback | A CI final ainda precisa empacotar e validar a mesma revisão |
+| Suíte local completa | PASS | `npm.cmd test`: 116 aprovados, zero falhas, ignorados ou cancelados nesta revisão candidata | Nenhuma; repetir somente se o código mudar |
+| CI de seis plataformas em `df74976` | PASS | [Run 41991406823](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41991406823) | Essa CI antecede o candidato rc.3 |
+| CI final do candidato rc.3 | UNVERIFIED | Será executada na revisão candidata publicada para avaliação | Aguardar os seis jobs antes de publicar o pré-release |
+| Coerência dos documentos EN/PT-BR/ES | PASS | READMEs, relatório, política de segurança, PostgreSQL e homologação Claude revisados | Claude continua sem homologação nativa |
+| Economia total de tokens | UNVERIFIED | Ilustração conceitual nos READMEs; benchmark pareado não medido | Não anunciar percentual como resultado do AgentVigor |
+| Estável v1.0.0 | BLOCKED | Claude real e gates finais de candidato pendentes | Não publicar estável enquanto requisitos essenciais estiverem bloqueados |
+
+O [v0.3.0-rc.2](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2) e seus assets permanecem preservados. O candidato rc.3 foi validado localmente; sua publicação depende da CI de seis plataformas. A aceitação completa do Vibe Toolkit não é reivindicada.
 
 ### Reprodução em PowerShell
 
@@ -90,18 +98,24 @@ The A–J table above links the requested deliverables and their evidence. All
 AgentVigor adds global skills, five original specialists, the CLI, scoped plans,
 optional integration management and rollback to the upstream Vibe resources.
 
-Bounded native Codex cases ran in all seven requested categories. RTK rewriting
-executed in an isolated native fixture. Full multi-agent procedures, managed
-integration invocation and Claude Code acceptance remain pending.
+The prior checkpoint records six passing CI jobs on commit `df74976`; this
+candidate's 116-test local suite and package smoke also passed.
+The native FULL audit, two-worker wave and live PostgreSQL migration also passed
+in bounded fixtures. Claude Code acceptance is BLOCKED because no client
+launcher was found during the 2026-11-05 retake. Managed integration invocation,
+production security scanning and the final candidate's package/CI gates remain
+UNVERIFIED. The pause checkpoint itself has no CI; the rc.3 matrix remains to
+run before publication.
 The local inventory separates installation from configuration, discovery and
 invocation. Windows official smokes and the six-job package/code matrix cover
-different validation scopes. The PostgreSQL preset passed lint, types, nine
-tests, build and synthetic SQL generation. A live PostgreSQL migration requires
-an available database. Token savings have not been measured.
+different validation scopes. The [PostgreSQL record](NEXT-POSTGRES-PRESET.md)
+includes a real PostgreSQL 16.15 migration in WSL/Linux, repeat migration and
+transaction rollback. Total token savings have not been measured.
 
-The published rc.1 tarball is preserved. The rc.2 candidate incorporates WSL
-fixes and the PostgreSQL preset. Use the reproduction commands above with `npm` on
-macOS/Linux. See the linked guides for scoped consent and rollback.
+The rc.1 and rc.2 pre-release artifacts remain preserved. Candidate rc.3 updates
+acceptance records and security/reporting guidance; its local suite and isolated
+package smoke passed. Publication still requires its six-job CI matrix. Use the
+reproduction commands above with `npm` on macOS/Linux.
 
 ## Español
 
@@ -110,15 +124,19 @@ procedimientos originales completos y el snapshot de 121 archivos están
 disponibles sin conexión. AgentVigor añade skills globales, cinco especialistas
 propias, CLI, planes acotados, gestión opcional de integraciones y reversión.
 
-Se ejecutó un caso nativo delimitado en cada categoría de Codex y el hook RTK
-ejecutó un comando en una fixture aislada. Siguen pendientes los procedimientos
-multiagente completos, la invocación de integraciones gestionadas y Claude Code.
+El checkpoint registra 116 pruebas locales y seis trabajos CI aprobados en
+`df74976`. La auditoría FULL, la ola de dos workers y la migración PostgreSQL
+real también pasaron en fixtures delimitadas. Claude Code está BLOCKED: no se
+encontró un launcher el 2026-11-05. La invocación de integraciones gestionadas,
+el escaneo de seguridad de producción y los gates del paquete/CI candidato
+siguen UNVERIFIED. El checkpoint actual no tiene CI propia aprobada.
 El inventario distingue instalación, configuración, descubrimiento e invocación.
 Los smokes oficiales Windows y la matriz de seis jobs validan alcances distintos.
-El preset PostgreSQL pasó lint, tipos, nueve pruebas, compilación y generación
-de SQL sintético. Aplicar migraciones requiere una base disponible. El ahorro
-de tokens sigue sin medición controlada.
+El [registro PostgreSQL](NEXT-POSTGRES-PRESET.md) incluye una migración real en
+PostgreSQL 16.15 en WSL/Linux, repetición y rollback transaccional. El ahorro
+total de tokens sigue sin medición controlada.
 
-El tarball rc.1 publicado se conserva. El candidato rc.2 incorpora las correcciones
-WSL y el preset PostgreSQL. Usa los comandos anteriores con `npm`
-en macOS/Linux y consulta cada guía para consentimiento y reversión.
+Los artefactos pre-release rc.1 y rc.2 siguen intactos. El candidato rc.3
+actualiza los registros de aceptación y la política de seguridad; la suite local
+y el smoke aislado del paquete pasaron. Aún requiere la matriz CI de seis jobs.
+Usa los comandos anteriores con `npm` en macOS/Linux.

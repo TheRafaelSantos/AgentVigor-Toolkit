@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0-rc.3
+
+- Correct the delivery status for the accepted Codex audit, multi-agent wave and real PostgreSQL migration evidence; separate those fixture results from production security claims.
+- Add a responsible vulnerability reporting policy and a Claude acceptance checklist that records the unavailable native client as blocked without claiming a test result.
+- Extend the isolated package smoke to verify repeat installation and managed-skill update idempotency before rollback.
+- Update the English, Brazilian Portuguese and Spanish READMEs to identify this as a pre-release and state the Claude acceptance limit. Keep token-savings artwork labeled as illustrative.
+
 ## 0.3.0-rc.2
 
 - Add the optional Next.js/PostgreSQL preset, preserving twelve upstream templates with attribution. Verify lint, types, nine tests, build and synthetic migration generation; a live database migration remains unverified.

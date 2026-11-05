@@ -4,7 +4,7 @@ Os procedimentos detalhados estão disponíveis offline com `agentvigor catalog 
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-O candidato `0.3.0-rc.2` inclui fluxos QUICK/FULL completos offline e integrações opcionais gerenciadas. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md), a [matriz de paridade](docs/upstream-audit/PARITY.md) e a [validação e limitações do candidato](docs/CANDIDATE-0.3-rc.2.md#português-brasileiro).
+`0.3.0-rc.3` é um pré-release candidato, não uma versão estável `1.0.0`. O pacote e a matriz CI de seis plataformas precisam passar antes da publicação. A homologação nativa do Claude Code está BLOCKED porque o cliente não estava disponível na última verificação; a documentação de compatibilidade não significa que essa homologação passou. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md), a [matriz de paridade](docs/upstream-audit/PARITY.md) e a [validação e limitações do candidato](docs/CANDIDATE-0.3-rc.3.md#português-brasileiro).
 
 ![AgentVigor Toolkit e seu slogan](docs/assets/readme/hero.png)
 
@@ -68,7 +68,7 @@ Execute os comandos abaixo dentro do checkout. No PowerShell, use `npm.cmd` se `
 
 ```text
 npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.2.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.3.tgz
 agentvigor --version
 agentvigor --help
 ```
@@ -126,6 +126,7 @@ Compare medições de execuções pareadas com `agentvigor benchmark --input obs
 - [Desenvolvimento](docs/DEVELOPMENT.md)
 - [Como contribuir](CONTRIBUTING.md)
 - [Avisos de terceiros](THIRD_PARTY_NOTICES.md)
+- [Política de segurança](SECURITY.md)
 - [Changelog](CHANGELOG.md)
 
 ## Criado e mantido por Rafael Pereira

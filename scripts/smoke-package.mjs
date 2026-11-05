@@ -26,8 +26,10 @@ try {
   const opts = ['--ignore-scripts', '--offline', '--cache', cache];
   const [packed] = JSON.parse(node([npm, 'pack', '--json', '--pack-destination', temp, ...opts]));
   assert.equal(packed.entryCount, packed.files.length);
+  assert.ok(packed.files.some(({ path }) => path === 'SECURITY.md'));
+  assert.ok(!packed.files.some(({ path }) => path === 'docs/PAUSE-HANDOFF.md'));
   for (const { path } of packed.files) {
-    assert.match(path, /^(LICENSE$|README[^/]*\.md$|CHANGELOG\.md$|CONTRIBUTING\.md$|THIRD_PARTY_NOTICES\.md$|package\.json$|(?:bin|lib|skills|docs|benchmarks)\/)/);
+    assert.match(path, /^(LICENSE$|README[^/]*\.md$|SECURITY\.md$|CHANGELOG\.md$|CONTRIBUTING\.md$|THIRD_PARTY_NOTICES\.md$|package\.json$|(?:bin|lib|skills|docs|benchmarks)\/)/);
     if (['skills/agentvigor-toolkit/references/upstream/templates/next/.env.example',
       'skills/agentvigor-toolkit/references/full/source/templates/next/.env.example'].includes(path)) continue;
     assert.doesNotMatch(path, /(?:^|\/)(?:\.env(?:\.|$)|.*\.(?:db|sqlite|pem|log|key)$)/i);
@@ -62,6 +64,10 @@ try {
   }
   const apply = JSON.parse(node([entry, 'install', '--agent', 'both', '--yes', '--json'], env));
   assert.equal(apply.status, 'installed');
+  const repeat = JSON.parse(node([entry, 'install', '--agent', 'both', '--yes', '--json'], env));
+  assert.equal(repeat.status, 'unchanged');
+  const update = JSON.parse(node([entry, 'update', '--yes', '--json'], env));
+  assert.equal(update.status, 'unchanged');
   const status = JSON.parse(node([entry, 'status', '--json'], env));
   assert.deepEqual(status.agents, ['codex', 'claude']);
   for (const [agent, client] of [['codex', '.agents'], ['claude', '.claude']]) {

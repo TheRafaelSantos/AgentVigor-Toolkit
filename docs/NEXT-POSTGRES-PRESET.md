@@ -39,11 +39,15 @@ These files are outside the preset's ownership.
 
 ## Validation record
 
-On Windows with Node 24.15.0, the generated fixture passed lint, TypeScript,
-the Node title test, eight original Vitest tests and the production build.
-Drizzle generated a `CREATE TABLE` migration for a synthetic one-column schema
-without a connection URL. Docker's Linux engine was unavailable, so applying
-migrations against a running PostgreSQL instance remains pending.
+The generated fixture passed lint, TypeScript, the Node title test, eight
+original Vitest tests and the production build on Windows with Node 24.15.0.
+Separately, `scripts/smoke-postgres.sh` passed against PostgreSQL 16.15 under
+WSL/Linux: it generated and applied a migration, repeated it without duplicating
+the journal entry, then confirmed insert/read and transaction rollback. The
+temporary cluster used a private Unix socket with TCP disabled and was stopped
+and removed by the script. No Docker service or global PostgreSQL installation
+was needed. The proof is a disposable synthetic project, not production
+database certification.
 
 The first build exceeded the 180-second quality limit. With Tailwind's source
 base set explicitly to `src`, Turbopack compiled in 8.6 seconds and the complete
@@ -69,9 +73,13 @@ Para desfazer, volte ao checkout do AgentVigor e use `project --mode rollback`
 com `--path` apontando para o projeto. Rode primeiro com `--dry-run`. A reversão
 remove os arquivos gerenciados intactos e preserva arquivos fora do preset.
 
-Na validação Windows, lint, tipos, os nove testes e o build passaram. Também foi
-gerado SQL de uma tabela sintética sem URL de conexão. A aplicação da migração
-em PostgreSQL real segue pendente porque o daemon do Docker estava indisponível.
+Na fixture Windows, lint, tipos, os nove testes e o build passaram. Separadamente,
+`scripts/smoke-postgres.sh` passou em PostgreSQL 16.15 no WSL/Linux: gerou e
+aplicou uma migração, repetiu sem duplicar a entrada do diário e confirmou
+inserção/leitura e rollback transacional. O cluster temporário usou socket Unix
+privado, TCP desativado, e foi encerrado e removido pelo script. Não foi
+necessário Docker nem instalar PostgreSQL globalmente. A fixture é sintética e
+não certifica banco de produção.
 A busca de classes do Tailwind fica limitada a `src`. Se criar componentes fora
 dessa pasta, registre as fontes adicionais no CSS.
 
@@ -92,8 +100,12 @@ Para revertir, vuelve al checkout y usa `project --mode rollback` con `--path`
 apuntando al proyecto. Ejecuta primero con `--dry-run`. Se eliminan los archivos
 gestionados intactos y se conservan los archivos fuera del preset.
 
-En Windows pasaron lint, tipos, nueve pruebas y compilación. También se generó
-SQL para una tabla sintética sin URL de conexión. Aplicar la migración en un
-PostgreSQL real sigue pendiente porque el daemon Docker estaba indisponible.
+En la fixture Windows pasaron lint, tipos, nueve pruebas y compilación. Por
+separado, `scripts/smoke-postgres.sh` pasó contra PostgreSQL 16.15 en WSL/Linux:
+generó y aplicó una migración, la repitió sin duplicar la entrada del diario y
+confirmó inserción/lectura y rollback transaccional. El clúster temporal usó un
+socket Unix privado, TCP desactivado, y el propio script lo detuvo y eliminó. No
+hizo falta Docker ni instalar PostgreSQL globalmente. La fixture es sintética y
+no certifica una base de producción.
 Tailwind busca clases en `src`. Registra fuentes adicionales si los componentes
 se ubican fuera de esa carpeta.
