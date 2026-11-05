@@ -26,7 +26,7 @@ const commands = {
   project: '--mode --template --path --dry-run --yes --json',
   quality: '--path --dry-run --yes --json',
   harness: '--path --dry-run --yes --json',
-  integrations: '--tool --agent --mode --json',
+  integrations: '--tool --agent --mode --json --dry-run --yes',
 };
 const profiles = ['minimal', 'balanced', 'rigorous'];
 const agentIds = ['codex', 'claude'];
@@ -79,7 +79,7 @@ function help(t, command) {
     monitor: '--interval <1..3600>  --once  --no-clear',
     benchmark: '--input <file.json>  --json',
     catalog: '--id <workflow>  --mode quick|full  --lang en|pt-BR|es  --json',
-    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan  --json',
+    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan|configure|rollback  --dry-run  --yes  --json',
     project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
@@ -255,6 +255,22 @@ async function main(args) {
     if (!['22', '24', '26'].includes(process.versions.node.split('.')[0])) throw new UsageError('UNSUPPORTED_NODE');
     const context = { home: homedir(), env, version: pkg.version };
     if (command === 'integrations') {
+      if (['configure', 'rollback'].includes(values.mode)) {
+        if (values.tool !== 'rtk') throw new UsageError('INTEGRATION_TOOL');
+        const { configureRtk } = await import('../lib/rtk-integration.mjs');
+        const tools = await detectTools(context);
+        const options = { ...context, agent: values.agent, mode: values.mode, executable: tools.rtk?.path };
+        const preview = await configureRtk({ ...options, dryRun: true });
+        if (values['dry-run']) return show(preview, values.json, t);
+        if (!values.yes) {
+          if (!process.stdin.isTTY || !process.stdout.isTTY || !process.stderr.isTTY || values.json || env.CI) {
+            throw new UsageError('CONFIRMATION_REQUIRED');
+          }
+          show(preview, false, t);
+          if (!await confirm(t, 'confirm')) { process.exitCode = 2; return; }
+        }
+        return show(await configureRtk({ ...options, expectedPlan: preview.planToken }), values.json, t);
+      }
       const { integrations } = await import('../lib/integrations.mjs');
       const result = await integrations({ ...context, tool: values.tool, agent: values.agent,
         mode: values.mode });

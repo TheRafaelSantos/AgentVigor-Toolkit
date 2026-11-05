@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add official RTK 1.1.0 staged configuration for Codex or Claude Code, with confirmed plans, private snapshots, drift checks and recoverable rollback.
+
 - Add optional integration inventory and scoped official setup plans. Native registration, discovery, managed mutations and rollback remain separately tracked acceptance work.
 
 - Add explicit QUICK and FULL catalog modes. FULL includes localized guidance and the complete pinned upstream procedure in its original language.

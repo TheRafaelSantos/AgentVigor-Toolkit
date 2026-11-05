@@ -28,7 +28,7 @@ FULL identifies complete offline source procedures. ADAPTED identifies executabl
 | Guides, onboarding, templates, rules and validators | FULL | All 121 source files and their bytes are covered by the offline snapshot test. Original validators remain reference code until separately selected and validated. |
 | Project adoption, Next foundation, quality runner and harness | ADAPTED | Existing 0.2.0 tests and validation record cover specific executable cases. The Next preset is a selected foundation and upstream optional data/runtime modules remain reference templates. |
 | Five original skills and router | ADAPTED | Existing manifest, installer and rollback tests. Fresh-client invocation and behavioral evaluation remain UNVERIFIED. |
-| RTK | EXTERNAL | Executable probe and monitor exist. Managed installation/configuration/rollback remains MISSING. |
+| RTK | ADAPTED / EXTERNAL | Existing executable probe and monitor, staged official 1.1.0 configuration and managed rollback for Codex/Claude. Four transaction tests and an official two-client smoke cover configuration. Binary installation and fresh-client invocation remain pending. |
 | Superpowers, Ponytail, Find Skills, Graphify | EXTERNAL | Native setup guides exist. Optional AgentVigor-managed lifecycle remains MISSING. |
 | Context7, browsers, account-specific integrations | EXTERNAL | Complete upstream guides and examples are offline. Availability and access depend on the selected client. |
 | Real Codex sessions across seven categories | UNVERIFIED | Executable available. Global discovery, invocation and FULL selection require observed fresh-session tests. |
