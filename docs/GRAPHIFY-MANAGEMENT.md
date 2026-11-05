@@ -81,17 +81,23 @@ On Windows use the quoted `.exe` path. If your existing Python was installed by
 uv outside PATH, set `UV_PYTHON_INSTALL_DIR` to its existing parent installation
 directory for the test process; no Python download is performed by AgentVigor.
 The CI matrix provisions Python separately and now runs this official smoke.
-Record macOS outcomes only after those jobs finish.
+After correcting the setup action's extensionless Windows uv path, all six jobs
+in [CI run 41991406823](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41991406823)
+passed at `df74976`: Windows Node 22/24, Ubuntu Node 24/26 and macOS Intel/ARM
+Node 24. Every job ran runtime install, both native configuration roots, AST
+extraction, integrity verification and offline rollback with the official tools.
 
 Português: o smoke combinado passou em Windows e Ubuntu/WSL: instalação privada,
 configuração dos dois clientes, extração AST local sem modelo, integridade após
 uso e rollback offline. As instruções e a fonte foram preservadas. O CI prepara
 Python separadamente; isso não instala Python nas máquinas dos usuários.
+O smoke também passou nos seis jobs do CI `41991406823`, incluindo macOS Intel/ARM.
 
 Español: la prueba combinada pasó en Windows y Ubuntu/WSL: runtime privado,
 configuración de ambos clientes, extracción AST local sin modelo, integridad
 después del uso y reversión sin conexión. Se conservaron instrucciones y fuente.
 CI prepara Python por separado; AgentVigor no lo instala en equipos personales.
+La prueba también pasó en los seis jobs del CI `41991406823`, incluyendo macOS Intel/ARM.
 
 ## Private executable and client configuration
 

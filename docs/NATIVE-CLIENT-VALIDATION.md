@@ -130,6 +130,51 @@ result summary in ignored `out/codex-acceptance-<scenario>.json` files.
 
 ## Remaining acceptance categories
 
+### Accepted complete audit and implementation-wave cases
+
+After the failed audit attempts documented below, the versioned app-server AUDIT
+case finished with code zero. It read FULL, preserved HEAD and all six source
+files, and generated all four current artifacts. Independent checks accepted
+schemaVersion, unique finding IDs, cross-report references, required evidence
+and both seeded defect descriptions. The reports separated SEC-001 (confirmed
+cross-tenant disclosure) from SEC-002 (candidate quantity calculation issue),
+instead of inflating the confirmed count. The native report recorded two existing
+tests and twelve in-memory checks. No source fix or installation was applied.
+The temporary managed skills were rolled back to `not-installed`, zero files.
+
+This is acceptance of the complete local AUDIT sequence for the synthetic
+repository. Scanners/advisories were not run; the reports state those gaps.
+The final ACL had one additional inherited entry of unverified origin while
+the owner and original entries remained. Exclusive report privacy and ACL
+equality were therefore not accepted. The source data is synthetic and reports
+remain in ignored `out/`. This does not certify production security or file
+privacy. The failed earlier attempts remain part of this record.
+
+The FULL `parallel-wave-dispatch` case also passed in a new disposable project.
+Two native workers owned separate modules; both started before the first finished.
+Only the coordinator was instructed to run the shared checks. Independent Node
+tests passed, HEAD/test/user note stayed unchanged and no extra files remained.
+The runner requires actual native start/completion events and overlapping work,
+not a narrative claiming parallel execution. The final fixture includes missing,
+empty and null tenant IDs: the first, narrower fixture omitted those cases and
+the native result itself identified that limitation, so the specification was
+strengthened and the scenario rerun successfully.
+
+```powershell
+node scripts/smoke-codex-full-procedures.mjs 'C:\path\to\codex.exe' --allow-live audit
+node scripts/smoke-codex-waves.mjs 'C:\path\to\codex.exe' --allow-live
+```
+
+Português: auditoria FULL e onda de implementação concluíram nas fixtures. A
+auditoria gerou quatro relatórios com fonte/HEAD preservados; a onda teve dois
+workers sobrepostos e passou também os casos de tenant ausente/vazio/nulo.
+Scanners, advisories e privacidade exclusiva dos relatórios não foram homologados.
+
+Español: la auditoría FULL y la ola de implementación terminaron en las fixtures.
+La auditoría generó cuatro informes conservando fuente/HEAD; la ola tuvo dos
+workers superpuestos y pasó casos de tenant ausente/vacío/nulo. No se validaron
+scanners, advisories ni privacidad exclusiva de los informes.
+
 ### Existing optional capabilities: read-only native inventory
 
 A fresh native app-server `skills/list` call reported `find-skills`, `graphify`,
