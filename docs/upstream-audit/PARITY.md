@@ -33,7 +33,7 @@ FULL identifies complete offline source procedures. ADAPTED identifies executabl
 | Superpowers and Ponytail | ADAPTED (Codex) / EXTERNAL (Claude) | Pinned native CLI staging, verified checkout revision, shared-profile coexistence and independent rollback. Discovery, hook execution and model behavior remain unverified. Claude managed operations return `BLOCKED` with the native handoff. See [plugin management](../NATIVE-PLUGIN-MANAGEMENT.md). |
 | Graphify | ADAPTED / UNVERIFIED | Private pinned `uv` runtime, staged official global setup, eight sidecars, license notices and offline rollback. Windows official smoke for both configuration roots and CLI runtime lifecycle. Project hooks and native discovery/invocation remain unverified. See [management](../GRAPHIFY-MANAGEMENT.md) and [source audit](GRAPHIFY-LIFECYCLE-AUDIT.md). |
 | Context7, browsers, account-specific integrations | EXTERNAL | Complete upstream guides and examples are offline. Availability and access depend on the selected client. |
-| Real Codex sessions across seven categories | UNVERIFIED | One real fresh-session read-only case proved global discovery, explicit router invocation and FULL loading. The seven complete behavior categories remain pending; see [observations and limits](../NATIVE-CLIENT-VALIDATION.md). |
+| Real Codex sessions across seven categories | ADAPTED / UNVERIFIED | Fresh sessions verified global discovery, explicit router invocation, FULL loading and seeded findings in review and security. The Git/RTK review path, complete audit procedure and other behavioral scenarios remain pending. See [observations and limits](../NATIVE-CLIENT-VALIDATION.md). |
 | Real Claude Code sessions | MISSING | No Claude launcher found on the current Windows PATH. Authentication was not changed. |
 
 ## Integration state contract
@@ -42,7 +42,7 @@ INSTALLED requires a resolved executable or installed native package and observe
 
 ## Open priorities
 
-1. Implement the optional official installer lifecycle per tool with scoped consent, ownership, backups and rollback.
+1. Validate discovery, invocation and hook behavior for the managed integrations. Complete native Claude plugin management when its registry can be tested.
 2. Observe fresh native-client discovery and explicit invocation in disposable projects for development, review, debugging, security, context economy, recovery and bootstrap.
 3. Extend disposable proofs for detailed upstream project and data-layer practices, retaining prerequisites and recording manual checks.
-4. Run the expanded package and platform matrix before publishing a new candidate.
+4. Keep platform and package evidence attached to each candidate. [0.3.0-rc.1 validation](../CANDIDATE-0.3.md) records the current release.

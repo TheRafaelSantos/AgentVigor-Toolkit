@@ -63,14 +63,36 @@ that this simulated-home fixture is insufficient for that client build; it does
 not establish a defect in the real user-root installation. The later real-root
 test above is the positive evidence.
 
+## Codex review and security fixtures
+
+Two fresh Windows Codex sessions at `e7203e9` used separate disposable projects
+outside the repository. The sessions exited zero. The runner observed successful
+commands reading the requested `SKILL.md` and seeded source in each case.
+
+| Case | Observed finding | Scope |
+| --- | --- | --- |
+| Review, Diff Guardian | `invoices.mjs:2` summed the unit price without quantity. One row priced at 1,000 cents with quantity three yielded 1,000 instead of 3,000. | The agent reported an RTK failure when trying to inspect a Git diff. The source review found the defect. The Git/RTK path remains pending. |
+| Security, Grounded Code | `document.mjs:3–4` returned a document by ID without checking its tenant. The agent identified a cross-tenant disclosure and proposed a fail-closed check and regression cases. | The runner checks the finding and file-read events. Claims about executing a proposed fix need separate command evidence. |
+
+The managed skill installation was reverted. Status returned to `not-installed`
+with zero managed files. To reproduce both cases from the checkout using the
+current authenticated Codex account and two real sessions:
+
+```powershell
+node scripts/smoke-codex-review-security.mjs 'C:\path\to\codex.exe' --allow-live
+```
+
+The command requires an absolute native Codex executable and an account with no
+existing managed AgentVigor installation. Results go to ignored `out/` files.
+
 ## Remaining acceptance categories
 
 | Category | Existing executable evidence | Native behavior still required |
 | --- | --- | --- |
 | Development | Disposable project foundations and quality runner tests | Complete a bounded development change with the relevant skill, then verify resulting files. |
-| Review | Complete upstream procedures and original diff-guardian manifest | Observe a review finding a seeded defect and distinguishing unsupported claims. |
+| Review | Real source review found a seeded invoice defect with Diff Guardian | Validate the Git diff path, RTK behavior and multi-agent procedure. |
 | Debugging | Quality failure handling and harness fixture tests | Observe diagnosis and correction of a seeded failing test. |
-| Security | Authorization harness before/after checks | Observe a bounded security review identifying a seeded authorization defect. |
+| Security | Real Grounded Code review found the cross-tenant authorization defect | Validate the full upstream security audit and its multi-part checks. |
 | Context economy | On-demand catalog, paired-observation benchmark and native FULL loading above | Observe proportional resource loading; measure token comparisons before any savings claim. |
 | Recovery | Managed install/project rollback and safe-resume manifest | Observe continuity from a handoff while preserving pending work and user edits. |
 | Bootstrap | Disposable Next lint/type/test/build evidence and project adoption tests | Observe a native client selecting and completing a supported bootstrap in a disposable project. |
@@ -99,6 +121,12 @@ Este resultado comprova descoberta global, invocação explícita do roteador e
 leitura FULL nesse caso. Ainda faltam os sete cenários comportamentais completos,
 testes das cinco especialistas e medições de economia de tokens. Claude Code
 não foi encontrado no PATH verificado; seus testes reais continuam pendentes.
+
+Duas sessões posteriores leram as skills e os arquivos de teste. O Diff Guardian
+identificou o cálculo da fatura sem quantidade. O Grounded Code identificou a
+leitura entre tenants. O caminho de revisão via Git/RTK ainda precisa de teste,
+assim como o procedimento completo de auditoria de segurança. O comando de
+reprodução está na seção de fixtures acima.
 
 Para repetir a parte de leitura, no PowerShell aberto na pasta do AgentVigor:
 
@@ -155,6 +183,11 @@ Este caso demuestra descubrimiento, invocación explícita del router y lectura
 FULL; aún faltan los siete escenarios completos, eficacia de las especialistas
 y mediciones de ahorro. Claude Code no se encontró en el PATH inspeccionado;
 no se creó ninguna cuenta ni se presumió funcionamiento.
+
+En dos sesiones posteriores, Diff Guardian detectó el cálculo de factura sin
+cantidad y Grounded Code detectó la lectura entre tenants. Siguen pendientes la
+revisión del diff por Git/RTK y la auditoría de seguridad completa. El comando
+para repetir ambas pruebas está en la sección de fixtures.
 
 Primary references:
 [local skill discovery](https://learn.chatgpt.com/docs/build-skills),

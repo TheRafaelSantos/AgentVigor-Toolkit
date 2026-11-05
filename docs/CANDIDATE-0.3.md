@@ -3,6 +3,18 @@
 This pre-release packages the offline upstream snapshot and optional managed
 integrations. Full upstream functional equivalence remains under evaluation.
 
+Published from `e7203e958d25fcca14e88ea3dfee6872e8dddc39`. All six matrix jobs
+passed. The 314-file Windows package smoke installed the tarball successfully.
+GitHub reports the same SHA-256 as the local artifact,
+`7da97be2d3bb1378333efb0e65bb996bf75d7ff7946a639b216e2704d354d67d`.
+[GitHub pre-release](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.1) ·
+[CI run](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41968999821).
+
+Post-release WSL testing reproduced short asynchronous reads on a Windows-mounted
+volume. This can reject a valid Graphify or uv executable during verification in
+`0.3.0-rc.1`. The correction on `main` reads through EOF and still rejects file
+size changes. The published candidate tarball is the original tested artifact.
+
 | Area | Evidence | Remaining acceptance |
 | --- | --- | --- |
 | Upstream workflows | [Parity matrix](upstream-audit/PARITY.md), 16 QUICK/FULL workflows, 121 archived upstream files, byte integrity and link checks | Run the original behavioral scenarios end to end |

@@ -124,9 +124,14 @@ export async function readRegular(path, maxBytes, errorCode) {
     const opened = await file.stat();
     if (!opened.isFile() || opened.ino !== info.ino || opened.dev !== info.dev || opened.size > maxBytes) throw failure(errorCode);
     const bytes = Buffer.alloc(opened.size + 1);
-    const { bytesRead } = await file.read(bytes, 0, bytes.length, 0);
-    if (bytesRead !== opened.size) throw failure(errorCode);
-    return bytes.subarray(0, bytesRead);
+    let offset = 0;
+    while (offset < bytes.length) {
+      const { bytesRead } = await file.read(bytes, offset, bytes.length - offset, offset);
+      if (bytesRead === 0) break;
+      offset += bytesRead;
+    }
+    if (offset !== opened.size) throw failure(errorCode);
+    return bytes.subarray(0, offset);
   } catch (error) {
     if (error.code === 'ENOENT') return null;
     throw failure(errorCode);
