@@ -122,5 +122,6 @@ node scripts/smoke-rtk-binary.mjs
 The smoke downloads both official editions into a disposable home, verifies
 archive checksums and the installed version, rolls back with networking
 disabled, asserts executable removal and deletes only the temporary home.
-Windows x64 passed both editions. macOS/Linux pins are audited; native smoke
-tests on those operating systems have not been run here.
+Windows x64 and Ubuntu/WSL x64 passed both editions using the official assets.
+The CI matrix also runs this smoke in each job. macOS native outcomes are recorded
+only after the relevant job completes.

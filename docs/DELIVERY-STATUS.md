@@ -62,7 +62,7 @@ security-audit
 | P1 | Hooks automáticos e uso das integrações dentro dos clientes | Registro e instalação estão testados. Observar evento de hook e efeito real, com o cliente selecionado |
 | P1 | Claude Code indisponível no PATH inspecionado | Homologação real e lifecycle dos plugins dependem de um cliente disponível. Manter handoff nativo e estados BLOCKED/UNVERIFIED |
 | P2 | PostgreSQL real e aplicação de migração | Testes de pool usam mocks. SQL foi gerado sem conexão. Docker indisponível impede a prova local da migração |
-| P2 | Smokes oficiais fora do Windows | CI cobre código e pacote. Instalação real das ferramentas no macOS/Linux precisa de smokes próprios |
+| P2 | Smokes oficiais fora do Windows | RTK OSS/Full passou em Linux/WSL e foi adicionado à matriz. Graphify, Find Skills e plugins precisam de smokes oficiais próprios fora do Windows |
 | P2 | Economia de tokens | Busca seletiva observada. Comparação controlada e custo por modelo ainda sem medição |
 | P2 | Próximo pacote com as correções de WSL e o preset PostgreSQL | O tarball rc.1 preserva a revisão publicada. Preparar outro candidato após os gates da revisão escolhida |
 

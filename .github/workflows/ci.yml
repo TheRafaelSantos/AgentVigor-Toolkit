@@ -37,3 +37,5 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
       - run: npm run smoke:package
+      - name: Verify official RTK binaries and offline rollback
+        run: node scripts/smoke-rtk-binary.mjs
