@@ -119,6 +119,7 @@ Compare medições de execuções pareadas com `agentvigor benchmark --input obs
 
 - [Integrações](docs/INTEGRATIONS.md)
 - [Instalação gerenciada e reversão](docs/INTEGRATION-MANAGEMENT.md)
+- [Preset opcional de Next.js e PostgreSQL](docs/NEXT-POSTGRES-PRESET.md#português-brasileiro)
 - [Recuperação](docs/RECOVERY.md)
 - [Laboratório de benchmark](docs/BENCHMARK.md)
 - [Telemetria](docs/TELEMETRY.md)

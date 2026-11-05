@@ -192,7 +192,7 @@ async function plan(root, mode, template, lang) {
     }
   } else if (mode !== 'status') {
     if (!projectTemplates.includes(template)) fail('INVALID_TEMPLATE');
-    if (mode === 'adopt' && ['next', 'harness'].includes(template)) fail('INVALID_PROJECT_MODE');
+    if (mode === 'adopt' && ['next', 'next-postgres', 'harness'].includes(template)) fail('INVALID_PROJECT_MODE');
     if (mode === 'init') {
       const entries = (await fs.readdir(root)).filter(entry => entry !== '.git' && entry !== stateDir);
       if ((state.init === null && entries.length) || (state.init !== null && state.init !== template)) {

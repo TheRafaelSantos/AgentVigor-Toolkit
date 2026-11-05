@@ -119,6 +119,7 @@ Compara observaciones emparejadas con `agentvigor benchmark --input observations
 
 - [Integraciones](docs/INTEGRATIONS.md)
 - [Instalación gestionada y reversión](docs/INTEGRATION-MANAGEMENT.md)
+- [Preset opcional de Next.js y PostgreSQL](docs/NEXT-POSTGRES-PRESET.md#español)
 - [Recuperación](docs/RECOVERY.md)
 - [Laboratorio de benchmark](docs/BENCHMARK.md)
 - [Telemetría](docs/TELEMETRY.md)

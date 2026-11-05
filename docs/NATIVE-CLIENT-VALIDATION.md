@@ -85,17 +85,52 @@ node scripts/smoke-codex-review-security.mjs 'C:\path\to\codex.exe' --allow-live
 The command requires an absolute native Codex executable and an account with no
 existing managed AgentVigor installation. Results go to ignored `out/` files.
 
+## Additional bounded Codex workflow cases
+
+The versioned runner `scripts/smoke-codex-workflows.mjs` launches fresh sessions
+in disposable directories, observes successful `SKILL.md` read commands, and
+checks resulting files with independent Node assertions. Five cases passed on
+Windows after the `a5227ed` correction:
+
+| Case | Observed result |
+| --- | --- |
+| Development | Added a quantity-aware price function. Independent assertions checked default, zero and multiple quantities. The user's note stayed byte-identical. |
+| Debugging | Observed a failing end-exclusive interval test, then a passing run of the same test. An independent rerun passed, and the test file stayed byte-identical. |
+| Context economy | Searched a 36,001-line synthetic log for `ERROR`, found the planted error, and kept each observed matching command's output below 4 KiB. Token savings were not measured. |
+| Recovery | Read Safe Resume and the handoff, inspected the stale implementation, corrected it and preserved the user's note. An independent Node assertion passed. |
+| Bootstrap | Read the QUICK workflow, ran the project preview and confirmed initialization in an empty directory. The verifier found `package.json`, `next.config.mjs` and `src/app/page.tsx`. Dependency installation and build were outside that native session's scope. |
+
+The first recovery attempt changed the fixture but lacked observable reads of
+the skill and handoff, so that attempt failed acceptance. An explicit-read retry
+passed. Bootstrap initially failed because the fixture contained an existing
+note while `project init` requires an empty target. A later empty-target attempt
+timed out. The empty-target retry with a bounded three-command procedure passed.
+The runner observed successful preview and apply commands, then restored the
+global skill state to `not-installed` with zero managed files.
+
+Run selected cases using the current authenticated Codex account:
+
+```powershell
+node scripts/smoke-codex-workflows.mjs 'C:\path\to\codex.exe' --allow-live development debugging context recovery bootstrap
+```
+
+Use the scenario names after `--allow-live` to select a subset. The runner
+temporarily installs the six AgentVigor skills and requires no existing managed
+installation. A `finally` block rolls the installation back and removes its
+disposable fixtures. Failed assertions set a nonzero exit code and preserve the
+result summary in ignored `out/codex-acceptance-<scenario>.json` files.
+
 ## Remaining acceptance categories
 
 | Category | Existing executable evidence | Native behavior still required |
 | --- | --- | --- |
-| Development | Disposable project foundations and quality runner tests | Complete a bounded development change with the relevant skill, then verify resulting files. |
+| Development | Real bounded Grounded Code change and independent assertions passed | Extend to the complete original project workflow as applicable. |
 | Review | Real source review found a seeded invoice defect with Diff Guardian | Validate the Git diff path, RTK behavior and multi-agent procedure. |
-| Debugging | Quality failure handling and harness fixture tests | Observe diagnosis and correction of a seeded failing test. |
+| Debugging | Real failure, production correction and rerun of an unchanged test observed | Additional project-specific cases remain selectable. |
 | Security | Real Grounded Code review found the cross-tenant authorization defect | Validate the full upstream security audit and its multi-part checks. |
-| Context economy | On-demand catalog, paired-observation benchmark and native FULL loading above | Observe proportional resource loading; measure token comparisons before any savings claim. |
-| Recovery | Managed install/project rollback and safe-resume manifest | Observe continuity from a handoff while preserving pending work and user edits. |
-| Bootstrap | Disposable Next lint/type/test/build evidence and project adoption tests | Observe a native client selecting and completing a supported bootstrap in a disposable project. |
+| Context economy | Real targeted search in a large synthetic log, plus on-demand FULL loading | Controlled paired token measurement before any savings claim. |
+| Recovery | Real Safe Resume session verified stale handoff state, corrected it and preserved user edits | Longer multi-session continuity remains outside the bounded fixture. |
+| Bootstrap | Native QUICK selection, preview and Next initialization passed. Separate Next/PostgreSQL fixture passed quality checks | Complete upstream external-capability selection and optional integration use within a project. |
 
 Claude Code was not found on the inspected Windows PATH. No account was created,
 login changed or success assumed. Its actual discovery and invocation remain
@@ -127,6 +162,12 @@ identificou o cálculo da fatura sem quantidade. O Grounded Code identificou a
 leitura entre tenants. O caminho de revisão via Git/RTK ainda precisa de teste,
 assim como o procedimento completo de auditoria de segurança. O comando de
 reprodução está na seção de fixtures acima.
+
+Os casos de desenvolvimento, depuração, busca seletiva em log e recuperação
+também passaram em sessões novas. O verificador conferiu o comportamento dos
+arquivos e a preservação das edições do usuário. O bootstrap passou após corrigir
+a fixture e delimitar os três comandos do caso. Esses
+resultados não medem economia de tokens nem homologam os procedimentos completos.
 
 Para repetir a parte de leitura, no PowerShell aberto na pasta do AgentVigor:
 
@@ -188,6 +229,12 @@ En dos sesiones posteriores, Diff Guardian detectó el cálculo de factura sin
 cantidad y Grounded Code detectó la lectura entre tenants. Siguen pendientes la
 revisión del diff por Git/RTK y la auditoría de seguridad completa. El comando
 para repetir ambas pruebas está en la sección de fixtures.
+
+También pasaron casos reales de desarrollo, depuración, búsqueda selectiva en un
+log y recuperación. El verificador comprobó los archivos y la conservación del
+trabajo previo. El bootstrap pasó tras corregir la fixture y delimitar los tres
+comandos del caso. Estos casos no miden ahorro de tokens ni validan todos los
+procedimientos completos.
 
 Primary references:
 [local skill discovery](https://learn.chatgpt.com/docs/build-skills),

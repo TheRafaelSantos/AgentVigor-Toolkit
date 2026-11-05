@@ -119,6 +119,7 @@ Compare observations from paired runs with `agentvigor benchmark --input observa
 
 - [Integrations](docs/INTEGRATIONS.md)
 - [Managed installation and rollback](docs/INTEGRATION-MANAGEMENT.md)
+- [Optional Next.js and PostgreSQL preset](docs/NEXT-POSTGRES-PRESET.md)
 - [Recovery](docs/RECOVERY.md)
 - [Benchmark lab](docs/BENCHMARK.md)
 - [Telemetry](docs/TELEMETRY.md)

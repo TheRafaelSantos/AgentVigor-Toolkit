@@ -628,7 +628,7 @@
       "destination": "scripts/project-presets.mjs",
       "kind": "adapted",
       "sha256": "31790f20400589421c70258055406ab4ec4736097996537b67b29abb7beddcf1",
-      "destinationSha256": "59be610f63545095f6b9d38538f6c6ba0b7035ea5ee2ace6925d1ab9d9e0100b"
+      "destinationSha256": "70b5ca4303241c3576b9b25d6654b6beec2d000195545c022becf479ff0917e3"
     },
     {
       "source": ".github/workflows/validate.yml",

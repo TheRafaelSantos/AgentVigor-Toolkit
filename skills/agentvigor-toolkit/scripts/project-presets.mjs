@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 
 const upstream = new URL('../references/upstream/templates/', import.meta.url);
+const fullNext = new URL('../references/full/source/templates/next/', import.meta.url);
 const license = new URL('../licenses/VIBE-CODING-TOOLKIT-MIT.txt', import.meta.url);
 const json = value => JSON.stringify(value, null, 2) + '\n';
 const upstreamText = name => readFile(new URL(name, upstream), 'utf8');
@@ -66,7 +67,10 @@ const harness = ['access.mjs', 'local-notes.txt', 'AGENTS.md', 'README.md', 'LIC
 const next = [...docs, ...eslint, 'package.json', 'tsconfig.json', 'next-env.d.ts', '.gitignore',
   'postcss.config.mjs', 'next.config.mjs', 'src/app/layout.tsx', 'src/app/page.tsx', 'src/app/globals.css',
   'src/lib/site.mjs', 'test/site.test.mjs'];
-const templates = { docs, eslint, harness, next };
+const postgres = ['.env.example', 'drizzle.config.ts', 'vitest.config.mts', 'src/db/index.ts', 'src/db/index.test.ts',
+  'src/db/schema/index.ts', 'src/lib/env.ts', 'src/lib/env-schema.ts', 'src/lib/env.test.ts', 'src/lib/logger.ts',
+  'src/lib/logger.test.ts', 'src/lib/utils.ts'];
+const templates = { docs, eslint, harness, next, 'next-postgres': [...next, ...postgres] };
 export const projectTemplates = Object.keys(templates);
 export const projectPaths = new Set(Object.values(templates).flat());
 
@@ -146,7 +150,7 @@ function nextFiles(w) {
     '.gitignore': 'node_modules/\n.next/\n*.tsbuildinfo\n.env*\n!.env.example\n.agentvigor-project/\n',
     'postcss.config.mjs': 'const config = { plugins: { "@tailwindcss/postcss": {} } };\nexport default config;\n',
     'next.config.mjs': 'const config = { turbopack: { root: import.meta.dirname } };\nexport default config;\n',
-    'src/app/globals.css': '@import "tailwindcss";\n',
+    'src/app/globals.css': '@import "tailwindcss" source("../");\n',
     'src/app/layout.tsx': `import type { ReactNode } from 'react';
 import './globals.css';
 
@@ -177,6 +181,20 @@ export async function preset(name, lang = 'en') {
   const w = Object.hasOwn(words, lang) ? words[lang] : words.en;
   if (name === 'docs') return docsFiles(w);
   if (name === 'next') return { ...docsFiles(w), ...await eslintFiles(w, true), ...nextFiles(w) };
+  if (name === 'next-postgres') {
+    const foundation = await preset('next', lang);
+    const manifest = JSON.parse(foundation['package.json']);
+    manifest.name = 'agentvigor-next-postgres';
+    Object.assign(manifest.dependencies, { 'drizzle-orm': '0.45.4', pg: '8.23.1', 'server-only': '0.0.1',
+      zod: '4.6.7', pino: '10.4.0', clsx: '2.1.1', 'tailwind-merge': '3.7.0' });
+    Object.assign(manifest.devDependencies, { 'drizzle-kit': '0.31.11', '@types/pg': '8.23.1',
+      '@next/env': manifest.dependencies.next, vitest: '5.1.0' });
+    Object.assign(manifest.scripts, { test: 'node --test "test/*.test.mjs" && vitest run', 'test:watch': 'vitest',
+      'db:generate': 'drizzle-kit generate', 'db:migrate': 'drizzle-kit migrate' });
+    const files = await Promise.all(postgres.map(async path => [path, await readFile(
+      new URL(path === '.env.example' ? path : path + '.example', fullNext), 'utf8')]));
+    return { ...foundation, ...Object.fromEntries(files), 'package.json': json(manifest) };
+  }
   if (name === 'eslint') {
     return { ...await eslintFiles(w, false), 'agentvigor.quality.json': json({
       schemaVersion: 1,

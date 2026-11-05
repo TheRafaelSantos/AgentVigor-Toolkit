@@ -80,7 +80,7 @@ function help(t, command) {
     benchmark: '--input <file.json>  --json',
     catalog: '--id <workflow>  --mode quick|full  --lang en|pt-BR|es  --json',
     integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan|install|configure|verify|rollback  --scope binary  --variant oss|full (RTK)\n  --dry-run  --yes  --json',
-    project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
+    project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next|next-postgres\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
   if (!command) console.log(`\n${t('commands')}\n${rows.join('\n')}`);

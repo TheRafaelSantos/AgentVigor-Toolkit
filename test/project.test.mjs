@@ -71,8 +71,32 @@ test('Next foundation contains pinned dependencies, App Router and a real qualit
   const pkg = JSON.parse(await readFile(join(path, 'package.json'), 'utf8'));
   assert.match(pkg.dependencies.next, /^16\.\d+\.\d+$/);
   assert.match(await readFile(join(path, 'src', 'app', 'page.tsx'), 'utf8'), /export default/);
+  assert.match(await readFile(join(path, 'src/app/globals.css'), 'utf8'), /source\("\.\.\/"\)/);
   const gates = JSON.parse(await readFile(join(path, 'agentvigor.quality.json'), 'utf8'));
   assert.deepEqual(gates.checks.map(check => check.id), ['lint', 'typecheck', 'test', 'build']);
+});
+
+test('optional Next/PostgreSQL foundation installs upstream modules and rolls back only its own files', async t => {
+  const path = await fixture(t);
+  const options = { path, mode: 'init', template: 'next-postgres' };
+  const plan = await project({ ...options, dryRun: true });
+  assert.deepEqual(await readdir(path), []);
+  await project({ ...options, expectedPlan: plan.planToken });
+  const pkg = JSON.parse(await readFile(join(path, 'package.json'), 'utf8'));
+  assert.match(pkg.scripts.test, /vitest run/);
+  assert.equal(pkg.scripts['db:migrate'], 'drizzle-kit migrate');
+  for (const asset of ['.env.example', 'drizzle.config.ts', 'vitest.config.mts', 'src/db/index.ts',
+    'src/db/index.test.ts', 'src/lib/logger.ts', 'src/lib/env.test.ts']) {
+    const source = new URL(`../skills/agentvigor-toolkit/references/full/source/templates/next/${asset === '.env.example' ? asset : asset + '.example'}`, import.meta.url);
+    assert.deepEqual(await readFile(join(path, asset)), await readFile(source));
+  }
+  await assert.rejects(readFile(join(path, '.env.local')), { code: 'ENOENT' });
+  await writeFile(join(path, 'NOTE.txt'), 'user work');
+  const undo = { path, mode: 'rollback' };
+  const removal = await project({ ...undo, dryRun: true });
+  await project({ ...undo, expectedPlan: removal.planToken });
+  await assert.rejects(readFile(join(path, 'src/db/index.ts')), { code: 'ENOENT' });
+  assert.equal(await readFile(join(path, 'NOTE.txt'), 'utf8'), 'user work');
 });
 
 test('an interrupted adoption recovers only files still linked to managed objects', async t => {

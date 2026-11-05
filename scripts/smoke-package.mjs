@@ -83,6 +83,11 @@ try {
   await mkdir(project);
   node([entry, 'project', '--mode', 'init', '--path', project, '--template', 'docs', '--yes'], env);
   await access(join(project, 'PRODUCT.md'));
+  const postgresProject = join(temp, 'postgres project');
+  await mkdir(postgresProject);
+  node([entry, 'project', '--mode', 'init', '--path', postgresProject, '--template', 'next-postgres', '--yes'], env);
+  await access(join(postgresProject, '.env.example'));
+  await access(join(postgresProject, 'src', 'db', 'index.ts'));
   node([entry, 'rollback', '--all', '--yes', '--json'], env);
   assert.equal(JSON.parse(node([entry, 'status', '--json'], env)).status, 'not-installed');
   console.log(`Package smoke passed (${process.platform}/${process.arch}, ${packed.entryCount} files)`);
