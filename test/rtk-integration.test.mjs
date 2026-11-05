@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, readFile, readdir, rm, symlink } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
+import { runFile } from '../lib/process.mjs';
 import { configureRtk } from '../lib/rtk-integration.mjs';
 
 async function fixture(t) {
@@ -76,4 +78,16 @@ test('linked configuration files and failed official generation cannot modify th
   const run = async (_, args) => ({ code: args.includes('--version') ? 0 : 1, stdout: 'rtk 1.1.0', stderr: '' });
   await assert.rejects(configureRtk({ ...options, run, dryRun: true }), { code: 'RTK_FAILED' });
   assert.equal(await readFile(join(options.home, '.codex', 'AGENTS.md'), 'utf8'), '# User rules\n');
+});
+
+test('RTK accepts a linked operating-system temporary directory without trusting linked user files', async t => {
+  const options = await fixture(t);
+  const target = join(options.home, 'physical-temp');
+  const alias = join(options.home, 'system-temp');
+  await mkdir(target);
+  await symlink(target, alias, process.platform === 'win32' ? 'junction' : 'dir');
+  const result = await runFile(process.execPath, ['--test', '--test-name-pattern=RTK configuration previews',
+    fileURLToPath(import.meta.url)], { env: { ...process.env, TMPDIR: alias, TMP: alias, TEMP: alias },
+    timeoutMs: 15000, maxOutputBytes: 16384 });
+  assert.equal(result.code, 0, result.stdout + result.stderr);
 });
