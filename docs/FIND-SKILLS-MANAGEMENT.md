@@ -95,7 +95,7 @@ Sources: [official CLI commands](https://github.com/vercel-labs/skills/blob/v1.7
 Abra o PowerShell e entre na pasta do projeto:
 
 ```powershell
-Set-Location 'C:\Users\rafap\Desktop\AgentVigor Toolkit'
+Set-Location 'C:\Projetos\AgentVigor Toolkit'
 node bin/agentvigor.mjs integrations --tool find-skills --agent codex --mode install --dry-run --lang pt-BR
 node bin/agentvigor.mjs integrations --tool find-skills --agent codex --mode install --lang pt-BR
 node bin/agentvigor.mjs integrations --tool find-skills --agent codex --mode status --json
