@@ -15,10 +15,10 @@ preservada. Rafael Pereira mantém as implementações originais do AgentVigor.
 | D. Ferramentas externas | [Gerenciamento](INTEGRATION-MANAGEMENT.md) separa os estados de instalação, configuração, descoberta e invocação. O inventário da máquina está na tabela seguinte. |
 | E. Sessões reais | Há um caso delimitado em cada uma das sete categorias do Codex e uma sessão de leitura FULL. Os resultados e limites estão no [registro nativo](NATIVE-CLIENT-VALIDATION.md). Claude Code continua sem launcher no PATH inspecionado. |
 | F. Regressões e mudanças | Preset PostgreSQL opt-in. Tailwind agora limita a busca a `src` nos presets Next. O leitor de arquivos trata leituras parciais em WSL. Hooks e registros preexistentes exigem controle de propriedade. [Changelog](../CHANGELOG.md). |
-| G. Compatibilidade | O commit `1299c7a` passou nos seis jobs de CI. Os smokes oficiais foram executados no Windows. Os testes de CLI/benchmark e transações também foram executados em WSL. [CI](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41971550064). |
+| G. Compatibilidade | O commit `1dbdf09` passou nos seis jobs de CI, incluindo download oficial, versão e rollback offline de RTK OSS e Full em Windows x64, Ubuntu x64 e macOS Intel/ARM. CLI/benchmark e transações também foram executados em WSL. [CI](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41977347205). |
 | H. Comparação | Vibe fornece procedimentos, templates, regras ESLint, harness e práticas. AgentVigor acrescenta roteamento global, cinco skills próprias, CLI, planos vinculados ao conteúdo, instalação opcional, inventário e rollback. [Comparação detalhada](upstream-audit/MATRIX.md). |
 | I. Lacunas | Prioridades e impactos abaixo. Referências e arquivos presentes são classificados separadamente de comportamento homologado. |
-| J. Publicação e reprodução | [Pré-release 0.3](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.1), [registro do candidato](CANDIDATE-0.3.md) e comandos abaixo. O preset PostgreSQL e a correção WSL são posteriores ao tarball rc.1. |
+| J. Publicação e reprodução | [Candidato rc.2](CANDIDATE-0.3-rc.2.md) e comandos abaixo. O rc.2 reúne o preset PostgreSQL e a correção WSL. O [rc.1](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.1) e seu tarball são preservados. |
 
 ### Inventário observado na máquina
 
@@ -62,9 +62,9 @@ security-audit
 | P1 | Hooks automáticos e uso das integrações dentro dos clientes | Registro e instalação estão testados. Observar evento de hook e efeito real, com o cliente selecionado |
 | P1 | Claude Code indisponível no PATH inspecionado | Homologação real e lifecycle dos plugins dependem de um cliente disponível. Manter handoff nativo e estados BLOCKED/UNVERIFIED |
 | P2 | PostgreSQL real e aplicação de migração | Testes de pool usam mocks. SQL foi gerado sem conexão. Docker indisponível impede a prova local da migração |
-| P2 | Smokes oficiais fora do Windows | RTK OSS/Full passou em Linux/WSL e foi adicionado à matriz. Graphify, Find Skills e plugins precisam de smokes oficiais próprios fora do Windows |
+| P2 | Smokes oficiais fora do Windows | RTK OSS/Full passou em todos os seis jobs, incluindo macOS Intel/ARM. Graphify, Find Skills e plugins precisam de smokes oficiais próprios fora do Windows |
 | P2 | Economia de tokens | Busca seletiva observada. Comparação controlada e custo por modelo ainda sem medição |
-| P2 | Próximo pacote com as correções de WSL e o preset PostgreSQL | O tarball rc.1 preserva a revisão publicada. Preparar outro candidato após os gates da revisão escolhida |
+| P2 | Publicação do rc.2 com as correções de WSL e o preset PostgreSQL | Publicar somente após os gates da revisão escolhida. O tarball rc.1 preserva a revisão anterior |
 
 ### Reprodução em PowerShell
 
@@ -98,8 +98,8 @@ different validation scopes. The PostgreSQL preset passed lint, types, nine
 tests, build and synthetic SQL generation. A live PostgreSQL migration requires
 an available database. Token savings have not been measured.
 
-The published rc.1 tarball is preserved. WSL fixes and the PostgreSQL preset are
-on later `main` revisions. Use the reproduction commands above with `npm` on
+The published rc.1 tarball is preserved. The rc.2 candidate incorporates WSL
+fixes and the PostgreSQL preset. Use the reproduction commands above with `npm` on
 macOS/Linux. See the linked guides for scoped consent and rollback.
 
 ## Español
@@ -117,6 +117,6 @@ El preset PostgreSQL pasó lint, tipos, nueve pruebas, compilación y generació
 de SQL sintético. Aplicar migraciones requiere una base disponible. El ahorro
 de tokens sigue sin medición controlada.
 
-El tarball rc.1 publicado se conserva. Las correcciones WSL y el preset PostgreSQL
-están en revisiones posteriores de `main`. Usa los comandos anteriores con `npm`
+El tarball rc.1 publicado se conserva. El candidato rc.2 incorpora las correcciones
+WSL y el preset PostgreSQL. Usa los comandos anteriores con `npm`
 en macOS/Linux y consulta cada guía para consentimiento y reversión.

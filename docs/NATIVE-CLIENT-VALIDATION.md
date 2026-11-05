@@ -2,7 +2,8 @@
 
 This record distinguishes a real client observation from file-manifest checks,
 simulated installers and automated harness evaluation. It is partial validation;
-the seven requested behavior categories are not yet all accepted.
+all seven requested categories have bounded observed cases, with full-procedure
+acceptance and external integrations tracked separately below.
 
 ## Observed Codex result
 
@@ -160,14 +161,15 @@ como sucesso. O ambiente também teve falhas de inicialização de MCP; a saúde
 desses conectores não foi homologada.
 
 Este resultado comprova descoberta global, invocação explícita do roteador e
-leitura FULL nesse caso. Ainda faltam os sete cenários comportamentais completos,
-testes das cinco especialistas e medições de economia de tokens. Claude Code
+leitura FULL nesse caso. Os sete casos delimitados descritos acima foram
+executados posteriormente; ainda faltam homologação de todos os procedimentos
+originais e medições de economia de tokens. Claude Code
 não foi encontrado no PATH verificado; seus testes reais continuam pendentes.
 
 Duas sessões posteriores leram as skills e os arquivos de teste. O Diff Guardian
 identificou o cálculo da fatura sem quantidade. O Grounded Code identificou a
-leitura entre tenants. O caminho de revisão via Git/RTK ainda precisa de teste,
-assim como o procedimento completo de auditoria de segurança. O comando de
+leitura entre tenants. Uma execução posterior confirmou a revisão com `git diff`;
+hooks RTK e o procedimento completo de auditoria continuam com gates próprios. O comando de
 reprodução está na seção de fixtures acima.
 
 Os casos de desenvolvimento, depuração, busca seletiva em log e recuperação
@@ -228,13 +230,14 @@ La simulación anterior con HOME/USERPROFILE no descubrió las skills y no se co
 como éxito. Hubo fallos de inicio de MCP ajenos al escenario; su salud no quedó
 validada. No se cambió configuración persistente. El diario privado se conservó.
 Este caso demuestra descubrimiento, invocación explícita del router y lectura
-FULL; aún faltan los siete escenarios completos, eficacia de las especialistas
-y mediciones de ahorro. Claude Code no se encontró en el PATH inspeccionado;
+FULL. Posteriormente se ejecutaron los siete casos acotados descritos arriba;
+siguen pendientes la validación de todos los procedimientos originales y las
+mediciones de ahorro. Claude Code no se encontró en el PATH inspeccionado;
 no se creó ninguna cuenta ni se presumió funcionamiento.
 
 En dos sesiones posteriores, Diff Guardian detectó el cálculo de factura sin
-cantidad y Grounded Code detectó la lectura entre tenants. Siguen pendientes la
-revisión del diff por Git/RTK y la auditoría de seguridad completa. El comando
+cantidad y Grounded Code detectó la lectura entre tenants. Una ejecución posterior
+confirmó `git diff`; hooks RTK y auditoría completa tienen gates propios. El comando
 para repetir ambas pruebas está en la sección de fixtures.
 
 También pasaron casos reales de desarrollo, depuración, búsqueda selectiva en un

@@ -4,7 +4,7 @@ Detailed procedures are available offline with `agentvigor catalog --id developm
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-Candidate `0.3.0-rc.1` adds complete offline QUICK/FULL workflows and optional managed integrations. See the [Vibe integration guide](docs/en/VIBE-INTEGRATION.md), [parity matrix](docs/upstream-audit/PARITY.md), and [candidate validation and limitations](docs/CANDIDATE-0.3.md).
+Candidate `0.3.0-rc.2` adds complete offline QUICK/FULL workflows and optional managed integrations. See the [Vibe integration guide](docs/en/VIBE-INTEGRATION.md), [parity matrix](docs/upstream-audit/PARITY.md), and [candidate validation and limitations](docs/CANDIDATE-0.3-rc.2.md).
 
 ![AgentVigor Toolkit with its slogan](docs/assets/readme/hero.png)
 
@@ -68,7 +68,7 @@ Inside the checkout, run the commands below. Use `npm.cmd` in Windows PowerShell
 
 ```text
 npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.1.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.2.tgz
 agentvigor --version
 agentvigor --help
 ```

@@ -4,7 +4,7 @@ Os procedimentos detalhados estão disponíveis offline com `agentvigor catalog 
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-O candidato `0.3.0-rc.1` inclui fluxos QUICK/FULL completos offline e integrações opcionais gerenciadas. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md), a [matriz de paridade](docs/upstream-audit/PARITY.md) e a [validação e limitações do candidato](docs/CANDIDATE-0.3.md#português-brasileiro).
+O candidato `0.3.0-rc.2` inclui fluxos QUICK/FULL completos offline e integrações opcionais gerenciadas. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md), a [matriz de paridade](docs/upstream-audit/PARITY.md) e a [validação e limitações do candidato](docs/CANDIDATE-0.3-rc.2.md#português-brasileiro).
 
 ![AgentVigor Toolkit e seu slogan](docs/assets/readme/hero.png)
 
@@ -68,7 +68,7 @@ Execute os comandos abaixo dentro do checkout. No PowerShell, use `npm.cmd` se `
 
 ```text
 npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.1.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.2.tgz
 agentvigor --version
 agentvigor --help
 ```

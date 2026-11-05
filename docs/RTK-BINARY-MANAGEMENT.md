@@ -122,6 +122,16 @@ node scripts/smoke-rtk-binary.mjs
 The smoke downloads both official editions into a disposable home, verifies
 archive checksums and the installed version, rolls back with networking
 disabled, asserts executable removal and deletes only the temporary home.
-Windows x64 and Ubuntu/WSL x64 passed both editions using the official assets.
-The CI matrix also runs this smoke in each job. macOS native outcomes are recorded
-only after the relevant job completes.
+Windows x64, Ubuntu/WSL x64, macOS Intel and macOS Apple Silicon passed both
+editions using the official assets. All six jobs in
+[CI run 41977347205](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41977347205)
+passed, including version verification and offline rollback. This proves the
+binary lifecycle on those runners; automatic client rewriting is a separate gate.
+
+Português: as duas edições passaram no Windows x64, Ubuntu/WSL x64 e macOS Intel
+e Apple Silicon. A prova cobre instalação, versão e reversão offline. Não prova
+que o cliente executou automaticamente o hook.
+
+Español: ambas ediciones pasaron en Windows x64, Ubuntu/WSL x64 y macOS Intel y
+Apple Silicon. Se verificaron instalación, versión y reversión sin conexión.
+La ejecución automática del hook requiere una prueba independiente.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0-rc.2
+
+- Add the optional Next.js/PostgreSQL preset, preserving twelve upstream templates with attribution. Verify lint, types, nine tests, build and synthetic migration generation; a live database migration remains unverified.
+- Bound Tailwind source discovery to the project source directory. Read regular files through EOF to handle short asynchronous reads on WSL, including diagnostics and benchmarks.
+- Record bounded real Codex cases across development, diff review, debugging, security, selective context search, recovery and project bootstrap. Keep full-procedure and external integration acceptance separate.
+- Run official RTK OSS and Full binary installation, version verification and offline rollback in all six CI jobs, including both macOS architectures.
+- Add the A–J delivery report, reproducible native procedure runner and updated limitations. Preserve the published rc.1 artifact. See the [new candidate record](docs/CANDIDATE-0.3-rc.2.md).
+
 ## 0.3.0-rc.1
 
 - Add private RTK 1.1.0 and Graphify 0.9.102 runtimes, staged configuration, confirmation, integrity checks and offline rollback.
