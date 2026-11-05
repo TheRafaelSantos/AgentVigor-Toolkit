@@ -246,7 +246,11 @@ node scripts/smoke-codex-full-procedures.mjs 'C:\path\to\codex.exe' --allow-live
 node scripts/smoke-codex-full-procedures.mjs 'C:\path\to\codex.exe' --allow-live audit
 ```
 
-The panel has a ten-minute limit; the sequential audit has fifteen minutes.
+The panel has a ten-minute limit. Earlier sequential audits used fifteen minutes;
+the new app-server audit has a thirty-minute limit and retains received events
+when that limit expires. It allows writes only through the workspace sandbox,
+disables delegation for that one sequential session and never changes persistent
+client settings. The transport rejects broader sandbox modes before spawning.
 The third audit's coordinator could not read the output after the client changed
 its ACL. Access was recovered only on that synthetic directory; four reports
 with consistent finding IDs were retained privately. Partial cleanup had already

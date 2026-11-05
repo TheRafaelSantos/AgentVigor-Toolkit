@@ -5,7 +5,8 @@ export function completedRootTurn(message, rootThreadId) {
   return typeof rootThreadId === 'string' && message.method === 'turn/completed' && message.params?.threadId === rootThreadId;
 }
 
-export async function runAppServer(executable, prompt, { cwd, env, timeoutMs }) {
+export async function runAppServer(executable, prompt, { cwd, env, timeoutMs, sandbox = 'read-only', allowSubagents = false }) {
+  if (!['read-only', 'workspace-write'].includes(sandbox)) throw new TypeError('Unsupported procedure sandbox');
   const child = spawn(executable, ['app-server'], { cwd, env, stdio: ['pipe', 'pipe', 'ignore'], windowsHide: true });
   const messages = [];
   let rootThreadId;
@@ -13,7 +14,7 @@ export async function runAppServer(executable, prompt, { cwd, env, timeoutMs }) 
   const send = message => child.stdin.write(JSON.stringify(message) + '\n');
   try {
     return await new Promise((resolve, reject) => {
-      const timer = setTimeout(() => resolve({ code: null, processError: 'PROCESS_TIMEOUT', stdout: messages.map(JSON.stringify).join('\n') }), timeoutMs);
+      const timer = setTimeout(() => resolve({ code: null, processError: 'PROCESS_TIMEOUT', stdout: messages.map(JSON.stringify).join('\n'), rootThreadId }), timeoutMs);
       const finish = value => { clearTimeout(timer); resolve(value); };
       const record = value => {
         outputBytes += Buffer.byteLength(JSON.stringify(value));
@@ -27,7 +28,8 @@ export async function runAppServer(executable, prompt, { cwd, env, timeoutMs }) 
         let message; try { message = JSON.parse(line); } catch { return; }
         if (message.id === 1 && !message.error) {
           send({ method: 'initialized' });
-          send({ id: 2, method: 'thread/start', params: { cwd, ephemeral: true, sandbox: 'read-only', approvalPolicy: 'never', experimentalRawEvents: true } });
+          send({ id: 2, method: 'thread/start', params: { cwd, ephemeral: true, sandbox, approvalPolicy: 'never', experimentalRawEvents: true,
+            ...(sandbox === 'workspace-write' && !allowSubagents ? { config: { features: { multi_agent: false } } } : {}) } });
         } else if (message.id === 2 && !message.error) {
           rootThreadId = message.result.thread.id;
           send({ id: 3, method: 'turn/start', params: { threadId: message.result.thread.id, input: [{ type: 'text', text: prompt }] } });
@@ -49,7 +51,7 @@ export async function runAppServer(executable, prompt, { cwd, env, timeoutMs }) 
           record({ type: 'turn.finished', threadId: message.params.threadId, turn: message.params.turn });
           if (completedRootTurn(message, rootThreadId)) finish({ code: message.params.turn.status === 'completed' ? 0 : 1, stdout: messages.map(JSON.stringify).join('\n'), rootThreadId });
         }
-        if (message.id !== undefined && message.method) send({ id: message.id, error: { code: -32601, message: 'No interactive approvals in read-only fixture' } });
+        if (message.id !== undefined && message.method) send({ id: message.id, error: { code: -32601, message: 'No interactive approvals in procedure fixture' } });
       });
       send({ id: 1, method: 'initialize', params: { clientInfo: { name: 'agentvigor-panel-observation', version: '0.3.0' }, capabilities: { experimentalApi: true } } });
     });

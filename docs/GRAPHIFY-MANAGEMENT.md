@@ -65,6 +65,34 @@ root mapping, idempotency, and rollback, and then removes those roots. It never
 installs a prerequisite and reports a missing path explicitly. A passing smoke
 test proves configuration transactions, not discovery or model-backed execution.
 
+The combined private runtime smoke passed on Windows and Ubuntu/WSL with Node
+24.15.0, uv 0.11.26 and existing Python 3.12. It installs the pinned runtime,
+configures both native roots, repeats without changes, restores user instructions,
+extracts a graph from synthetic Python source without an LLM, rechecks runtime
+integrity and rolls the runtime back with an empty PATH. The source stays intact.
+No provider keys are passed to the structural extraction process. This proves
+runtime/configuration and local AST behavior, not invocation through an agent.
+
+```text
+node scripts/smoke-graphify-runtime.mjs /absolute/path/to/uv --allow-network
+```
+
+On Windows use the quoted `.exe` path. If your existing Python was installed by
+uv outside PATH, set `UV_PYTHON_INSTALL_DIR` to its existing parent installation
+directory for the test process; no Python download is performed by AgentVigor.
+The CI matrix provisions Python separately and now runs this official smoke.
+Record macOS outcomes only after those jobs finish.
+
+Português: o smoke combinado passou em Windows e Ubuntu/WSL: instalação privada,
+configuração dos dois clientes, extração AST local sem modelo, integridade após
+uso e rollback offline. As instruções e a fonte foram preservadas. O CI prepara
+Python separadamente; isso não instala Python nas máquinas dos usuários.
+
+Español: la prueba combinada pasó en Windows y Ubuntu/WSL: runtime privado,
+configuración de ambos clientes, extracción AST local sin modelo, integridad
+después del uso y reversión sin conexión. Se conservaron instrucciones y fuente.
+CI prepara Python por separado; AgentVigor no lo instala en equipos personales.
+
 ## Private executable and client configuration
 
 Run these commands from the checkout in PowerShell or a Linux shell. The first

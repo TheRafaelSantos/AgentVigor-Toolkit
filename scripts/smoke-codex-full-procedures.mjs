@@ -91,10 +91,8 @@ try {
     try {
       let result;
       try {
-        result = sample.id === 'panel' ? await runAppServer(executable, prompt, { cwd, env, timeoutMs: 600000 })
-          : await runFile(executable, ['exec', '--ephemeral', '--skip-git-repo-check', '--sandbox', sample.sandbox,
-          ...(sample.id === 'audit' ? ['-c', 'features.multi_agent=false'] : []),
-          '--json', '--cd', cwd, prompt], { cwd, env, timeoutMs: sample.id === 'audit' ? 900000 : 600000, maxOutputBytes: 4 * 1024 * 1024 });
+        result = await runAppServer(executable, prompt, { cwd, env, sandbox: sample.sandbox,
+          timeoutMs: sample.id === 'audit' ? 1800000 : 600000 });
       } catch (error) {
         result = { code: null, stdout: '', processError: error.code ?? error.name };
       }
