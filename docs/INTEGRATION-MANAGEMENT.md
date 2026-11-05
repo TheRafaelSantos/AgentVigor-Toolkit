@@ -25,8 +25,8 @@ classified `INCOMPATIBLE`.
 Plans identify native client commands separately from shell commands. They
 include the audited version, license and official setup source. All steps carry
 `executed: false`. RTK and Graphify have separate runtime and client operations.
-Find Skills has an install/rollback executor. Superpowers and Ponytail use native
-client procedures. The plan token
+Find Skills has an install/rollback executor. [Superpowers and Ponytail](NATIVE-PLUGIN-MANAGEMENT.md)
+use managed native Codex registration and documented Claude Code procedures. The plan token
 identifies this preview and does not authorize a future installer with broader
 effects. Existing tools and credentials are left to their current owners.
 
@@ -71,7 +71,7 @@ checkout to reproduce the disposable two-client test. No client login is needed.
 O comando `integrations` inspeciona executáveis e o manifesto do Find Skills,
 com saída JSON. Use `--mode plan`, selecione `--tool` e escolha `--agent codex`
 ou `--agent claude` para consultar o procedimento oficial aplicável. Os passos
-de Superpowers e Ponytail usam os procedimentos nativos. O
+de [Superpowers e Ponytail](NATIVE-PLUGIN-MANAGEMENT.md) usam gerenciamento nativo no Codex. O
 [Graphify gerenciado](GRAPHIFY-MANAGEMENT.md) separa o executável da configuração do cliente.
 O Find Skills já oferece [instalação oficial gerenciada](FIND-SKILLS-MANAGEMENT.md#português-brasileiro)
 com `--mode install` e reversão com `--mode rollback`. Para RTK 1.1.0
@@ -86,7 +86,7 @@ uma sessão nova. Os estados não observados aparecem como `UNVERIFIED`.
 El comando `integrations` inspecciona ejecutables y el manifiesto de Find
 Skills mediante JSON. Usa `--mode plan`, elige `--tool` y selecciona
 `--agent codex` o `--agent claude` para consultar el procedimiento oficial.
-Superpowers y Ponytail usan los procedimientos nativos.
+[Superpowers y Ponytail](NATIVE-PLUGIN-MANAGEMENT.md) usan gestión nativa en Codex.
 [Graphify gestionado](GRAPHIFY-MANAGEMENT.md) separa el ejecutable de la configuración.
 Find Skills ya ofrece [instalación oficial gestionada](FIND-SKILLS-MANAGEMENT.md#español)
 con `--mode install` y reversión con `--mode rollback`.

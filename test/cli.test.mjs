@@ -134,3 +134,13 @@ test('RTK binary CLI previews pinned OSS asset and requires scoped consent', asy
   assert.equal(run(args, env).status, 2);
   assert.deepEqual(await readdir(home), []);
 });
+
+test('managed plugin CLI blocks unverified Claude operations and requires consent before staging Codex downloads', async () => {
+  const command = ['integrations', '--tool', 'superpowers', '--mode', 'install', '--json'];
+  const noConsent = run([...command, '--agent', 'codex'], { PATH: '', Path: '' });
+  assert.equal(noConsent.status, 2);
+  assert.match(noConsent.stderr, /CONFIRMATION_REQUIRED/);
+  const claude = run([...command, '--agent', 'claude', '--dry-run']);
+  assert.equal(claude.status, 1);
+  assert.equal(JSON.parse(claude.stdout).reason, 'CLAUDE_NATIVE_LIFECYCLE_UNVERIFIED');
+});

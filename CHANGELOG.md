@@ -1,15 +1,15 @@
 # Changelog
 
-## Unreleased
+## 0.3.0-rc.1
 
-- Add official RTK 1.1.0 staged configuration for Codex or Claude Code, with confirmed plans, private snapshots, drift checks and recoverable rollback.
-
-- Add optional integration inventory and scoped official setup plans. Native registration, discovery, managed mutations and rollback remain separately tracked acceptance work.
+- Add private RTK 1.1.0 and Graphify 0.9.102 runtimes, staged configuration, confirmation, integrity checks and offline rollback.
+- Add managed Find Skills for the Codex and Claude user directories. Add pinned native Superpowers and Ponytail registration for Codex, including coexistence and independent rollback.
+- Separate executable and registration checks from discovery and invocation evidence. Document the Claude Code handoff for Superpowers and Ponytail and record a real Codex global discovery and FULL loading case.
 
 - Add explicit QUICK and FULL catalog modes. FULL includes localized guidance and the complete pinned upstream procedure in its original language.
 - Distribute the entire upstream snapshot offline with per-file hashes, local prompt/guide link checks and MIT attribution. Store the original gitignore as gitignore.txt for npm packaging.
 - Add a parity matrix separating complete instructions, adapted executors, external prerequisites and pending client verification.
-- Verify 79 tests and a 275-file installed package on Windows for this increment.
+- See the [candidate validation record](docs/CANDIDATE-0.3.md) for evidence, reproduction and outstanding acceptance cases.
 
 ## 0.2.0-rc.1
 

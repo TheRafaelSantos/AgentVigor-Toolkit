@@ -1,6 +1,6 @@
 {
   "name": "agentvigor",
-  "version": "0.2.0-rc.1",
+  "version": "0.3.0-rc.1",
   "description": "On-demand coding workflows, project foundations and quality gates for Codex and Claude Code",
   "type": "module",
   "license": "MIT",

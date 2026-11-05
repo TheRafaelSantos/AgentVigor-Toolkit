@@ -4,7 +4,7 @@ Os procedimentos detalhados estão disponíveis offline com `agentvigor catalog 
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-Candidato `0.2.0-rc.1`. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md) e a [matriz de funcionalidades](docs/upstream-audit/MATRIX.md). O [registro inicial](docs/RELEASE-CANDIDATE.md) documenta o `0.1.0-rc.1`.
+O candidato `0.3.0-rc.1` inclui fluxos QUICK/FULL completos offline e integrações opcionais gerenciadas. Consulte o [guia de integração com o Vibe](docs/pt-BR/VIBE-INTEGRATION.md), a [matriz de paridade](docs/upstream-audit/PARITY.md) e a [validação e limitações do candidato](docs/CANDIDATE-0.3.md#português-brasileiro).
 
 ![AgentVigor Toolkit e seu slogan](docs/assets/readme/hero.png)
 
@@ -68,7 +68,7 @@ Execute os comandos abaixo dentro do checkout. No PowerShell, use `npm.cmd` se `
 
 ```text
 npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.2.0-rc.1.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-0.3.0-rc.1.tgz
 agentvigor --version
 agentvigor --help
 ```
@@ -118,6 +118,7 @@ Compare medições de execuções pareadas com `agentvigor benchmark --input obs
 ## Guias e contribuições
 
 - [Integrações](docs/INTEGRATIONS.md)
+- [Instalação gerenciada e reversão](docs/INTEGRATION-MANAGEMENT.md)
 - [Recuperação](docs/RECOVERY.md)
 - [Laboratório de benchmark](docs/BENCHMARK.md)
 - [Telemetria](docs/TELEMETRY.md)

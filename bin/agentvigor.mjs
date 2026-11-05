@@ -96,6 +96,7 @@ function show(result, json, t) {
   if (result.destination) console.log(`  ${t('integrationDestination')}: ${result.destination}`);
   if (result.source?.version) console.log(`  ${result.tool} ${result.source.version} · ${result.source.license} · ${result.source.source}`);
   if (result.networkRequired) console.log(`  ${t('integrationNetwork')}: ${result.networkHosts.join(', ')}`);
+  if (result.handoff) console.log(`  ${result.reason}: ${result.handoff}`);
   if (result.licenseNotice) console.log(`  ${result.license}: ${result.licenseNotice}`);
   if (result.executable) console.log(`  ${result.executable}`);
   for (const { agent, profile, version } of result.installations ?? []) {
@@ -302,17 +303,24 @@ async function main(args) {
           }
         } else if (values.tool === 'find-skills' && values.mode !== 'configure') {
           ({ manageFindSkills: execute } = await import('../lib/find-skills-integration.mjs'));
+        } else if (['superpowers', 'ponytail'].includes(values.tool) && values.mode !== 'configure') {
+          const { manageNativePlugin } = await import('../lib/native-plugin-integration.mjs');
+          options.tool = values.tool;
+          execute = manageNativePlugin;
         } else throw new UsageError('INTEGRATION_TOOL');
         if (values.mode === 'verify') {
           if (values['dry-run'] || values.yes) throw new UsageError('INTEGRATION_MODE');
           return show(await execute(options), values.json, t);
         }
+        const interactive = process.stdin.isTTY && process.stdout.isTTY && process.stderr.isTTY && !values.json && !env.CI;
+        if (!values['dry-run'] && !values.yes && !interactive) throw new UsageError('CONFIRMATION_REQUIRED');
         const preview = await execute({ ...options, dryRun: true });
+        if (preview.status === 'BLOCKED') {
+          process.exitCode = 1;
+          return show(preview, values.json, t);
+        }
         if (values['dry-run']) return show(preview, values.json, t);
         if (!values.yes) {
-          if (!process.stdin.isTTY || !process.stdout.isTTY || !process.stderr.isTTY || values.json || env.CI) {
-            throw new UsageError('CONFIRMATION_REQUIRED');
-          }
           show(preview, false, t);
           if (!await confirm(t, 'confirm')) { process.exitCode = 2; return; }
         }
