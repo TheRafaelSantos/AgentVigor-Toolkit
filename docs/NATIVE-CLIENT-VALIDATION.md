@@ -196,6 +196,43 @@ stopped on a child turn completion, so that attempt does not establish completio
 of the coordinator's validation and consolidated report. A root-thread-aware
 transport is being checked separately before being adopted by the runner.
 
+The root-thread-aware app-server experiment subsequently completed with code
+zero. Native events showed two distinct reviewer starts and two completions,
+then the coordinator's own completed turn. Ten command executions succeeded.
+The coordinator read the complete original procedure and orchestration guide,
+froze the snapshot before dispatch, verified both reports, reproduced the defects
+and deduplicated them into two causes with reviewer attribution. Observed Node
+output recorded two existing tests passing, seven checks passing against the
+base and only three passing against the vulnerable snapshot. The final snapshot
+hash matched the initial hash. Independent runner checks preserved the source
+and HEAD. Static typing and framework lenses were N/A for this JavaScript-only
+fixture. No production, external system or code repair was included.
+
+This proves the complete multi-agent review sequence for that bounded fixture;
+it does not establish all parallel-wave or large-project behavior. The versioned
+panel runner now uses the app-server transport and requires two actual starts,
+both reviewer completions and the coordinator's final turn. A regression test
+ensures a child completion cannot terminate the transport early. The transport
+is read-only, ephemeral, uses current account/model/provider and does not approve
+interactive permission requests or change persistent client settings.
+
+The versioned `smoke-codex-full-procedures.mjs --allow-live panel` then passed
+against its own six-file fixture: code zero, FULL read, preserved revision and
+source, native dispatch observed, both reviewers completed and both planted
+defects reported. The managed skill rollback restored `not-installed` with zero
+managed files. The full local suite passed 115/115 tests after the transport and
+evidence regressions were added. These changes are later than the rc.2 tarball.
+
+Português: a revisão FULL concluiu na fixture com dois revisores nativos,
+validação pelo coordenador, achados deduplicados e fonte/HEAD preservados. O
+transporte agora aguarda o coordenador. Projetos maiores e ondas de implementação
+continuam com critérios próprios.
+
+Español: la revisión FULL terminó en la fixture con dos revisores nativos,
+validación del coordinador, hallazgos deduplicados y fuente/HEAD conservados. El
+transporte espera al coordinador. Proyectos mayores y olas de implementación
+requieren pruebas propias.
+
 The first complete security-audit attempt timed out after writing two artifacts.
 The second wrote all four but timed out before session completion. Both were
 recorded as failed; the second's artifacts were inspected before cleanup, not
@@ -229,6 +266,13 @@ duplicate IDs, inconsistent handoff IDs and a missing seeded defect. The native
 runner also retains terminal error events privately for diagnosis. An artificial
 24-KiB report limit was removed because it caused report rewriting and is not an
 upstream acceptance requirement. This does not waive any procedure check.
+
+The next audit attempt also reached the fifteen-minute timeout. All four current
+artifacts passed the stricter structural/ID/defect checks and source/HEAD remained
+unchanged, but the native session did not finish. Its `passed` result is false.
+Because the exec process helper discards stdout when rejecting a timeout, that
+attempt cannot independently establish FULL read events; artifact presence is
+not substituted for those missing observations.
 
 The runner requires no existing managed AgentVigor installation, temporarily
 installs the six skills and restores the prior state in `finally`. Reports and

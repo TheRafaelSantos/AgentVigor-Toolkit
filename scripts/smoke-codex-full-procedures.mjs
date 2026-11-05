@@ -10,6 +10,7 @@ import { readProjectFile } from '../skills/agentvigor-toolkit/scripts/process.mj
 import pkg from '../package.json' with { type: 'json' };
 import { validateAuditArtifacts } from './audit-artifacts.mjs';
 import { dispatchedReviewers } from './panel-evidence.mjs';
+import { runAppServer } from './codex-appserver.mjs';
 
 const executable = process.argv[2];
 assert.ok(isAbsolute(executable || '') && process.argv.includes('--allow-live'),
@@ -90,7 +91,8 @@ try {
     try {
       let result;
       try {
-        result = await runFile(executable, ['exec', '--ephemeral', '--skip-git-repo-check', '--sandbox', sample.sandbox,
+        result = sample.id === 'panel' ? await runAppServer(executable, prompt, { cwd, env, timeoutMs: 600000 })
+          : await runFile(executable, ['exec', '--ephemeral', '--skip-git-repo-check', '--sandbox', sample.sandbox,
           ...(sample.id === 'audit' ? ['-c', 'features.multi_agent=false'] : []),
           '--json', '--cd', cwd, prompt], { cwd, env, timeoutMs: sample.id === 'audit' ? 900000 : 600000, maxOutputBytes: 4 * 1024 * 1024 });
       } catch (error) {
@@ -99,7 +101,8 @@ try {
       const events = result.stdout.split(/\r?\n/).flatMap(line => { try { return [JSON.parse(line)]; } catch { return []; } });
       const completed = events.filter(event => event.type === 'item.completed').map(event => event.item);
       const commands = completed.filter(item => item?.type === 'command_execution' && item.exit_code === 0);
-      const final = completed.filter(item => item?.type === 'agent_message').at(-1)?.text ?? '';
+      const final = events.filter(event => event.type === 'item.completed' && event.item?.type === 'agent_message'
+        && (!result.rootThreadId || event.threadId === result.rootThreadId)).at(-1)?.item.text ?? '';
       const failures = events.filter(event => event.type === 'error' || event.type === 'turn.failed')
         .map(event => ({ type: event.type, message: event.message ?? event.error?.message ?? null }));
       await writeFile(resolve(`out/codex-full-${sample.id}-failures.json`), JSON.stringify(failures, null, 2), { mode: 0o600 });
@@ -114,6 +117,8 @@ try {
         const collaboration = events.map(event => event.item).filter(item => /collab|agent.*tool|subAgentActivity/i.test(item?.type ?? ''));
         observed.collaboration = collaboration;
         observed.nativeDispatchObserved = dispatchedReviewers(collaboration).length >= 2;
+        const finished = new Set(collaboration.filter(item => item.type === 'subAgentActivity' && item.kind === 'completed').map(item => item.agentThreadId));
+        observed.nativeReviewersCompleted = observed.nativeDispatchObserved && dispatchedReviewers(collaboration).every(id => finished.has(id));
         observed.reportedBothSeededDefects = /tenant/i.test(final) && /quantity|quantidade/i.test(final);
       } else {
         const names = ['SECURITY-AUDIT.md', 'SECURITY-FINDINGS.json', 'REMEDIATION-PROMPTS.md', 'AUDIT-HANDOFF.md'];

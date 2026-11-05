@@ -58,11 +58,11 @@ security-audit
 
 | Prioridade | Lacuna | Impacto / próximo critério |
 | --- | --- | --- |
-| P1 | Revisão multiagente, dispatch e auditoria completa ainda sem execução integral do procedimento original | Casos delimitados de uma skill não provam todas as etapas. Executar procedimentos com evidências por etapa |
+| P1 | Auditoria FULL e ondas de implementação | A revisão FULL concluiu em fixture com dois revisores nativos e validação do coordenador. A auditoria ainda não concluiu uma sessão aceita; ondas de implementação requerem prova própria |
 | P1 | Uso das integrações dentro dos clientes | O hook RTK reescreveu e executou um comando na fixture isolada. O caminho WinGet falha no sandbox; os runtimes gerenciados e demais integrações precisam de provas próprias dentro do cliente |
 | P1 | Claude Code indisponível no PATH inspecionado | Homologação real e lifecycle dos plugins dependem de um cliente disponível. Manter handoff nativo e estados BLOCKED/UNVERIFIED |
 | P2 | PostgreSQL real e aplicação de migração | Testes de pool usam mocks. SQL foi gerado sem conexão. Docker indisponível impede a prova local da migração |
-| P2 | Smokes oficiais fora do Windows | RTK OSS/Full passou em todos os seis jobs, incluindo macOS Intel/ARM. Find Skills passou em Ubuntu/WSL para os dois destinos. Graphify/plugins fora do Windows e Find Skills em macOS seguem pendentes |
+| P2 | Smokes oficiais fora do Windows | RTK OSS/Full e Find Skills passaram em todos os seis jobs, incluindo macOS Intel/ARM. Find Skills também passou em WSL para os dois destinos. Graphify/plugins fora do Windows seguem pendentes |
 | P2 | Economia de tokens | Busca seletiva observada. Comparação controlada e custo por modelo ainda sem medição |
 | Concluído | Publicação do rc.2 com as correções de WSL e o preset PostgreSQL | Publicado de `11e7762` após seis jobs verdes e tarball verificado em Windows/WSL. [Release](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2). O rc.1 foi preservado |
 
