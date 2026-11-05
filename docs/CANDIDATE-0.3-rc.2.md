@@ -5,11 +5,21 @@ Next.js/PostgreSQL preset and the additional native Codex observations since
 rc.1. The original rc.1 release and assets remain intact. This is a pre-release;
 complete upstream functional equivalence is not claimed.
 
+Published from `11e7762731e3fa156a9fb80411f1d17d7adad85d` after all six jobs in
+[CI run 41986113934](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41986113934)
+passed. [GitHub pre-release](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2).
+The 8,152,636-byte tarball has SHA-256
+`fe801fcbaaec64ec4fa545177dfd47a194e87e6bd6f501cf9d35581af2f686a6`,
+matching GitHub's asset digest. The Windows package smoke passed with 317 files.
+The same Windows-produced tarball passed offline installation, FULL catalog,
+six-skill installation and rollback under Linux/WSL Node 24.15.0. The local suite
+passed 112/112 tests. These checks do not close the native procedure gaps below.
+
 See the [A–J delivery report](DELIVERY-STATUS.md), [parity matrix](upstream-audit/PARITY.md),
 [native observations](NATIVE-CLIENT-VALIDATION.md) and
 [PostgreSQL preset validation](NEXT-POSTGRES-PRESET.md).
 
-Before publication, the selected commit must pass the six-job CI matrix:
+The published commit passed the six-job CI matrix:
 Windows Node 22/24, Ubuntu Node 24/26, macOS Intel Node 24 and macOS ARM Node 24.
 Each job runs the suite, installs the packed tarball in an isolated prefix and
 verifies both official RTK editions with offline rollback. The GitHub release

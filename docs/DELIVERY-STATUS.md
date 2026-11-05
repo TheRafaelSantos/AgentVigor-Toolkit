@@ -64,7 +64,7 @@ security-audit
 | P2 | PostgreSQL real e aplicação de migração | Testes de pool usam mocks. SQL foi gerado sem conexão. Docker indisponível impede a prova local da migração |
 | P2 | Smokes oficiais fora do Windows | RTK OSS/Full passou em todos os seis jobs, incluindo macOS Intel/ARM. Graphify, Find Skills e plugins precisam de smokes oficiais próprios fora do Windows |
 | P2 | Economia de tokens | Busca seletiva observada. Comparação controlada e custo por modelo ainda sem medição |
-| P2 | Publicação do rc.2 com as correções de WSL e o preset PostgreSQL | Publicar somente após os gates da revisão escolhida. O tarball rc.1 preserva a revisão anterior |
+| Concluído | Publicação do rc.2 com as correções de WSL e o preset PostgreSQL | Publicado de `11e7762` após seis jobs verdes e tarball verificado em Windows/WSL. [Release](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2). O rc.1 foi preservado |
 
 ### Reprodução em PowerShell
 
