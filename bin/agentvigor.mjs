@@ -22,6 +22,10 @@ const commands = {
   update: '--dry-run --yes --json',
   benchmark: '--input --json',
   rollback: '--all --dry-run --yes --json',
+  catalog: '--id --json',
+  project: '--mode --template --path --dry-run --yes --json',
+  quality: '--path --dry-run --yes --json',
+  harness: '--path --dry-run --yes --json',
 };
 const profiles = ['minimal', 'balanced', 'rigorous'];
 const agentIds = ['codex', 'claude'];
@@ -44,6 +48,7 @@ function parse(args) {
       options: {
         help: { ...bool, short: 'h' }, version: { ...bool, short: 'v' }, lang: string,
         agent: string, profile: string, interval: string, input: string,
+        id: string, mode: string, template: string, path: string,
         'dry-run': bool, yes: bool, json: bool, once: bool, 'no-clear': bool, all: bool, telemetry: bool,
       },
     });
@@ -72,6 +77,8 @@ function help(t, command) {
     install: '--agent auto|codex|claude|both  --profile minimal|balanced|rigorous\n  --dry-run  --yes  --json  --telemetry',
     monitor: '--interval <1..3600>  --once  --no-clear',
     benchmark: '--input <file.json>  --json',
+    catalog: '--id <workflow>  --lang en|pt-BR|es  --json',
+    project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
   if (!command) console.log(`\n${t('commands')}\n${rows.join('\n')}`);
@@ -87,9 +94,14 @@ function show(result, json, t) {
   for (const { agent, profile, version } of result.installations ?? []) {
     console.log(`  ${agent} · ${profile} · ${version}`);
   }
-  for (const { agent, skill, action, status } of result.skills ?? result.changes ?? []) {
-    console.log(`  ${agent.padEnd(7)} ${skill.padEnd(30)} ${t(action ?? status)}`);
+  for (const { agent, skill, path, action, status, id, error } of result.skills ?? result.checks ?? result.changes ?? []) {
+    const name = skill ? skill + (path && path !== 'SKILL.md' ? '/' + path : '') : path ?? id ?? '';
+    console.log(`  ${agent ? agent.padEnd(7) + ' ' : ''}${name}  ${t(action ?? status ?? 'planned')}${error ? ' [' + error + ']' : ''}`);
   }
+  if (!result.changes?.length) {
+    for (const { path, status } of result.managed ?? []) console.log(`  ${path}  ${t(status)}`);
+  }
+  if (result.error) console.error(`[${result.error}] ${errorMessage(t, result.error)}`);
 }
 
 async function confirm(t, key) {
@@ -185,9 +197,54 @@ async function mutate(command, values, context, t) {
   }
 }
 
+async function executeWorkflow(command, values, env, lang, t) {
+  const options = { path: values.path ?? '.', env, lang };
+  let execute;
+  if (command === 'project') {
+    options.mode = values.mode ?? 'status';
+    options.template = values.template;
+    ({ project: execute } = await import('../skills/agentvigor-toolkit/scripts/project.mjs'));
+  } else if (command === 'quality') {
+    ({ quality: execute } = await import('../skills/agentvigor-toolkit/scripts/quality.mjs'));
+  } else {
+    ({ harness: execute } = await import('../skills/agentvigor-toolkit/scripts/harness.mjs'));
+  }
+  const preview = await execute({ ...options, dryRun: true });
+  if (values['dry-run'] || options.mode === 'status' || !preview.planToken || preview.status === 'unavailable') {
+    show(preview, values.json, t);
+    if (preview.status === 'unavailable') process.exitCode = 1;
+    return;
+  }
+  if (!values.yes) {
+    if (!process.stdin.isTTY || !process.stdout.isTTY || !process.stderr.isTTY || values.json || env.CI) {
+      throw new UsageError('CONFIRMATION_REQUIRED');
+    }
+    show(preview, false, t);
+    if (!await confirm(t, command === 'project' ? 'confirmProject' : 'confirmRun')) {
+      console.error(t('cancelled'));
+      process.exitCode = 2;
+      return;
+    }
+  }
+  const controller = new AbortController();
+  const stop = () => controller.abort();
+  process.once('SIGINT', stop);
+  process.once('SIGTERM', stop);
+  try {
+    const result = await execute({ ...options, expectedPlan: preview.planToken, signal: controller.signal });
+    show(result, values.json, t);
+    if (['failed', 'unavailable'].includes(result.status)) process.exitCode = 1;
+    if (result.status === 'cancelled') process.exitCode = 130;
+  } finally {
+    process.off('SIGINT', stop);
+    process.off('SIGTERM', stop);
+  }
+}
+
 async function main(args) {
   const env = process.env;
-  let t = translator(language(env));
+  const detectedLanguage = language(env);
+  let t = translator(detectedLanguage);
   try {
     const { command, values } = parse(args);
     if (values.lang !== undefined) t = translator(values.lang);
@@ -195,6 +252,17 @@ async function main(args) {
     if (!command || values.help) return help(t, command);
     if (!['22', '24', '26'].includes(process.versions.node.split('.')[0])) throw new UsageError('UNSUPPORTED_NODE');
     const context = { home: homedir(), env, version: pkg.version };
+    if (command === 'catalog') {
+      const { catalog } = await import('../skills/agentvigor-toolkit/scripts/catalog.mjs');
+      const result = await catalog({ id: values.id, lang: values.lang ?? detectedLanguage });
+      if (values.json) console.log(JSON.stringify(result, null, 2));
+      else if (result.content) console.log(result.content.trimEnd());
+      else for (const entry of result.entries) console.log(`  ${entry.id}  ${entry.title ?? entry.description}`);
+      return;
+    }
+    if (['project', 'quality', 'harness'].includes(command)) {
+      return await executeWorkflow(command, values, env, values.lang ?? detectedLanguage, t);
+    }
     if (['install', 'update', 'rollback'].includes(command)) return await mutate(command, values, context, t);
     if (command === 'status') return show(await installationStatus(context), values.json, t);
     if (command === 'doctor') {

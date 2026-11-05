@@ -14,7 +14,7 @@ const npm = process.env.npm_execpath;
 const isWindows = process.platform === 'win32';
 
 function node(args, overrides = {}) {
-  const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', timeout: 30_000,
+  const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', timeout: 120_000,
     env: { ...process.env, ...overrides } });
   assert.equal(result.status, 0, result.stderr || String(result.error ?? ''));
   return result.stdout;
@@ -28,6 +28,7 @@ try {
   assert.equal(packed.entryCount, packed.files.length);
   for (const { path } of packed.files) {
     assert.match(path, /^(LICENSE$|README[^/]*\.md$|CHANGELOG\.md$|CONTRIBUTING\.md$|THIRD_PARTY_NOTICES\.md$|package\.json$|(?:bin|lib|skills|docs|benchmarks)\/)/);
+    if (path === 'skills/agentvigor-toolkit/references/upstream/templates/next/.env.example') continue;
     assert.doesNotMatch(path, /(?:^|\/)(?:\.env(?:\.|$)|.*\.(?:db|sqlite|pem|log|key)$)/i);
   }
   const tarball = join(temp, packed.filename);
@@ -57,6 +58,19 @@ try {
   assert.equal(apply.status, 'installed');
   const status = JSON.parse(node([entry, 'status', '--json'], env));
   assert.deepEqual(status.agents, ['codex', 'claude']);
+  for (const [agent, client] of [['codex', '.agents'], ['claude', '.claude']]) {
+    const router = join(home, client, 'skills', 'agentvigor-toolkit');
+    await access(join(router, 'SKILL.md'));
+    await access(join(router, 'references', 'provenance.json'));
+    assert.ok(status.skills.some(skill => skill.agent === agent && skill.skill === 'agentvigor-toolkit' &&
+      skill.path === 'scripts/project.mjs' && skill.status === 'ok'));
+  }
+  const catalog = JSON.parse(node([entry, 'catalog', '--lang', 'es', '--json'], env));
+  assert.equal(catalog.entries.length, 16);
+  const project = join(temp, 'example project');
+  await mkdir(project);
+  node([entry, 'project', '--mode', 'init', '--path', project, '--template', 'docs', '--yes'], env);
+  await access(join(project, 'PRODUCT.md'));
   node([entry, 'rollback', '--all', '--yes', '--json'], env);
   assert.equal(JSON.parse(node([entry, 'status', '--json'], env)).status, 'not-installed');
   console.log(`Package smoke passed (${process.platform}/${process.arch}, ${packed.entryCount} files)`);

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "upstreamRevision": "21b71b68679c11184f49c23168852014bf6dde8b",
+  "files": [
+    {
+      "path": "docs/assets/readme/context-still.svg",
+      "purpose": "Upstream context artwork for knowledge and context maintenance",
+      "dependencies": [
+        "SVG renderer"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "aa9cec1f7799d205e6710959dd111de7b9ac361e7616cde8417774aed71a86ce",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 0,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/context.svg",
+      "purpose": "Upstream context artwork for knowledge and context maintenance",
+      "dependencies": [
+        "SVG renderer",
+        "Animation support"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "17b3df9c67fd76d264a0a72783b9079e6c7e7e3c9a901cae3688aeda4b12dcda",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 3,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/foundation-still.svg",
+      "purpose": "Upstream foundation artwork for project preparation and validation",
+      "dependencies": [
+        "SVG renderer"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "d43658b1693e003db2af3491d5c8fa9c23690ad544ec2d2ff1c65fa120b44d0b",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 0,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/foundation.svg",
+      "purpose": "Upstream foundation artwork for project preparation and validation",
+      "dependencies": [
+        "SVG renderer",
+        "Animation support"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "bb004dd4b0c9efbd63d884cd8f8568d85791f0a8c5e4a6a70cecd0d5f195440c",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 3,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/hero-still.svg",
+      "purpose": "Upstream hero artwork for identity and entry points",
+      "dependencies": [
+        "SVG renderer"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "6ba0cffa77807ad8bb09d05597e24632266e9110d7e2af2bba175c8b764f4db7",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 0,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/hero.svg",
+      "purpose": "Upstream hero artwork for identity and entry points",
+      "dependencies": [
+        "SVG renderer",
+        "Animation support"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "4f5afe62a55deb8fedfe3bac64af49e58f78d7df08f5c1a4e72395f44c029dd5",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 5,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/orchestration-still.svg",
+      "purpose": "Upstream orchestration artwork for division and integration of agent work",
+      "dependencies": [
+        "SVG renderer"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "06702b87bd2051ca021969732de004c42c847aafd0066dccd5b31bcadfdae6e8",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 0,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/orchestration.svg",
+      "purpose": "Upstream orchestration artwork for division and integration of agent work",
+      "dependencies": [
+        "SVG renderer",
+        "Animation support"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "e526367a65db9cf250eb2a55054cc18e258cd340e25a2cdb01c2e80be4064810",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 3,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/quality-still.svg",
+      "purpose": "Upstream quality artwork for quality and review workflows",
+      "dependencies": [
+        "SVG renderer"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "b3a6620dc3725366f2349fb4581609739971e1df8cb6c5969aac789c7086b7ee",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 0,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    },
+    {
+      "path": "docs/assets/readme/quality.svg",
+      "purpose": "Upstream quality artwork for quality and review workflows",
+      "dependencies": [
+        "SVG renderer",
+        "Animation support"
+      ],
+      "codex": "reference",
+      "claude": "reference",
+      "decision": "excluded",
+      "reason": "Artwork supports upstream branding. AgentVigor uses its separately supplied, captioned PNG visuals.",
+      "evidence": "Inspected SVG source and paired animated/static README usage",
+      "sha256": "73cad48fb78207733575928e647ca28746acaeb1d1e57566eca22169865ef79a",
+      "counts": {
+        "title": 1,
+        "desc": 1,
+        "animations": 3,
+        "scripts": 0,
+        "externalReferences": 0
+      }
+    }
+  ]
+}

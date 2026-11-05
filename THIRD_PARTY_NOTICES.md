@@ -3,14 +3,16 @@
 Rafael Pereira created and maintains AgentVigor Toolkit. The original
 AgentVigor code and skills use the repository's [MIT license](LICENSE).
 
-The integrations below are separate upstream projects. AgentVigor does
-not bundle their code, binaries, skills, or plugins. Its RTK monitor calls
-the separately installed `rtk` executable. Links describe the observed
-upstream terms for the relevant release or reference revision.
+AgentVigor incorporates selected Vibe Coding Toolkit material under its MIT
+license. The router distributes the original notice and a per-file record
+of copied and adapted material. AgentVigor's original code implements the
+installer, CLI, catalog, project transactions and quality runner. Other
+integrations use their separate upstream distribution. The RTK monitor calls
+the separately installed `rtk` executable.
 
 | Project | Credit and relationship | Upstream terms |
 | --- | --- | --- |
-| [Vibe Coding Toolkit](https://github.com/soumatheusgomes/vibe-coding-toolkit/tree/21b71b68679c11184f49c23168852014bf6dde8b) | Matheus Gomes. Reviewed as a technical reference. No files, prompts, templates, or artwork from it are redistributed. | [MIT, copyright 2026 Matheus Gomes](https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/LICENSE) |
+| [Vibe Coding Toolkit](https://github.com/soumatheusgomes/vibe-coding-toolkit/tree/21b71b68679c11184f49c23168852014bf6dde8b) | Matheus Gomes. Source of selected templates, ESLint rules, the harness exercise, and adapted development workflows. See the [per-file provenance](skills/agentvigor-toolkit/references/provenance.json). | [MIT, copyright 2026 Matheus Gomes](skills/agentvigor-toolkit/licenses/VIBE-CODING-TOOLKIT-MIT.txt) |
 | [RTK](https://github.com/rtk-ai/rtk/tree/v1.1.0) | RTK contributors. Optional command-output filtering and source of the monitor's displayed data. | [Apache-2.0 CLI](https://github.com/rtk-ai/rtk/blob/v1.1.0/LICENSE), [BUSL-1.1 engine](https://github.com/rtk-ai/rtk/blob/v1.1.0/engine/LICENSE) in the full binary, and [BUSL-1.1 separate proxy](https://github.com/rtk-ai/rtk/blob/v1.1.0/proxy/LICENSE). The `rtk-oss` edition omits the engine. |
 | [Superpowers](https://github.com/obra/superpowers/tree/v7.0.2) | Jesse Vincent and contributors. Optional development workflow plugin. | [MIT](https://github.com/obra/superpowers/blob/v7.0.2/LICENSE) |
 | [Ponytail](https://github.com/DietrichGebert/ponytail/tree/v5.3.3) | DietrichGebert and contributors. Optional implementation and review guidance. | [MIT](https://github.com/DietrichGebert/ponytail/blob/v5.3.3/LICENSE) |

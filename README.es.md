@@ -2,7 +2,7 @@
 
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
-Candidato a lanzamiento `0.1.0-rc.1`. Consulta el [registro de validación](docs/RELEASE-CANDIDATE.md) para ver las entregas, los entornos comprobados y las verificaciones de clientes pendientes.
+Candidato `0.2.0-rc.1`. Consulta la [guía de integración de Vibe](docs/es/VIBE-INTEGRATION.md) y la [matriz de funcionalidades](docs/upstream-audit/MATRIX.md). El [registro inicial](docs/RELEASE-CANDIDATE.md) documenta `0.1.0-rc.1`.
 
 ![AgentVigor Toolkit con su eslogan](docs/assets/readme/hero.png)
 
@@ -10,7 +10,7 @@ Candidato a lanzamiento `0.1.0-rc.1`. Consulta el [registro de validación](docs
 
 **Smarter agents. Leaner runs. Safer code.**
 
-AgentVigor es un kit local para OpenAI Codex y Claude Code. Instala cinco skills originales bajo demanda, diagnostica el entorno de los agentes y muestra estadísticas de RTK sobre salidas de comandos. El CLI usa funciones nativas de Node.js y funciona sin un servicio en segundo plano.
+AgentVigor combina cinco skills originales con una skill que selecciona flujos bajo demanda, bases de proyecto, controles de calidad, un evaluador de harness y el monitor RTK para Codex y Claude Code. El CLI usa funciones nativas de Node.js y funciona sin un servicio en segundo plano.
 
 ## Requisitos e instalación
 
@@ -56,7 +56,7 @@ Para automatizar, revisa la vista previa y añade `--yes`. Usa `--json` en insta
 
 > **Arte conceptual.** El diff, las comprobaciones correctas y los porcentajes de riesgo de alucinación son ilustrativos. AgentVigor ofrece flujos de revisión y handoff. Los resultados de pruebas requieren ejecución, y el handoff guardado ayuda a retomar en un runtime nuevo.
 
-`minimal` instala Grounded Code y Agent Doctor. `balanced`, el perfil predeterminado, añade Diff Guardian y Token Budget. `rigorous` incluye también Safe Resume. Puedes cambiar el perfil de un cliente sin modificar los archivos de skills del otro.
+Todos los perfiles instalan la skill `agentvigor-toolkit`. `minimal` también incluye Grounded Code y Agent Doctor. `balanced`, el perfil predeterminado, añade Diff Guardian y Token Budget. `rigorous` incluye también Safe Resume. Puedes cambiar el perfil de un cliente sin modificar los archivos de skills del otro.
 
 Codex busca skills personales en `~/.agents/skills`. Inicia una sesión nueva y escribe `$agentvigor-grounded-code` para buscar la skill. Claude Code usa `~/.claude/skills` o la ruta configurada en `CLAUDE_CONFIG_DIR`. Reinicia Claude Code, abre el menú con `/` y busca `/agentvigor-grounded-code`. `status` verifica los archivos del disco. El selector del cliente confirma el descubrimiento. Las skills se cargan según la tarea y las políticas del cliente.
 
@@ -66,9 +66,19 @@ Desde la raíz del código fuente, ejecuta los comandos siguientes. En PowerShel
 
 ```text
 npm pack --ignore-scripts
-npm install --global --offline --ignore-scripts ./agentvigor-0.1.0-rc.1.tgz
+npm install --global --offline --ignore-scripts ./agentvigor-0.2.0-rc.1.tgz
 agentvigor --version
 agentvigor --help
+```
+
+## Flujos de Vibe y configuración de proyectos
+
+Usa `catalog` para elegir un flujo y previsualizar la adopción en el directorio del proyecto. Los archivos existentes reciben propuestas en `.agentvigor-project/proposals/`. Para ejecutar controles, revisa `agentvigor.quality.json`. La guía cubre una base Next.js, ESLint, el ejercicio desechable de harness y la reversión del proyecto.
+
+```text
+agentvigor catalog --lang es
+agentvigor project --mode adopt --template docs --path . --dry-run
+agentvigor quality --path . --dry-run
 ```
 
 ## Diagnóstico y monitor de RTK

@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { constants } from 'node:fs';
-import { access, chmod, mkdtemp, rm, unlink, writeFile } from 'node:fs/promises';
+import { access, chmod, mkdtemp, readFile, rm, unlink, writeFile } from 'node:fs/promises';
 import { delimiter, join } from 'node:path';
 import { test } from 'node:test';
+import { setTimeout as delay } from 'node:timers/promises';
 import { detectPlatform, detectTools } from '../lib/platform.mjs';
 import { runFile } from '../lib/process.mjs';
 import { monitor, probeRtk } from '../lib/monitor.mjs';
@@ -89,6 +90,28 @@ test('bounds wall time and aggregate output and terminates on abort', async () =
   controller.abort();
   await assert.rejects(pending, { code: 'PROCESS_ABORTED' });
   await assert.rejects(runFile(process.execPath, forever, { signal: controller.signal }), { code: 'PROCESS_ABORTED' });
+});
+
+test('cancels a live subprocess tree without leaving the grandchild active', async (t) => {
+  const directory = await mkdtemp(join(process.cwd(), '.runtime fixtures '));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const marker = join(directory, 'marker.txt');
+  await writeFile(marker, '');
+  const grandchild = 'const fs = require("node:fs"); let n = 0; const timer = setInterval(() => { fs.appendFileSync(process.argv[1], "x"); if (++n >= 40) clearInterval(timer); }, 50);';
+  const main = 'require("node:child_process").spawn(process.execPath, ["-e", process.argv[1], process.argv[2]], { stdio: "ignore" }); setInterval(() => {}, 1000);';
+  const controller = new AbortController();
+  const pending = runFile(process.execPath, ['-e', main, grandchild, marker], { signal: controller.signal, timeoutMs: 8000 });
+  const rejected = assert.rejects(pending, { code: 'PROCESS_ABORTED' });
+  try {
+    for (let count = 0; count < 50 && !(await readFile(marker)).length; count += 1) await delay(40);
+    assert.ok((await readFile(marker)).length > 0, 'Grandchild reached the marker');
+  } finally {
+    controller.abort();
+    await rejected;
+  }
+  const stopped = await readFile(marker, 'utf8');
+  await delay(250);
+  assert.equal(await readFile(marker, 'utf8'), stopped);
 });
 
 test('runs the static RTK summary once with visible time, estimates and warnings', async () => {

@@ -1,0 +1,1188 @@
+[
+  {
+    "path": "AGENTS.md",
+    "purpose": "Convenções e escopo de manutenção do toolkit.",
+    "dependencies": [
+      "README.md, docs/04-project-bootstrap.md, templates/project-docs/manifest.json"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Preservar disciplina e rastreio de fontes, remover restrições de arquitetura próprias do repositório de referência. Ainda não instalado pelo CLI.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/AGENTS.md#L1-L34"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "CLAUDE.md",
+    "purpose": "Ponte Claude para as instruções compartilhadas.",
+    "dependencies": [
+      "AGENTS.md",
+      "suporte a imports do Claude"
+    ],
+    "codex": "reference",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Manter ponte curta por cliente e mesclar conteúdo existente. Não usar sintaxe de import Claude como configuração Codex.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/CLAUDE.md#L1"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "LICENSE",
+    "purpose": "Concessão MIT e copyright original.",
+    "dependencies": [
+      "Copyright Matheus Gomes"
+    ],
+    "codex": "reference",
+    "claude": "reference",
+    "decision": "incorporated",
+    "reason": "Preservar integralmente junto de qualquer material redistribuído e registrar derivação. A licença raiz de Rafael permanece a do AgentVigor.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/LICENSE#L1-L21"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "README.md",
+    "purpose": "Portal canônico com quatro rotas e contratos de escopo.",
+    "dependencies": [
+      "docs/*",
+      "docs/prompts/*",
+      "docs/tools/*",
+      "templates/*",
+      "assets",
+      "scripts"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "replaced",
+    "reason": "README AgentVigor mantém identidade própria. Incorporar navegação funcional por objetivo e somente anunciar rotas entregues.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.md#L54-L130",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.md#L194-L218",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.md#L293-L380",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.md#L406-L410"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "README.pt-BR.md",
+    "purpose": "Tradução do portal em português.",
+    "dependencies": [
+      "README.md",
+      "mesmos destinos e âncoras"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "replaced",
+    "reason": "Manter README próprio em português com paridade de comandos/escopos. Guias upstream permanecem canônicos em inglês.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.pt-BR.md#L1-L67",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.pt-BR.md#L106-L132",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.pt-BR.md#L196-L220",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.pt-BR.md#L374-L412"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "README.es.md",
+    "purpose": "Tradução do portal em espanhol.",
+    "dependencies": [
+      "README.md",
+      "mesmos destinos e âncoras"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "replaced",
+    "reason": "Manter README próprio em espanhol com paridade de comandos/escopos e identidade AgentVigor.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.es.md#L1-L67",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.es.md#L106-L132",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.es.md#L196-L220",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/README.es.md#L374-L412"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/00-overview.md",
+    "purpose": "Mapa de adoção, decisões de produto, contexto e qualidade.",
+    "dependencies": [
+      "Guias 01–08",
+      "prompts 10–16",
+      "ferramentas selecionadas"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Transformar em mapa de capacidades atuais e futuras. Opções e aplicações existentes continuam preservadas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/00-overview.md#L7-L20",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/00-overview.md#L26-L84"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/01-installation.md",
+    "purpose": "Referência de instalação por cliente e escopo.",
+    "dependencies": [
+      "Instaladores oficiais",
+      "plugins",
+      "RTK",
+      "Graphify",
+      "Context7"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Atualizar versões/fontes e manter seleção por agente, confirmação e detecção de duplicatas. Comandos escritos não equivalem a instalação executada.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/01-installation.md#L7-L102"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/02-playbook-onboarding.md",
+    "purpose": "Tutorial narrado Claude, fluxo de trabalho, memória e adoção lint.",
+    "dependencies": [
+      "Plugins opcionais",
+      "templates",
+      "prompts 01–12",
+      "shell"
+    ],
+    "codex": "conditional",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Reconciliar plugins obrigatórios, política warn e alegação de ganho puro com escolhas explícitas, evidência e defaults AgentVigor.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/02-playbook-onboarding.md#L34-L59",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/02-playbook-onboarding.md#L111-L242",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/02-playbook-onboarding.md#L244-L331",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/02-playbook-onboarding.md#L502-L608",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/02-playbook-onboarding.md#L673-L729"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/03-environment-setup.md",
+    "purpose": "Uso, retomada e reprodução da preparação de máquina.",
+    "dependencies": [
+      "Prompt 10",
+      "manifest de ambiente",
+      "gerenciadores",
+      "autenticação"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Gerar inventário read-only e plano por componente selecionado. Reconciliar ambos agentes obrigatórios e alterações globais amplas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/03-environment-setup.md#L7-L39",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/03-environment-setup.md#L60-L74",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/03-environment-setup.md#L91-L145"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/04-project-bootstrap.md",
+    "purpose": "Receita de produto até fundação Next funcional.",
+    "dependencies": [
+      "create-next-app",
+      "Node",
+      "gerenciador",
+      "templates/next",
+      "ESLint",
+      "skills"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Preset explícito para projeto novo. Necessita executor e transações reais, preflight, compatibilidade e sandbox de teste.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/04-project-bootstrap.md#L72-L113",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/04-project-bootstrap.md#L115-L151",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/04-project-bootstrap.md#L153-L215"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/05-toolkit-validation.md",
+    "purpose": "Registro histórico e escopo da validação upstream.",
+    "dependencies": [
+      "scripts/validate-docs*",
+      "validate-next",
+      "validate-harness",
+      "CI upstream"
+    ],
+    "codex": "reference",
+    "claude": "reference",
+    "decision": "excluded",
+    "reason": "Reter como evidência histórica da referência. Resultados/versões/revisões upstream não podem ser atribuídos ao AgentVigor.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/05-toolkit-validation.md#L12-L34",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/05-toolkit-validation.md#L36-L109"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/06-project-defaults.md",
+    "purpose": "Defaults de stack, arquitetura, documentação e adaptações.",
+    "dependencies": [
+      "Next",
+      "Drizzle/PostgreSQL",
+      "Zod",
+      "Pino",
+      "Vitest",
+      "manifest docs"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Oferecer preset revisado opt-in e preservar stacks existentes. Decisões de stack não pertencem a todas as instalações globais.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/06-project-defaults.md#L7-L40",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/06-project-defaults.md#L54-L76",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/06-project-defaults.md#L92-L112"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/07-harness-evaluation.md",
+    "purpose": "Protocolo de avaliação comportamental com casos descartáveis.",
+    "dependencies": [
+      "Prompt 14",
+      "fixture auth",
+      "evaluator externo ao escopo do agente"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "incorporated",
+    "reason": "Incorporar casos e separar execução determinística, comportamento de modelo e reinício real de cliente. Hoje o benchmark próprio não os substitui.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/07-harness-evaluation.md#L9-L43"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/08-security-audit.md",
+    "purpose": "Guia de auditoria avançada e retomada de remediações.",
+    "dependencies": [
+      "Prompts 13/16",
+      "saídas privadas",
+      "fontes atuais"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Disponibilizar workflow opt-in com quatro artefatos e validação de destino privado. Não acoplar ao install/bootstrap.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/08-security-audit.md#L5-L68",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/08-security-audit.md#L70-L112"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/README.md",
+    "purpose": "Índice de 16 workflows.",
+    "dependencies": [
+      "Prompts 01–16"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Expor catálogo local por objetivo e dependências reais. O índice não executa as receitas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/README.md#L3-L24"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/01-project-sanitation.md",
+    "purpose": "Inventário e limpeza proporcional com baseline.",
+    "dependencies": [
+      "Comandos do projeto",
+      "manifests",
+      "busca de referências"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Checar scripts antes de executar e não tratar zero referências textuais como prova de remoção segura. Ações arriscadas dependem de escopo.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/01-project-sanitation.md#L48-L99"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/02-eslint-warning-burndown.md",
+    "purpose": "Redução mensurada de warnings e decisão sobre migração.",
+    "dependencies": [
+      "ESLint existente",
+      "comandos reais",
+      "prompt 05"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Eliminar ambiguidade entre 'default sem resposta' e aguardar decisão, sem interpretar silêncio como autorização de escopo.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/02-eslint-warning-burndown.md#L78-L160"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/03-multi-agent-code-review.md",
+    "purpose": "Revisão por lentes com síntese e alvo congelado.",
+    "dependencies": [
+      "Diff/ref imutável",
+      "ferramentas nativas de revisão",
+      "callers/testes"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Usar lentes proporcionais e fallback inline. Verificar disponibilidade de subagentes, sem criar painel ou multiplicar custos por padrão.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/03-multi-agent-code-review.md#L35-L94"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/04-brainstorm-to-plan.md",
+    "purpose": "Clarificação e plano com aceite verificável.",
+    "dependencies": [
+      "Requisitos",
+      "critérios",
+      "comandos de verificação"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Preservar decisões/autorizações existentes e perguntar apenas o que muda resultado. Não repetir aprovações já concedidas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/04-brainstorm-to-plan.md#L43-L80"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/05-parallel-wave-dispatch.md",
+    "purpose": "Planejar ondas por arquivos, recursos e dependências.",
+    "dependencies": [
+      "Plano",
+      "host com delegação",
+      "Git somente autorizado"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "incorporated",
+    "reason": "Incorporar contrato de um escritor por arquivo e recursos independentes. Execução depende do host, sem daemon/orquestrador novo.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/05-parallel-wave-dispatch.md#L37-L93"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/06-memory-bootstrap.md",
+    "purpose": "Índice pequeno, proveniência e migração confirmada de memória.",
+    "dependencies": [
+      "Memória nativa/docs",
+      "destino autorizado",
+      "leitura de confirmação"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Reusar memória/docs existentes, exigir escrita autorizada e verificar mecanismo de carregamento. Sem vault automático ou limite universal rígido.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/06-memory-bootstrap.md#L62-L149"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/07-eslint-complete-setup.md",
+    "purpose": "Configuração lint por stack e desenho de invariantes.",
+    "dependencies": [
+      "ESLint",
+      "plugins aplicáveis",
+      "runtime",
+      "profile typed"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Atualizar contrato técnico com auditor runtime. Tratar regras monetária/input/auth descritas como propostas, não código já implementado.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/07-eslint-complete-setup.md#L65-L136",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/07-eslint-complete-setup.md#L431-L535"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/08-eslint-quality-gates-install.md",
+    "purpose": "Copiar regras auditadas e medir adoção.",
+    "dependencies": [
+      "Módulos ESLint mesma revisão",
+      "self-check",
+      "config atual"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Precisará instalador de projeto, diff, backup, verificador de cópia e resolução de versões. Sem reescrever regras para esconder falhas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/08-eslint-quality-gates-install.md#L82-L232"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/09-file-size-refactor.md",
+    "purpose": "Refatorar por responsabilidade preservando APIs.",
+    "dependencies": [
+      "Regra de tamanho",
+      "testes",
+      "typecheck",
+      "limite de lote"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Remover commit automático e parada de lote incondicionais quando divergem do escopo aprovado. Preservar coesão e interfaces.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/09-file-size-refactor.md#L75-L169"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/10-development-environment-setup.md",
+    "purpose": "Preparar, atualizar, validar e inventariar máquina.",
+    "dependencies": [
+      "OS/managers",
+      "Git/gh",
+      "runtimes",
+      "agentes",
+      "plugins",
+      "Docker"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Não executar original como default. Adaptar agentes opcionais, perfis selecionados, plano/consentimento por alteração global e privilégios mínimos.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/10-development-environment-setup.md#L42-L116",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/10-development-environment-setup.md#L118-L228",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/10-development-environment-setup.md#L240-L345"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/11-next-project-bootstrap.md",
+    "purpose": "Roteiro integrado de bootstrap de projeto novo.",
+    "dependencies": [
+      "Guias04/06",
+      "catálogo",
+      "manifest docs",
+      "templates executáveis"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Manter produto e preset opcionais. Evitar instalar todos web skills sem necessidade e tornar geração/merge verificáveis.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/11-next-project-bootstrap.md#L18-L41"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/12-existing-project-setup.md",
+    "purpose": "Adoção completa em projeto existente com cobertura por componente.",
+    "dependencies": [
+      "Inventário real",
+      "contexto",
+      "ferramentas",
+      "testes",
+      "revisão"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Workflow próprio com plano/diff e etapas aplicáveis, preservando frameworks e conteúdo. Conteúdo remoto não concede autoridade.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/12-existing-project-setup.md#L38-L100",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/12-existing-project-setup.md#L102-L175",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/12-existing-project-setup.md#L177-L185"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/13-security-review.md",
+    "purpose": "Revisão read-only de repo/diff com relatório privado.",
+    "dependencies": [
+      "Git/history quando houver",
+      "tracer manual",
+      "skill opcional"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Incorporar bloco independente e política de relatórios. Diferenciar análise estática, testes isolados e serviços reais.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/13-security-review.md#L19-L78"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/14-harness-evaluation.md",
+    "purpose": "Avaliar harness em cópias descartáveis.",
+    "dependencies": [
+      "Guias07",
+      "fixture",
+      "evaluator fixo",
+      "host observável"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "incorporated",
+    "reason": "Incorporar protocolo como workflow e checks determinísticos reais separados dos turnos de modelo.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/14-harness-evaluation.md#L15-L29"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/15-harness-improvement.md",
+    "purpose": "Comparar baseline e uma mudança mínima de harness.",
+    "dependencies": [
+      "Prompt14",
+      "casos/evaluator",
+      "host nativo",
+      "CLIlab separado"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Disponibilizar comparação limitada quando há falha observada. Harness2 não será dependência nem execução automática em toda instalação.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/15-harness-improvement.md#L15-L39"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/prompts/16-security-audit.md",
+    "purpose": "Auditoria universal com findings e remediações em lotes.",
+    "dependencies": [
+      "Saídas privadas",
+      "fontes atuais",
+      "modo AUDIT/PLAN/FIX/VERIFY"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Incorporar workflow opt-in e contrato dos quatro artefatos. Scanners, produção, uploads e correções têm autorização própria.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/16-security-audit.md#L17-L46",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/16-security-audit.md#L48-L62",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/prompts/16-security-audit.md#L133-L224"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/README.md",
+    "purpose": "Catálogo e matriz de máquina/projeto.",
+    "dependencies": [
+      "23 guias técnicos",
+      "evidência por capacidade"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Converter matriz para catálogo local navegável com escopo/cliente/dependências e estados reais.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/README.md#L3-L46"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/01-superpowers.md",
+    "purpose": "Guia de processo e skills Superpowers.",
+    "dependencies": [
+      "Distribuição oficial",
+      "skills realmente disponíveis"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Atualizar descrição à versão auditada e retirar garantias absolutas de invocação/conflito. Parte é orientação de workflow, não API.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/01-superpowers.md#L14-L71",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/01-superpowers.md#L138-L174",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/01-superpowers.md#L280-L337"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/02-subagent-orchestration.md",
+    "purpose": "Delegação, modelos, recursos, revisão e retomada.",
+    "dependencies": [
+      "Capacidades/slots do host",
+      "briefs",
+      "recursos separados"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "incorporated",
+    "reason": "Incorporar padrão e folha de tarefa. Nomes de especialistas e política de seleção não instalam agentes nem expõem modelos.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/02-subagent-orchestration.md#L35-L110",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/02-subagent-orchestration.md#L112-L135",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/02-subagent-orchestration.md#L193-L323"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/04-ponytail.md",
+    "purpose": "Engenharia proporcional e limites de implementação.",
+    "dependencies": [
+      "Plugin/skill oficial",
+      "comandos atuais"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Reusar integração oficial. Atualizar instruções em vez de duplicar todo o conteúdo do plugin ou fixar resposta em três linhas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/04-ponytail.md#L33-L64",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/04-ponytail.md#L68-L140",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/04-ponytail.md#L232-L282"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/05-caveman.md",
+    "purpose": "Comunicação concisa e medição de uso.",
+    "dependencies": [
+      "Distribuição oficial e client commands disponíveis"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Preferência opcional. Não prometer invariância de números/negativas nem porcentagens promocionais como resultado medido.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/05-caveman.md#L16-L46",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/05-caveman.md#L57-L112",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/05-caveman.md#L173-L213"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/07-graphify.md",
+    "purpose": "Grafo local, exclusões, extração e consulta.",
+    "dependencies": [
+      "Python",
+      "uv/pipx",
+      "Graphify",
+      "skill cliente"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Usar adapter de versão e modo code-only explícito. Verificar seleção de plataforma, flags e origem; sem API/backend implícito.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/07-graphify.md#L11-L57",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/07-graphify.md#L69-L96"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/08-obsidian-memory.md",
+    "purpose": "Padrão opcional de vault com validação MCP.",
+    "dependencies": [
+      "Servidor não escolhido",
+      "schemas/templates",
+      "cliente MCP"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Manter referência opt-in. Um servidor abstrato/placeholder não constitui integração funcional; hook literal não é barreira de acesso.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/08-obsidian-memory.md#L16-L61",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/08-obsidian-memory.md#L200-L260"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/09-claude-memory-system.md",
+    "purpose": "Memória leve, validade, índice e migração.",
+    "dependencies": [
+      "Memória nativa ou docs",
+      "fonte/evidência",
+      "carregamento cliente"
+    ],
+    "codex": "conditional",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Verificar carregamento por cliente e autorização de escrita. Atualizar/aposentar conhecimento com fonte e validade.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/09-claude-memory-system.md#L30-L70",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/09-claude-memory-system.md#L83-L169",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/09-claude-memory-system.md#L327-L372"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/15-codex-workflow.md",
+    "purpose": "Codex instructions, plugins, skills, MCP e permissões.",
+    "dependencies": [
+      "Codex suportado",
+      "AGENTS",
+      "TOML",
+      "serviços opcionais"
+    ],
+    "codex": "conditional",
+    "claude": "reference",
+    "decision": "adapted",
+    "reason": "Manter adapter Codex próprio e remover full-access como baseline de instalação. Verificar configuração efetiva em sessão nova.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/15-codex-workflow.md#L26-L105",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/15-codex-workflow.md#L107-L128"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/16-vercel-skills.md",
+    "purpose": "Seleção e instalação local de skills oficiais.",
+    "dependencies": [
+      "Skills CLI",
+      "fontes/nomes",
+      "lockfile",
+      "clientes selecionados"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Fixar versão auditada quando distribuir, resolver nomes reais, inventariar duplicatas e explicitar telemetria upstream. Catálogo não é número permanente.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/16-vercel-skills.md#L3-L50",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/16-vercel-skills.md#L52-L76"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "docs/tools/23-harness2.md",
+    "purpose": "Método nativo inspirado em Harness2 e lab CLI separado.",
+    "dependencies": [
+      "Prompt15",
+      "evaluator",
+      "Python3.12/uv no lab opcional"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Preservar distinção entre método, demo e benchmark. Não automatizar providers/custos nem desativar sandbox para testar.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/23-harness2.md#L7-L46",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/docs/tools/23-harness2.md#L48-L64"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/README.md",
+    "purpose": "Mapa de origens e destinos dos templates.",
+    "dependencies": [
+      "Guias04/06",
+      "manifest e todas templates"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Usar como contrato de catálogo e planos. A presença de templates não equivale a geração ou integração.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/README.md#L3-L27"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/AGENTS.md.template",
+    "purpose": "Instruções por projeto, continuidade e descoberta progressiva.",
+    "dependencies": [
+      "Produto",
+      "comandos reais",
+      "docs",
+      "client capabilities"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Reduzir ao contexto do preset, manter regras genéricas e incluir apenas ferramentas adotadas. Evitar stack e preferências não selecionadas.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/AGENTS.md.template#L5-L65",
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/AGENTS.md.template#L67-L116"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/CLAUDE.md.template",
+    "purpose": "Import curto do AGENTS no Claude.",
+    "dependencies": [
+      "AGENTS.md",
+      "import oficial"
+    ],
+    "codex": "reference",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Manter conteúdo mínimo e mesclar CLAUDE existente. Não gerar para Codex isolado sem decisão do projeto.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/CLAUDE.md.template#L1"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/environment-manifest.json.example",
+    "purpose": "Schema informal e inventário de 27 componentes.",
+    "dependencies": [
+      "Inventário real",
+      "perfis",
+      "evidência",
+      "configurações privadas"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Necessita produtor/validador real e export sanitizado. Remover instalação de ambos agentes, Caveman e full-access como defaults.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/environment-manifest.json.example#L1-L431"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/product.md.template",
+    "purpose": "Brief de produto, MVP e critérios.",
+    "dependencies": [
+      "Descrição do usuário",
+      "decisões de escopo"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Usar fonte para render de documentação e registrar origem. Stack Next/Drizzle será preset selecionado, não requisito genérico.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/product.md.template#L1-L47"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/security-review.md.template",
+    "purpose": "Contrato de relatório privado de revisão.",
+    "dependencies": [
+      "Workflow13",
+      "destino privado",
+      "achados reais"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Reusar estrutura e proveniência com destino privado e placeholders preenchidos por evidência.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/security-review.md.template#L1-L46"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/settings.json.example",
+    "purpose": "Formato Claude de dois hooks ilustrativos.",
+    "dependencies": [
+      "Scripts example-command-proxy e example-session-banner ausentes"
+    ],
+    "codex": "reference",
+    "claude": "conditional",
+    "decision": "excluded",
+    "reason": "Não instalar arquivo como configuração pronta. Guardar apenas referência upstream e gerar entrada somente para script real selecionado/verificado.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/settings.json.example#L1-L25"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/task-handoff.md.template",
+    "purpose": "Checkpoint de tarefa com evidência e recursos.",
+    "dependencies": [
+      "Registro existente de tarefa",
+      "estado Git/processos"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Ampliar Safe Resume com saída de arquivo opcional que registra estado observado e recursos. Nenhuma continuidade automática.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/task-handoff.md.template#L1-L14"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project/.graphifyignore.example",
+    "purpose": "Exclusões de secrets e conteúdo gerado.",
+    "dependencies": [
+      "Projeto real",
+      "Graphify",
+      "política de dados"
+    ],
+    "codex": "conditional",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Mesclar exclusões em projeto selecionado e verificar matcher instalado. Aplicar só dentro do alvo planejado.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project/.graphifyignore.example#L1-L28"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project/codex.config.toml.example",
+    "purpose": "Context7 remoto no Codex.",
+    "dependencies": [
+      "Cliente trusted",
+      "MCP",
+      "conexão não duplicada"
+    ],
+    "codex": "conditional",
+    "claude": "reference",
+    "decision": "adapted",
+    "reason": "Mesclar TOML apenas com seleção e suporte confirmado. Necessita backup e preservação de configuração existente.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project/codex.config.toml.example#L1-L5"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project/mcp.json.example",
+    "purpose": "Context7 remoto no Claude.",
+    "dependencies": [
+      "Claude MCP HTTP",
+      "conexão não duplicada"
+    ],
+    "codex": "reference",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Mesclar objeto com seleção explícita. Autenticação fora do repositório, sem presumir formatos iguais.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project/mcp.json.example#L1-L8"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project/sentry.codex.config.toml.example",
+    "purpose": "Sentry por organização/projeto no Codex.",
+    "dependencies": [
+      "Sentry escolhido",
+      "slugs reais",
+      "OAuth"
+    ],
+    "codex": "conditional",
+    "claude": "reference",
+    "decision": "adapted",
+    "reason": "Manter opt-in e substituir slugs por escopo fornecido. Verificar login no cliente sem transportar tokens.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project/sentry.codex.config.toml.example#L1-L4"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project/sentry.mcp.json.example",
+    "purpose": "Sentry por organização/projeto no Claude.",
+    "dependencies": [
+      "Sentry escolhido",
+      "slugs reais",
+      "OAuth"
+    ],
+    "codex": "reference",
+    "claude": "conditional",
+    "decision": "adapted",
+    "reason": "Manter opt-in e merge independente do Codex, sem SDK automático.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project/sentry.mcp.json.example#L1-L8"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/architecture.md.template",
+    "purpose": "Mapa da arquitetura e fronteiras observadas.",
+    "dependencies": [
+      "Código",
+      "stack",
+      "decisões reais",
+      "dados se houver"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Renderizar conforme projeto/preset, sem camadas vazias nem diagrama de implementação inexistente.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/architecture.md.template#L1-L25"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/design.md.template",
+    "purpose": "Design, acessibilidade e estados UI.",
+    "dependencies": [
+      "Produto",
+      "tokens/componentes reais",
+      "interface quando aplicável"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Omitir ou marcar N/A para projetos sem UI. Preservar fonte visual do projeto existente.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/design.md.template#L1-L21"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/manifest.json",
+    "purpose": "Mapa exato de nove documentos.",
+    "dependencies": [
+      "Fontes relativas",
+      "destinos sem traversal"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Reusar mapa como allowlist e validar fontes/destinos/links. AgentVigor precisa aplicar plano transacionalmente.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/manifest.json#L1-L11"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/onboarding.md.template",
+    "purpose": "Preparação e primeiro fluxo local.",
+    "dependencies": [
+      "Comandos reais",
+      "runtime",
+      "dados/integrações selecionados"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Gerar instruções específicas do ambiente com espaço em paths, sem valores de secrets.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/onboarding.md.template#L1-L25"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/quality.md.template",
+    "purpose": "Checks, limites e workflows de revisão/harness.",
+    "dependencies": [
+      "Comandos/testes reais",
+      "preset lint",
+      "workflow13/14/15"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Preservar checks existentes, separar preparado/executado e tornar etapas opcionais conforme risco.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/quality.md.template#L1-L39"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/README.md.template",
+    "purpose": "Entrada de execução e mapa de docs do projeto.",
+    "dependencies": [
+      "Produto",
+      "comandos reais",
+      "manifest documental"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "adapted",
+    "reason": "Gerar conteúdo preenchido ou rascunho claramente marcado. Não sobrescrever README existente em aplicação.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/README.md.template#L1-L21"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  },
+  {
+    "path": "templates/project-docs/setup.md.template",
+    "purpose": "Registro de origem, ações, testes e pendências.",
+    "dependencies": [
+      "Snapshot de ferramentas/projeto",
+      "evidência dos comandos"
+    ],
+    "codex": "supported",
+    "claude": "supported",
+    "decision": "incorporated",
+    "reason": "Usar ledger de evidências sanitizado e origem upstream, com atualização ligada ao estado aplicado.",
+    "evidence": [
+      "https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/21b71b68679c11184f49c23168852014bf6dde8b/templates/project-docs/setup.md.template#L1-L45"
+    ],
+    "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+    "stage": "proposed"
+  }
+]

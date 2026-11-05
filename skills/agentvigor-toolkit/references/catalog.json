@@ -1,0 +1,294 @@
+{
+  "upstream": "https://github.com/soumatheusgomes/vibe-coding-toolkit",
+  "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+  "workflows": [
+    {
+      "id": "project-sanitation",
+      "source": "docs/prompts/01-project-sanitation.md",
+      "labels": {
+        "en": {
+          "title": "Project sanitation",
+          "description": "Measure and clean a codebase while preserving behavior."
+        },
+        "pt-BR": {
+          "title": "Saneamento de projeto",
+          "description": "Meça e organize uma base de código preservando seu comportamento."
+        },
+        "es": {
+          "title": "Saneamiento del proyecto",
+          "description": "Mide y limpia una base de código conservando su comportamiento."
+        }
+      }
+    },
+    {
+      "id": "eslint-warning-burndown",
+      "source": "docs/prompts/02-eslint-warning-burndown.md",
+      "labels": {
+        "en": {
+          "title": "ESLint warning reduction",
+          "description": "Measure warnings by rule and reduce them without hiding regressions."
+        },
+        "pt-BR": {
+          "title": "Redução de avisos do ESLint",
+          "description": "Meça os avisos por regra e reduza-os sem esconder regressões."
+        },
+        "es": {
+          "title": "Reducción de avisos de ESLint",
+          "description": "Mide los avisos por regla y redúcelos sin ocultar regresiones."
+        }
+      }
+    },
+    {
+      "id": "multi-agent-code-review",
+      "source": "docs/prompts/03-multi-agent-code-review.md",
+      "labels": {
+        "en": {
+          "title": "Independent code review",
+          "description": "Review a fixed change with the lenses warranted by its risks."
+        },
+        "pt-BR": {
+          "title": "Revisão independente de código",
+          "description": "Revise uma mudança definida pelas perspectivas justificadas pelo risco."
+        },
+        "es": {
+          "title": "Revisión independiente de código",
+          "description": "Revisa un cambio definido desde las perspectivas que exige su riesgo."
+        }
+      }
+    },
+    {
+      "id": "brainstorm-to-plan",
+      "source": "docs/prompts/04-brainstorm-to-plan.md",
+      "labels": {
+        "en": {
+          "title": "From intent to a verifiable plan",
+          "description": "Resolve meaningful ambiguity and define checks before implementing."
+        },
+        "pt-BR": {
+          "title": "Da intenção ao plano verificável",
+          "description": "Resolva ambiguidades relevantes e defina checagens antes de implementar."
+        },
+        "es": {
+          "title": "De la intención al plan verificable",
+          "description": "Resuelve ambigüedades relevantes y define comprobaciones antes de implementar."
+        }
+      }
+    },
+    {
+      "id": "parallel-wave-dispatch",
+      "source": "docs/prompts/05-parallel-wave-dispatch.md",
+      "labels": {
+        "en": {
+          "title": "Parallel task waves",
+          "description": "Delegate independent work with a single writer per file and resource."
+        },
+        "pt-BR": {
+          "title": "Ondas de tarefas em paralelo",
+          "description": "Delegue trabalho independente com um escritor por arquivo e recurso."
+        },
+        "es": {
+          "title": "Oleadas de tareas en paralelo",
+          "description": "Delega trabajo independiente con un escritor por archivo y recurso."
+        }
+      }
+    },
+    {
+      "id": "memory-bootstrap",
+      "source": "docs/prompts/06-memory-bootstrap.md",
+      "labels": {
+        "en": {
+          "title": "Project memory and handoffs",
+          "description": "Keep durable knowledge short, sourced, and retrievable."
+        },
+        "pt-BR": {
+          "title": "Memória de projeto e handoffs",
+          "description": "Mantenha conhecimento durável enxuto, rastreável e recuperável."
+        },
+        "es": {
+          "title": "Memoria del proyecto y traspasos",
+          "description": "Mantén conocimiento duradero breve, trazable y recuperable."
+        }
+      }
+    },
+    {
+      "id": "eslint-complete-setup",
+      "source": "docs/prompts/07-eslint-complete-setup.md",
+      "labels": {
+        "en": {
+          "title": "ESLint setup by project",
+          "description": "Plan a compatible lint configuration and preserve working gates."
+        },
+        "pt-BR": {
+          "title": "Configuração de ESLint por projeto",
+          "description": "Planeje configuração lint compatível e preserve verificações existentes."
+        },
+        "es": {
+          "title": "Configuración de ESLint por proyecto",
+          "description": "Planifica una configuración de lint compatible y conserva controles existentes."
+        }
+      }
+    },
+    {
+      "id": "eslint-quality-gates-install",
+      "source": "docs/prompts/08-eslint-quality-gates-install.md",
+      "labels": {
+        "en": {
+          "title": "Install local quality rules",
+          "description": "Apply a reviewed rule bundle and measure the first run."
+        },
+        "pt-BR": {
+          "title": "Instalação de regras locais de qualidade",
+          "description": "Aplique o conjunto revisado de regras e meça a primeira execução."
+        },
+        "es": {
+          "title": "Instalación de reglas locales de calidad",
+          "description": "Aplica el conjunto revisado de reglas y mide la primera ejecución."
+        }
+      }
+    },
+    {
+      "id": "file-size-refactor",
+      "source": "docs/prompts/09-file-size-refactor.md",
+      "labels": {
+        "en": {
+          "title": "Split large files by responsibility",
+          "description": "Use measured size warnings to find cohesive extraction seams."
+        },
+        "pt-BR": {
+          "title": "Refatoração de arquivos grandes por responsabilidade",
+          "description": "Use alertas de tamanho medidos para encontrar extrações coesas."
+        },
+        "es": {
+          "title": "División de archivos grandes por responsabilidad",
+          "description": "Usa avisos de tamaño medidos para encontrar extracciones cohesionadas."
+        }
+      }
+    },
+    {
+      "id": "development-environment-setup",
+      "source": "docs/prompts/10-development-environment-setup.md",
+      "labels": {
+        "en": {
+          "title": "Prepare a development environment",
+          "description": "Inventory the actual machine and plan only selected global changes."
+        },
+        "pt-BR": {
+          "title": "Preparação do ambiente de desenvolvimento",
+          "description": "Inventarie a máquina real e planeje somente alterações globais selecionadas."
+        },
+        "es": {
+          "title": "Preparación del entorno de desarrollo",
+          "description": "Haz inventario del entorno real y planifica solo los cambios globales seleccionados."
+        }
+      }
+    },
+    {
+      "id": "next-project-bootstrap",
+      "source": "docs/prompts/11-next-project-bootstrap.md",
+      "labels": {
+        "en": {
+          "title": "Bootstrap a new Next.js project",
+          "description": "Create a scoped starting point for an explicitly chosen new project."
+        },
+        "pt-BR": {
+          "title": "Bootstrap de projeto Next.js novo",
+          "description": "Crie uma base com escopo para um projeto novo escolhido explicitamente."
+        },
+        "es": {
+          "title": "Inicio de un proyecto Next.js nuevo",
+          "description": "Crea una base acotada para un proyecto nuevo elegido expresamente."
+        }
+      }
+    },
+    {
+      "id": "existing-project-setup",
+      "source": "docs/prompts/12-existing-project-setup.md",
+      "labels": {
+        "en": {
+          "title": "Adopt AgentVigor in an existing project",
+          "description": "Reconcile project files and capabilities with a plan that preserves working equivalents."
+        },
+        "pt-BR": {
+          "title": "Adoção do AgentVigor em projeto existente",
+          "description": "Concilie arquivos e capacidades com um plano que preserve equivalentes funcionais."
+        },
+        "es": {
+          "title": "Adopción de AgentVigor en un proyecto existente",
+          "description": "Reconcilia archivos y capacidades con un plan que conserva equivalentes funcionales."
+        }
+      }
+    },
+    {
+      "id": "security-review",
+      "source": "docs/prompts/13-security-review.md",
+      "labels": {
+        "en": {
+          "title": "Read-only security review",
+          "description": "Trace trust boundaries in a fixed repository snapshot or diff."
+        },
+        "pt-BR": {
+          "title": "Revisão de segurança em leitura",
+          "description": "Rastreie fronteiras de confiança em um snapshot ou diff definido."
+        },
+        "es": {
+          "title": "Revisión de seguridad en lectura",
+          "description": "Rastrea límites de confianza en un snapshot o diff definido."
+        }
+      }
+    },
+    {
+      "id": "harness-evaluation",
+      "source": "docs/prompts/14-harness-evaluation.md",
+      "labels": {
+        "en": {
+          "title": "Evaluate agent behavior in a disposable fixture",
+          "description": "Run a controlled authorization baseline and record what the host actually does."
+        },
+        "pt-BR": {
+          "title": "Avaliação do agente em fixture descartável",
+          "description": "Execute um baseline controlado de autorização e registre ações observadas do cliente."
+        },
+        "es": {
+          "title": "Evaluación del agente en una fixture desechable",
+          "description": "Ejecuta una línea base controlada de autorización y registra acciones observadas del cliente."
+        }
+      }
+    },
+    {
+      "id": "harness-improvement",
+      "source": "docs/prompts/15-harness-improvement.md",
+      "labels": {
+        "en": {
+          "title": "Compare a focused harness improvement",
+          "description": "Test one change against the same scenario and independent evaluator."
+        },
+        "pt-BR": {
+          "title": "Comparação de uma melhoria do harness",
+          "description": "Teste uma mudança com o mesmo cenário e avaliador independente."
+        },
+        "es": {
+          "title": "Comparación de una mejora del harness",
+          "description": "Prueba un cambio con el mismo escenario y evaluador independiente."
+        }
+      }
+    },
+    {
+      "id": "security-audit",
+      "source": "docs/prompts/16-security-audit.md",
+      "labels": {
+        "en": {
+          "title": "Advanced security audit and remediation",
+          "description": "Audit explicitly selected systems and prepare verifiable remediation batches."
+        },
+        "pt-BR": {
+          "title": "Auditoria de segurança e remediação",
+          "description": "Audite sistemas selecionados explicitamente e prepare lotes de correção verificáveis."
+        },
+        "es": {
+          "title": "Auditoría de seguridad y remediación",
+          "description": "Audita sistemas seleccionados explícitamente y prepara lotes de corrección verificables."
+        }
+      }
+    }
+  ]
+}

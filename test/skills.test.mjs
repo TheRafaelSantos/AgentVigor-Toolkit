@@ -8,10 +8,11 @@ const names = [
   'agentvigor-grounded-code',
   'agentvigor-safe-resume',
   'agentvigor-token-budget',
+  'agentvigor-toolkit',
 ];
 const skills = new URL('../skills/', import.meta.url);
 
-test('the toolkit ships exactly the five original skills', async () => {
+test('the toolkit ships the five original skills and the workflow router', async () => {
   const entries = await readdir(skills, { withFileTypes: true });
   const directories = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
   assert.deepEqual(directories.sort(), names);

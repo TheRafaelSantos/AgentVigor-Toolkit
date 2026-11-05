@@ -25,6 +25,6 @@ AgentVigor is an independent Node.js CLI and a set of portable, on-demand skills
 
 ## Local development
 
-Open a shell in the checkout root. Run `node --version`, `npm test`, and `npm pack --dry-run --json`. In Windows PowerShell, `npm.cmd` is also available when script execution policy blocks `npm.ps1`.
+Open a shell in the checkout root. Use a current patch of Node.js 22, 24 or 26. Run `npm ci --ignore-scripts --no-audit --no-fund`, then `npm test`, `npm run smoke:package` and `npm pack --dry-run --json`. ESLint is pinned for development tests. In Windows PowerShell, `npm.cmd` is also available when script execution policy blocks `npm.ps1`.
 
 Read the README for the exact installation, update and removal commands. For a release, review all staged files and the package manifest, run the suite, inspect CI, then create a pre-release with the packed tarball and SHA-256 checksum. Use regular fast-forward pushes and preserve the existing license and upstream notices.

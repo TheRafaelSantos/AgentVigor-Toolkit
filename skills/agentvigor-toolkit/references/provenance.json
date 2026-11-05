@@ -1,0 +1,634 @@
+{
+  "upstream": "https://github.com/soumatheusgomes/vibe-coding-toolkit",
+  "revision": "21b71b68679c11184f49c23168852014bf6dde8b",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Matheus Gomes",
+  "files": [
+    {
+      "source": "LICENSE",
+      "destination": "licenses/VIBE-CODING-TOOLKIT-MIT.txt",
+      "kind": "copied",
+      "sha256": "d687e4265813cc684a8307b579a68ac19578f3de351aafbd6419da926b52203f"
+    },
+    {
+      "source": "scripts/validate-harness.mjs",
+      "destination": "references/upstream/scripts/validate-harness.mjs",
+      "kind": "copied",
+      "sha256": "14220a750afbcf228fc397d5d3d32f10631c0f2e0a533c0ba8fa79b553f62e1c"
+    },
+    {
+      "source": "templates/AGENTS.md.template",
+      "destination": "references/upstream/templates/AGENTS.md.template",
+      "kind": "copied",
+      "sha256": "ccc115e84c9b4b28f979d1480dcd52e1bd9d76bca0383f33d538ddab24a6cfc8"
+    },
+    {
+      "source": "templates/CLAUDE.md.template",
+      "destination": "references/upstream/templates/CLAUDE.md.template",
+      "kind": "copied",
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49"
+    },
+    {
+      "source": "templates/environment-manifest.json.example",
+      "destination": "references/upstream/templates/environment-manifest.json.example",
+      "kind": "copied",
+      "sha256": "9c30da19c530ad8aa75f2c62a893ca71339cff3788108e537bc0fd363cdc296b"
+    },
+    {
+      "source": "templates/eslint/eslint-rules/core-rules.cjs",
+      "destination": "references/upstream/templates/eslint/eslint-rules/core-rules.cjs",
+      "kind": "copied",
+      "sha256": "74ebcc0235d16fc58d20cebe52148ff40606754a993b63743e721ab594244319"
+    },
+    {
+      "source": "templates/eslint/eslint-rules/index.cjs",
+      "destination": "references/upstream/templates/eslint/eslint-rules/index.cjs",
+      "kind": "copied",
+      "sha256": "9610051b37cf4832532cce223060a328851727c85e2d1c0b8745a5f0c837e550"
+    },
+    {
+      "source": "templates/eslint/eslint-rules/next-base.mjs",
+      "destination": "references/upstream/templates/eslint/eslint-rules/next-base.mjs",
+      "kind": "copied",
+      "sha256": "f5d9e408e48e5b2c5a2a4ee41b8f63f99658a9c7e174c8b81d7a13f139cbbcaa"
+    },
+    {
+      "source": "templates/eslint/eslint-rules/utils.cjs",
+      "destination": "references/upstream/templates/eslint/eslint-rules/utils.cjs",
+      "kind": "copied",
+      "sha256": "b2ab939d3a6c157daf6fe840c0dc401ae570863fbd81bf23971e69a12cb79a33"
+    },
+    {
+      "source": "templates/eslint/eslint.config.mjs.example",
+      "destination": "references/upstream/templates/eslint/eslint.config.mjs.example",
+      "kind": "copied",
+      "sha256": "47045b77c9a9f505f4f8f2d1b7b85bf1aa5c2a87e04314f06e4f9e2743fac920"
+    },
+    {
+      "source": "templates/eslint/eslint.typed.config.mjs.example",
+      "destination": "references/upstream/templates/eslint/eslint.typed.config.mjs.example",
+      "kind": "copied",
+      "sha256": "048d8d9c0607448105305f148b1662bf8aeded38c28dda6bf39ce81f764018ae"
+    },
+    {
+      "source": "templates/eslint/next-app.config.mjs.example",
+      "destination": "references/upstream/templates/eslint/next-app.config.mjs.example",
+      "kind": "copied",
+      "sha256": "fd5ba24e5f58dac4ec405a4775d73ac5aa783f2c0f54796ed753694c9861e012"
+    },
+    {
+      "source": "templates/eslint/next.config.mjs.example",
+      "destination": "references/upstream/templates/eslint/next.config.mjs.example",
+      "kind": "copied",
+      "sha256": "f2fc8b20d4b24c37531086ee54f72fb5d454b1f01949f0cc1299b8b69ab1ad06"
+    },
+    {
+      "source": "templates/eslint/next.typed.config.mjs.example",
+      "destination": "references/upstream/templates/eslint/next.typed.config.mjs.example",
+      "kind": "copied",
+      "sha256": "2fd63e6dbd16cb1e6f4fa580446a518b76b7129c3c3e0b2b7382da32d669807f"
+    },
+    {
+      "source": "templates/eslint/verify.mjs",
+      "destination": "references/upstream/templates/eslint/verify.mjs",
+      "kind": "copied",
+      "sha256": "9b7a37f0b208500f483648f30b7ab6e0863c6c90af44e8234827eeb049c0d12c"
+    },
+    {
+      "source": "templates/harness-evaluation/AGENTS.md",
+      "destination": "references/upstream/templates/harness-evaluation/AGENTS.md",
+      "kind": "copied",
+      "sha256": "fc3a8332f18db84139bb9fd412dc629379b74f875a13f8aabdf5e7c9a62f27df"
+    },
+    {
+      "source": "templates/harness-evaluation/access.mjs",
+      "destination": "references/upstream/templates/harness-evaluation/access.mjs",
+      "kind": "copied",
+      "sha256": "fa96fe6a759bc49db77236810a83bb4c97d3ce693124bb6505545e0193550240"
+    },
+    {
+      "source": "templates/harness-evaluation/local-notes.txt",
+      "destination": "references/upstream/templates/harness-evaluation/local-notes.txt",
+      "kind": "copied",
+      "sha256": "79e3fc6afaf135133c764bc261b5040575c373a80dcb44b254bce07e5a4a5b0c"
+    },
+    {
+      "source": "templates/next/.env.example",
+      "destination": "references/upstream/templates/next/.env.example",
+      "kind": "copied",
+      "sha256": "767e9e3c22ef23536e54f0dec49a7d54d58847c70363ea6dc27fcadf0638d8a8"
+    },
+    {
+      "source": "templates/next/drizzle.config.ts.example",
+      "destination": "references/upstream/templates/next/drizzle.config.ts.example",
+      "kind": "copied",
+      "sha256": "2a6f22db8bf672a7f0150cb6958c707c30a51597527675947e2d8562b6418f7b"
+    },
+    {
+      "source": "templates/next/src/db/index.test.ts.example",
+      "destination": "references/upstream/templates/next/src/db/index.test.ts.example",
+      "kind": "copied",
+      "sha256": "a83ab83dbf188ba1a9ea9dc5ea3a93a0d4947b7c40aa3094f96216978aa7e029"
+    },
+    {
+      "source": "templates/next/src/db/index.ts.example",
+      "destination": "references/upstream/templates/next/src/db/index.ts.example",
+      "kind": "copied",
+      "sha256": "06330f1a7cd2a06cacbea296dd3323e47fb30436090148b25ad7f7db9ffcab69"
+    },
+    {
+      "source": "templates/next/src/db/schema/index.ts.example",
+      "destination": "references/upstream/templates/next/src/db/schema/index.ts.example",
+      "kind": "copied",
+      "sha256": "37a4ad96db521639ea3c010882cbc05b2055d78382233b0d468f22ca41ca8cd8"
+    },
+    {
+      "source": "templates/next/src/lib/env-schema.ts.example",
+      "destination": "references/upstream/templates/next/src/lib/env-schema.ts.example",
+      "kind": "copied",
+      "sha256": "425ecff24ac2c8eed7561d2c92e6abbce283eda6b3cf2d26f51e66682107852f"
+    },
+    {
+      "source": "templates/next/src/lib/env.test.ts.example",
+      "destination": "references/upstream/templates/next/src/lib/env.test.ts.example",
+      "kind": "copied",
+      "sha256": "f4359092b705aaad1d795a90c26d3845e61397bc976f37afb3cc17c443864be1"
+    },
+    {
+      "source": "templates/next/src/lib/env.ts.example",
+      "destination": "references/upstream/templates/next/src/lib/env.ts.example",
+      "kind": "copied",
+      "sha256": "ca9ffc4f6499247cc633dc3bf1d898eed512e032a36ea0e601c68cadf1c744a2"
+    },
+    {
+      "source": "templates/next/src/lib/logger.test.ts.example",
+      "destination": "references/upstream/templates/next/src/lib/logger.test.ts.example",
+      "kind": "copied",
+      "sha256": "162ebe50aeeecc0d75bdde7cabd0e6e83b04ad773e34618e96009be4c376cb3c"
+    },
+    {
+      "source": "templates/next/src/lib/logger.ts.example",
+      "destination": "references/upstream/templates/next/src/lib/logger.ts.example",
+      "kind": "copied",
+      "sha256": "5b27c9c73c44d658422e6e04ea032f3e4310e777eee05e5f50bc01aba99adc19"
+    },
+    {
+      "source": "templates/next/src/lib/utils.ts.example",
+      "destination": "references/upstream/templates/next/src/lib/utils.ts.example",
+      "kind": "copied",
+      "sha256": "d1f1e0d62cb8d8d1e04c26e14de842d8a151f75812d81b046c65b5d1fe8e4b27"
+    },
+    {
+      "source": "templates/next/vitest.config.mts.example",
+      "destination": "references/upstream/templates/next/vitest.config.mts.example",
+      "kind": "copied",
+      "sha256": "d7a35d31194cb4b1dccc09b7558569839da4ab3f954d1d0272dcaec2621bc104"
+    },
+    {
+      "source": "templates/product.md.template",
+      "destination": "references/upstream/templates/product.md.template",
+      "kind": "copied",
+      "sha256": "263ecf84dc1eb69472d1511a965a2bee49679ae49c813fc9af03f57bd6614639"
+    },
+    {
+      "source": "templates/project-docs/README.md.template",
+      "destination": "references/upstream/templates/project-docs/README.md.template",
+      "kind": "copied",
+      "sha256": "f9c9c89dd6d594b6768897955411c408c29af4c252f8f4f9d0498260cf442ce9"
+    },
+    {
+      "source": "templates/project-docs/architecture.md.template",
+      "destination": "references/upstream/templates/project-docs/architecture.md.template",
+      "kind": "copied",
+      "sha256": "aec8085acffba45233c399f20bc483b594b6f301e95f9db4bcc5cf75d71a520e"
+    },
+    {
+      "source": "templates/project-docs/design.md.template",
+      "destination": "references/upstream/templates/project-docs/design.md.template",
+      "kind": "copied",
+      "sha256": "c038c9dfae53b7326c4978eb7963a4c42471f95df537508c758a922aee744eeb"
+    },
+    {
+      "source": "templates/project-docs/manifest.json",
+      "destination": "references/upstream/templates/project-docs/manifest.json",
+      "kind": "copied",
+      "sha256": "31790f20400589421c70258055406ab4ec4736097996537b67b29abb7beddcf1"
+    },
+    {
+      "source": "templates/project-docs/onboarding.md.template",
+      "destination": "references/upstream/templates/project-docs/onboarding.md.template",
+      "kind": "copied",
+      "sha256": "101440e5c307791947ca93c6c879aca00558d616e4e14791b76aec217084bc35"
+    },
+    {
+      "source": "templates/project-docs/quality.md.template",
+      "destination": "references/upstream/templates/project-docs/quality.md.template",
+      "kind": "copied",
+      "sha256": "37c7bd58e64c1509ea76697f0614cf5c9401827fd962c31a7f9deb35fd5e7046"
+    },
+    {
+      "source": "templates/project-docs/setup.md.template",
+      "destination": "references/upstream/templates/project-docs/setup.md.template",
+      "kind": "copied",
+      "sha256": "26642727c04f7daced32813ac7272ef6b8df0bd8e4c220ed81215d6c81ebea4a"
+    },
+    {
+      "source": "templates/project/.graphifyignore.example",
+      "destination": "references/upstream/templates/project/.graphifyignore.example",
+      "kind": "copied",
+      "sha256": "c1da1e78c96dc2d83518952726b073f9b422c000cc5e9375c784e643404ab4f8"
+    },
+    {
+      "source": "templates/project/codex.config.toml.example",
+      "destination": "references/upstream/templates/project/codex.config.toml.example",
+      "kind": "copied",
+      "sha256": "277367d8fd7e1762646a7e3caebd314d7eb785beda3d7aeef00612d99935c92e"
+    },
+    {
+      "source": "templates/project/mcp.json.example",
+      "destination": "references/upstream/templates/project/mcp.json.example",
+      "kind": "copied",
+      "sha256": "fce4dbd6f3476e6ba72f643e541aa12c70b4a13f129021b9cbcca3fd3bece200"
+    },
+    {
+      "source": "templates/project/sentry.codex.config.toml.example",
+      "destination": "references/upstream/templates/project/sentry.codex.config.toml.example",
+      "kind": "copied",
+      "sha256": "6d52679151565d25a84a24784ed08fdd6b0d03cc119135cef4d0fe0a3f4f063e"
+    },
+    {
+      "source": "templates/project/sentry.mcp.json.example",
+      "destination": "references/upstream/templates/project/sentry.mcp.json.example",
+      "kind": "copied",
+      "sha256": "b1f9d6e91ae6d36443f16c4ce1d4f9b0ca2584baced6af6eb66963617e152249"
+    },
+    {
+      "source": "templates/rules/parallel-subagent-driven-development.md",
+      "destination": "references/upstream/templates/rules/parallel-subagent-driven-development.md",
+      "kind": "copied",
+      "sha256": "20a668a72cc53c89a7283777c90602eee8c77e5f53c6fe7d20eff231ee0ee1ed"
+    },
+    {
+      "source": "templates/security-review.md.template",
+      "destination": "references/upstream/templates/security-review.md.template",
+      "kind": "copied",
+      "sha256": "328aa3c3c7ae1ce5aa527a1528af4ea62c3ad236217fbba630e2d2cab28ad0a6"
+    },
+    {
+      "source": "templates/task-handoff.md.template",
+      "destination": "references/upstream/templates/task-handoff.md.template",
+      "kind": "copied",
+      "sha256": "1f1bf77adb02f3cc0d2d1c98f424398cbd05ad630fa3dcb94fbd9772288ef485"
+    },
+    {
+      "source": "docs/prompts/01-project-sanitation.md",
+      "destination": "references/workflows/en/project-sanitation.md",
+      "kind": "adapted",
+      "sha256": "de82c8ec49bb2020741464eea064e03b1ae58a2a27ae09eb44aae0203a5783be",
+      "destinationSha256": "e943d929ca8b2a7fd59f474a51e619202367896995c9ec148baf335b9382f8f0"
+    },
+    {
+      "source": "docs/prompts/01-project-sanitation.md",
+      "destination": "references/workflows/pt-BR/project-sanitation.md",
+      "kind": "adapted",
+      "sha256": "de82c8ec49bb2020741464eea064e03b1ae58a2a27ae09eb44aae0203a5783be",
+      "destinationSha256": "097abe3363eded94091f11a38ce3db1939fc42c6c445eb308cd56d7f9e9735be"
+    },
+    {
+      "source": "docs/prompts/01-project-sanitation.md",
+      "destination": "references/workflows/es/project-sanitation.md",
+      "kind": "adapted",
+      "sha256": "de82c8ec49bb2020741464eea064e03b1ae58a2a27ae09eb44aae0203a5783be",
+      "destinationSha256": "8899aa1d40edc1bee7357dbb0214215146b143036c00d0499403d2d1315c00d0"
+    },
+    {
+      "source": "docs/prompts/02-eslint-warning-burndown.md",
+      "destination": "references/workflows/en/eslint-warning-burndown.md",
+      "kind": "adapted",
+      "sha256": "ca5c08cd976b0f85ae4d9840153aa6e2de67f9e3ba8a899c26e06f07a34d7b43",
+      "destinationSha256": "ebfe1d086bfcf4627f366c7ed08e766b9a9bdad4c48f61d9ab8cadb85618a08c"
+    },
+    {
+      "source": "docs/prompts/02-eslint-warning-burndown.md",
+      "destination": "references/workflows/pt-BR/eslint-warning-burndown.md",
+      "kind": "adapted",
+      "sha256": "ca5c08cd976b0f85ae4d9840153aa6e2de67f9e3ba8a899c26e06f07a34d7b43",
+      "destinationSha256": "bbfd51dfd687535452c26966380b835d789e489ac96010de66e33ec938f9f2d3"
+    },
+    {
+      "source": "docs/prompts/02-eslint-warning-burndown.md",
+      "destination": "references/workflows/es/eslint-warning-burndown.md",
+      "kind": "adapted",
+      "sha256": "ca5c08cd976b0f85ae4d9840153aa6e2de67f9e3ba8a899c26e06f07a34d7b43",
+      "destinationSha256": "ce7c34af8f435990352690b7bb73d8edb6420440f15d87bca88fdd31889b2cb8"
+    },
+    {
+      "source": "docs/prompts/03-multi-agent-code-review.md",
+      "destination": "references/workflows/en/multi-agent-code-review.md",
+      "kind": "adapted",
+      "sha256": "258881b08c8feaf15932ef3fd9cd2b5f7580a524b4acb24ea8329fb0d06a4383",
+      "destinationSha256": "dbeb733801d18a2cae02ef1338e596d6c33401d31dd96f4f1204f8a28cab67d5"
+    },
+    {
+      "source": "docs/prompts/03-multi-agent-code-review.md",
+      "destination": "references/workflows/pt-BR/multi-agent-code-review.md",
+      "kind": "adapted",
+      "sha256": "258881b08c8feaf15932ef3fd9cd2b5f7580a524b4acb24ea8329fb0d06a4383",
+      "destinationSha256": "c3d9bbf5bdf581a0ce3384224b33896b6690ce98aa81829be2e93c7836fb12ff"
+    },
+    {
+      "source": "docs/prompts/03-multi-agent-code-review.md",
+      "destination": "references/workflows/es/multi-agent-code-review.md",
+      "kind": "adapted",
+      "sha256": "258881b08c8feaf15932ef3fd9cd2b5f7580a524b4acb24ea8329fb0d06a4383",
+      "destinationSha256": "97918a78817cb54f56a897d942efd8936f709b0f1d488a1205886084ea6f5067"
+    },
+    {
+      "source": "docs/prompts/04-brainstorm-to-plan.md",
+      "destination": "references/workflows/en/brainstorm-to-plan.md",
+      "kind": "adapted",
+      "sha256": "f5b8b8c83e1fc535b16e194b573ba0f1fc238738fc646eab0263c5fc4412bcb2",
+      "destinationSha256": "1d2d886ee1aa4006a683c20c510382bc5c28141c8802ca3d9286321251619967"
+    },
+    {
+      "source": "docs/prompts/04-brainstorm-to-plan.md",
+      "destination": "references/workflows/pt-BR/brainstorm-to-plan.md",
+      "kind": "adapted",
+      "sha256": "f5b8b8c83e1fc535b16e194b573ba0f1fc238738fc646eab0263c5fc4412bcb2",
+      "destinationSha256": "caaed5ca50c9dbcc4bc4bee7db078b19ed29a4fecde4fe1dbcee6229a3a506ba"
+    },
+    {
+      "source": "docs/prompts/04-brainstorm-to-plan.md",
+      "destination": "references/workflows/es/brainstorm-to-plan.md",
+      "kind": "adapted",
+      "sha256": "f5b8b8c83e1fc535b16e194b573ba0f1fc238738fc646eab0263c5fc4412bcb2",
+      "destinationSha256": "9ead4eab4e1ac274ace75e0d493f09aa3f51c9fceeae2f92a901733abc5b2384"
+    },
+    {
+      "source": "docs/prompts/05-parallel-wave-dispatch.md",
+      "destination": "references/workflows/en/parallel-wave-dispatch.md",
+      "kind": "adapted",
+      "sha256": "f55db696fc824df1c0cd55f711245ff96730860f4d303af95e993d7d1ba7ebb0",
+      "destinationSha256": "c21f0e59ae3ed812edf61d3b5a1bdce2ffbce1abb8fe1809e83d4778375135a7"
+    },
+    {
+      "source": "docs/prompts/05-parallel-wave-dispatch.md",
+      "destination": "references/workflows/pt-BR/parallel-wave-dispatch.md",
+      "kind": "adapted",
+      "sha256": "f55db696fc824df1c0cd55f711245ff96730860f4d303af95e993d7d1ba7ebb0",
+      "destinationSha256": "117495142e28f18ebfe621cf8a9ec04ae5096f106960ade4e7be8db206a18a90"
+    },
+    {
+      "source": "docs/prompts/05-parallel-wave-dispatch.md",
+      "destination": "references/workflows/es/parallel-wave-dispatch.md",
+      "kind": "adapted",
+      "sha256": "f55db696fc824df1c0cd55f711245ff96730860f4d303af95e993d7d1ba7ebb0",
+      "destinationSha256": "85d585f6b6fceb953ba4d1526fd0e65182a24a2462b8aea4d73c4f021a1f2870"
+    },
+    {
+      "source": "docs/prompts/06-memory-bootstrap.md",
+      "destination": "references/workflows/en/memory-bootstrap.md",
+      "kind": "adapted",
+      "sha256": "15c3d5e587b71488c6e5af50c8e91eb6d59928f67701e882a758aa97b8f511f5",
+      "destinationSha256": "30f03ec019384af3520e33891b8502f5b30450e8cd88fdaf0ae1bf84ee9099f8"
+    },
+    {
+      "source": "docs/prompts/06-memory-bootstrap.md",
+      "destination": "references/workflows/pt-BR/memory-bootstrap.md",
+      "kind": "adapted",
+      "sha256": "15c3d5e587b71488c6e5af50c8e91eb6d59928f67701e882a758aa97b8f511f5",
+      "destinationSha256": "68d58b058a1aa1772b9ab3953a560f1e20c50a4e21730b74a5ed2690d3cf3bce"
+    },
+    {
+      "source": "docs/prompts/06-memory-bootstrap.md",
+      "destination": "references/workflows/es/memory-bootstrap.md",
+      "kind": "adapted",
+      "sha256": "15c3d5e587b71488c6e5af50c8e91eb6d59928f67701e882a758aa97b8f511f5",
+      "destinationSha256": "87328e383a01f9a1275441ef4653759d2166a9975608d8fe7292634b79743c73"
+    },
+    {
+      "source": "docs/prompts/07-eslint-complete-setup.md",
+      "destination": "references/workflows/en/eslint-complete-setup.md",
+      "kind": "adapted",
+      "sha256": "113bc5716fc7941eddb3c518ce14db3538cbb785c242232dc03d35d3d819bdb8",
+      "destinationSha256": "a28ee01304498dcad0ea1f3ebf2adc32ec2cf59f00469391d1d2d164b0a3ecda"
+    },
+    {
+      "source": "docs/prompts/07-eslint-complete-setup.md",
+      "destination": "references/workflows/pt-BR/eslint-complete-setup.md",
+      "kind": "adapted",
+      "sha256": "113bc5716fc7941eddb3c518ce14db3538cbb785c242232dc03d35d3d819bdb8",
+      "destinationSha256": "f958d7360283ac74b73e9af71a188916c2e11764fdac705b3897c4639673e40b"
+    },
+    {
+      "source": "docs/prompts/07-eslint-complete-setup.md",
+      "destination": "references/workflows/es/eslint-complete-setup.md",
+      "kind": "adapted",
+      "sha256": "113bc5716fc7941eddb3c518ce14db3538cbb785c242232dc03d35d3d819bdb8",
+      "destinationSha256": "24200ca1852fd058f26bafd3099d8d3ccc2b570b596ad63571c653e28c3c64c3"
+    },
+    {
+      "source": "docs/prompts/08-eslint-quality-gates-install.md",
+      "destination": "references/workflows/en/eslint-quality-gates-install.md",
+      "kind": "adapted",
+      "sha256": "969900331ad6c71ec4b2f3b6ceb281e4323a9cd11b7f558cd1b88a190bed8ad6",
+      "destinationSha256": "cd911de557931d2d99f7bd6e88b88ecb9a96f485d3217b6672c9d4ee118c9f54"
+    },
+    {
+      "source": "docs/prompts/08-eslint-quality-gates-install.md",
+      "destination": "references/workflows/pt-BR/eslint-quality-gates-install.md",
+      "kind": "adapted",
+      "sha256": "969900331ad6c71ec4b2f3b6ceb281e4323a9cd11b7f558cd1b88a190bed8ad6",
+      "destinationSha256": "58e18c912ae2f2275813db66fd778b1316dd5e532b1278ab39275c84b742d302"
+    },
+    {
+      "source": "docs/prompts/08-eslint-quality-gates-install.md",
+      "destination": "references/workflows/es/eslint-quality-gates-install.md",
+      "kind": "adapted",
+      "sha256": "969900331ad6c71ec4b2f3b6ceb281e4323a9cd11b7f558cd1b88a190bed8ad6",
+      "destinationSha256": "9dbb684989aca761225f07d34fdd9a14ccf96151421c4403b913c7c4899a80ec"
+    },
+    {
+      "source": "docs/prompts/09-file-size-refactor.md",
+      "destination": "references/workflows/en/file-size-refactor.md",
+      "kind": "adapted",
+      "sha256": "7cec25731a81032742243d923aed3054725a912b2ba83e4b60831ff140916d23",
+      "destinationSha256": "9cddc6133e8283c06b7f8b8a0ffa814ca6493aa45d9baf7ef5c0ef06b500f404"
+    },
+    {
+      "source": "docs/prompts/09-file-size-refactor.md",
+      "destination": "references/workflows/pt-BR/file-size-refactor.md",
+      "kind": "adapted",
+      "sha256": "7cec25731a81032742243d923aed3054725a912b2ba83e4b60831ff140916d23",
+      "destinationSha256": "3ebdde6881b210dcccdc0bc7e2f9f4903c67957c1649e57402701661651e6a35"
+    },
+    {
+      "source": "docs/prompts/09-file-size-refactor.md",
+      "destination": "references/workflows/es/file-size-refactor.md",
+      "kind": "adapted",
+      "sha256": "7cec25731a81032742243d923aed3054725a912b2ba83e4b60831ff140916d23",
+      "destinationSha256": "71c8ead8c605580e67f8399baa2698952d78bef31744c6ea17eddb5c387b3b25"
+    },
+    {
+      "source": "docs/prompts/10-development-environment-setup.md",
+      "destination": "references/workflows/en/development-environment-setup.md",
+      "kind": "adapted",
+      "sha256": "a1e4a2c3e449fa6d94be0abd12896db93557dbd306a147f691d2f3752fbbbf1e",
+      "destinationSha256": "a415d0290617ecaca4c5c84f61fa29e4aa625424bdabf16ca13f969edb3dad73"
+    },
+    {
+      "source": "docs/prompts/10-development-environment-setup.md",
+      "destination": "references/workflows/pt-BR/development-environment-setup.md",
+      "kind": "adapted",
+      "sha256": "a1e4a2c3e449fa6d94be0abd12896db93557dbd306a147f691d2f3752fbbbf1e",
+      "destinationSha256": "2554a0e2812467606dae1209c96dd49d61f22eb7d80738a2c4a8c9dbc0d2b336"
+    },
+    {
+      "source": "docs/prompts/10-development-environment-setup.md",
+      "destination": "references/workflows/es/development-environment-setup.md",
+      "kind": "adapted",
+      "sha256": "a1e4a2c3e449fa6d94be0abd12896db93557dbd306a147f691d2f3752fbbbf1e",
+      "destinationSha256": "3bcdadc77c845be8dd66353d9bf6c84d134ea9ab120c4eab498e5e692880492a"
+    },
+    {
+      "source": "docs/prompts/11-next-project-bootstrap.md",
+      "destination": "references/workflows/en/next-project-bootstrap.md",
+      "kind": "adapted",
+      "sha256": "c4a4d9d478b0bd0c34f27dda0c3a9a2e86918e48ae8f0af278a93e8d97c223b8",
+      "destinationSha256": "1f3e94fa351258cc833d727c517d3111e6733b117ef0a7413db198360f968b39"
+    },
+    {
+      "source": "docs/prompts/11-next-project-bootstrap.md",
+      "destination": "references/workflows/pt-BR/next-project-bootstrap.md",
+      "kind": "adapted",
+      "sha256": "c4a4d9d478b0bd0c34f27dda0c3a9a2e86918e48ae8f0af278a93e8d97c223b8",
+      "destinationSha256": "8e2ad0693f7dc56b18ff1a049542745b4d7133c4cd6a552e0dbf8127a7988014"
+    },
+    {
+      "source": "docs/prompts/11-next-project-bootstrap.md",
+      "destination": "references/workflows/es/next-project-bootstrap.md",
+      "kind": "adapted",
+      "sha256": "c4a4d9d478b0bd0c34f27dda0c3a9a2e86918e48ae8f0af278a93e8d97c223b8",
+      "destinationSha256": "c116e88b9d51214ef492fba24a5b7bc16b9d34c3cdd6704c0c90848ee0403710"
+    },
+    {
+      "source": "docs/prompts/12-existing-project-setup.md",
+      "destination": "references/workflows/en/existing-project-setup.md",
+      "kind": "adapted",
+      "sha256": "8de3f0ea8dcf439617bbeb3462b91ce644a33f4d4a6b015b361e1ceb08c977d7",
+      "destinationSha256": "800deb4fbcadc94f2fba072a1d304d204ff381b2b8e217fd4dca09d2b2faf857"
+    },
+    {
+      "source": "docs/prompts/12-existing-project-setup.md",
+      "destination": "references/workflows/pt-BR/existing-project-setup.md",
+      "kind": "adapted",
+      "sha256": "8de3f0ea8dcf439617bbeb3462b91ce644a33f4d4a6b015b361e1ceb08c977d7",
+      "destinationSha256": "42c8c2f2f4cef5ecdad0330786b1a91ff6f445dff96931010781f0ac69a295d1"
+    },
+    {
+      "source": "docs/prompts/12-existing-project-setup.md",
+      "destination": "references/workflows/es/existing-project-setup.md",
+      "kind": "adapted",
+      "sha256": "8de3f0ea8dcf439617bbeb3462b91ce644a33f4d4a6b015b361e1ceb08c977d7",
+      "destinationSha256": "5f4597002f2098f8ce3f7289182ec28512ff764413a1ad0c0f32edafd5da631d"
+    },
+    {
+      "source": "docs/prompts/13-security-review.md",
+      "destination": "references/workflows/en/security-review.md",
+      "kind": "adapted",
+      "sha256": "745c348a632363ef2a5ae160862cc8e8ca8bfd382ae60bfce50145b31ad0b206",
+      "destinationSha256": "daa9f5bc5058cc8432fcc5a18bafacba8982b5ef2fa65a46330581cfa74dbec5"
+    },
+    {
+      "source": "docs/prompts/13-security-review.md",
+      "destination": "references/workflows/pt-BR/security-review.md",
+      "kind": "adapted",
+      "sha256": "745c348a632363ef2a5ae160862cc8e8ca8bfd382ae60bfce50145b31ad0b206",
+      "destinationSha256": "450f960c95a86a0e9a9d0626e330a28a27b147c84f7358d623f08eddee9e5be7"
+    },
+    {
+      "source": "docs/prompts/13-security-review.md",
+      "destination": "references/workflows/es/security-review.md",
+      "kind": "adapted",
+      "sha256": "745c348a632363ef2a5ae160862cc8e8ca8bfd382ae60bfce50145b31ad0b206",
+      "destinationSha256": "24a593ec819dc0017628754d7aab207fdc0dbef46b2599a26db1c88df584bcfc"
+    },
+    {
+      "source": "docs/prompts/14-harness-evaluation.md",
+      "destination": "references/workflows/en/harness-evaluation.md",
+      "kind": "adapted",
+      "sha256": "76e0dd91bf2ba2adaa88eb27ec9fcb97b658c74c4cdd116328571a71b2afe736",
+      "destinationSha256": "4843e0523bf66bff3798e81a28922d987ee44e76a70081a9176c08eac1ff6921"
+    },
+    {
+      "source": "docs/prompts/14-harness-evaluation.md",
+      "destination": "references/workflows/pt-BR/harness-evaluation.md",
+      "kind": "adapted",
+      "sha256": "76e0dd91bf2ba2adaa88eb27ec9fcb97b658c74c4cdd116328571a71b2afe736",
+      "destinationSha256": "fdb6d8f0a65f5dc756d940c75bc0e99728498430a9286d10d7d9aee2688b23be"
+    },
+    {
+      "source": "docs/prompts/14-harness-evaluation.md",
+      "destination": "references/workflows/es/harness-evaluation.md",
+      "kind": "adapted",
+      "sha256": "76e0dd91bf2ba2adaa88eb27ec9fcb97b658c74c4cdd116328571a71b2afe736",
+      "destinationSha256": "147d0020f03533c884e85b3f5f435edf144bd320b255f697503eea59f915311c"
+    },
+    {
+      "source": "docs/prompts/15-harness-improvement.md",
+      "destination": "references/workflows/en/harness-improvement.md",
+      "kind": "adapted",
+      "sha256": "28a40884a135667e7eb7e998bb0bb633a71bd21999a77b907a0243dd0d30f79f",
+      "destinationSha256": "6dc183635ad60421d2c7469376cf6dece95ccdedb8a2bb441a08cee8b422363e"
+    },
+    {
+      "source": "docs/prompts/15-harness-improvement.md",
+      "destination": "references/workflows/pt-BR/harness-improvement.md",
+      "kind": "adapted",
+      "sha256": "28a40884a135667e7eb7e998bb0bb633a71bd21999a77b907a0243dd0d30f79f",
+      "destinationSha256": "e7fc6a4648fe00f65e2c4d85b1cf0a7893ab020a80a46f89aa8e8f89c558e69f"
+    },
+    {
+      "source": "docs/prompts/15-harness-improvement.md",
+      "destination": "references/workflows/es/harness-improvement.md",
+      "kind": "adapted",
+      "sha256": "28a40884a135667e7eb7e998bb0bb633a71bd21999a77b907a0243dd0d30f79f",
+      "destinationSha256": "7cc05327fb2c24cd523db359fbf3824cd583b2885b719de71df526c107e73321"
+    },
+    {
+      "source": "docs/prompts/16-security-audit.md",
+      "destination": "references/workflows/en/security-audit.md",
+      "kind": "adapted",
+      "sha256": "bc66eb3a3539e5e67d259f4caec40efcb6aaf4c4f9206d4a44d0def55db542ca",
+      "destinationSha256": "3165f1fb19b24a069f93434e05ff45d411ddfbc3f80372fc0fcad30ee1344823"
+    },
+    {
+      "source": "docs/prompts/16-security-audit.md",
+      "destination": "references/workflows/pt-BR/security-audit.md",
+      "kind": "adapted",
+      "sha256": "bc66eb3a3539e5e67d259f4caec40efcb6aaf4c4f9206d4a44d0def55db542ca",
+      "destinationSha256": "e65cc044071617ff65fd5ce026901a95c71e47204be0238de639dd56f5a307f7"
+    },
+    {
+      "source": "docs/prompts/16-security-audit.md",
+      "destination": "references/workflows/es/security-audit.md",
+      "kind": "adapted",
+      "sha256": "bc66eb3a3539e5e67d259f4caec40efcb6aaf4c4f9206d4a44d0def55db542ca",
+      "destinationSha256": "8f4e689fe76caab026229a70938ba8732721de2496878878c85e8aa8cfc724cb"
+    },
+    {
+      "source": "scripts/validate-harness.mjs",
+      "destination": "scripts/harness.mjs",
+      "kind": "adapted",
+      "sha256": "14220a750afbcf228fc397d5d3d32f10631c0f2e0a533c0ba8fa79b553f62e1c",
+      "destinationSha256": "93d39fb04b8f61aeab86dbaa87f447ffcd7260d7b4a5dacd0cbbfac03f6c4907"
+    },
+    {
+      "source": "templates/project-docs/manifest.json",
+      "destination": "scripts/project-presets.mjs",
+      "kind": "adapted",
+      "sha256": "31790f20400589421c70258055406ab4ec4736097996537b67b29abb7beddcf1",
+      "destinationSha256": "59be610f63545095f6b9d38538f6c6ba0b7035ea5ee2ace6925d1ab9d9e0100b"
+    }
+  ]
+}

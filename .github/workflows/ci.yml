@@ -34,5 +34,6 @@ jobs:
           node-version: ${{ matrix.node }}
           package-manager-cache: false
       - run: node -p "process.platform + ' ' + process.arch + ' ' + process.version"
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
       - run: npm run smoke:package

@@ -8,18 +8,42 @@ import { test } from 'node:test';
 const bin = fileURLToPath(new URL('../bin/agentvigor.mjs', import.meta.url));
 const testDir = fileURLToPath(new URL('.', import.meta.url));
 const run = (args, env = {}) => spawnSync(process.execPath, [bin, ...args], {
-  encoding: 'utf8', timeout: 15_000,
+  encoding: 'utf8', timeout: 90_000,
   env: { ...process.env, CI: 'true', LANG: 'en_US.UTF-8', LC_ALL: '', LC_MESSAGES: '', AGENTVIGOR_LANG: '', ...env },
 });
 
 test('help advertises every available command, and version matches the package', async () => {
   const help = run(['--help']);
   assert.equal(help.status, 0, help.stderr);
-  for (const command of ['install', 'doctor', 'status', 'monitor', 'update', 'benchmark', 'rollback']) {
+  for (const command of ['install', 'doctor', 'status', 'monitor', 'update', 'benchmark', 'rollback',
+    'catalog', 'project', 'quality', 'harness']) {
     assert.match(help.stdout, new RegExp(`\\b${command}\\b`));
   }
   const { default: pkg } = await import('../package.json', { with: { type: 'json' } });
   assert.equal(run(['--version']).stdout.trim(), pkg.version);
+});
+
+test('CLI previews and evaluates a project harness from the local catalog', async (t) => {
+  const path = await mkdtemp(join(testDir, '.tmp-harness-cli-'));
+  t.after(() => rm(path, { recursive: true, force: true }));
+  const catalog = run(['catalog', '--lang', 'pt-BR', '--json']);
+  assert.equal(catalog.status, 0, catalog.stderr);
+  assert.equal(JSON.parse(catalog.stdout).entries.length, 16);
+  const created = run(['project', '--mode', 'init', '--template', 'harness', '--path', path, '--yes', '--json']);
+  assert.equal(created.status, 0, created.stderr);
+  assert.equal(JSON.parse(created.stdout).status, 'applied');
+  const preview = run(['harness', '--path', path, '--dry-run', '--json']);
+  assert.equal(preview.status, 0, preview.stderr);
+  assert.equal(JSON.parse(preview.stdout).checks.length, 7);
+  const denied = run(['harness', '--path', path, '--json']);
+  assert.equal(denied.status, 2, denied.stderr);
+  const baseline = run(['harness', '--path', path, '--yes', '--json']);
+  assert.equal(baseline.status, 1, baseline.stderr);
+  const results = JSON.parse(baseline.stdout);
+  assert.equal(results.checks.filter(check => check.status === 'failed').length, 2);
+  const missing = run(['quality', '--path', path, '--dry-run', '--json']);
+  assert.equal(missing.status, 1, missing.stderr);
+  assert.equal(JSON.parse(missing.stdout).error, 'QUALITY_MISSING');
 });
 
 test('locale detection, explicit override, and input errors', () => {

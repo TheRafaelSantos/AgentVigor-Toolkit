@@ -3,6 +3,7 @@ node_modules/
 *.log
 .env
 .env.*
+!skills/agentvigor-toolkit/references/upstream/templates/next/.env.example
 .agentvigor-test-*/
 .runtime fixtures */
 test/.tmp-*/

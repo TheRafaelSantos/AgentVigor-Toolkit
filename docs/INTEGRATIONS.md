@@ -1,6 +1,7 @@
 # Agent discovery and optional integrations
 
-The AgentVigor installer manages its original skill files. The monitor can run
+The AgentVigor installer manages its specialist skills and the Vibe workflow router.
+The monitor can run
 an RTK executable already installed by the user. The other integrations on this
 page are optional and are managed by their upstream installers. AgentVigor
 doesn't register their plugins, hooks, global instructions, proxies, or MCP
@@ -159,7 +160,11 @@ reverse registration. Preserve any graph artifacts you want to keep.
 [Graphify CLI installation](https://docs.graphify.com/open-source/installation) ·
 [Graphify platform setup and removal](https://github.com/Graphify-Labs/graphify/blob/v0.9.102/README.md#install).
 
-## Reference audit
+## Vibe Coding Toolkit incorporation
+
+The selected MIT resources, adapted workflows and executable presets are
+described in the [functionality matrix](upstream-audit/MATRIX.md). The
+following initial reference review records the state before this incorporation.
 
 The [Vibe Coding Toolkit at revision 21b71b6](https://github.com/soumatheusgomes/vibe-coding-toolkit/tree/21b71b68679c11184f49c23168852014bf6dde8b)
 is by Matheus Gomes under MIT. The reviewed tree contains documentation,

@@ -2,13 +2,14 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
-import test from 'node:test';
-import { install, rollback, installationStatus } from '../lib/install.mjs';
+import test, { after } from 'node:test';
+import { pathToFileURL } from 'node:url';
+import * as live from '../lib/install.mjs';
 
 async function fixture(t) {
   const home = await fs.mkdtemp(path.resolve('.agentvigor-test-home-'));
   t.after(() => fs.rm(home, { recursive: true, force: true }));
-  return { home, env: {}, agents: ['codex'], version: '0.1.0-rc.1' };
+  return { home, env: {}, agents: ['codex'], version: '0.2.0-rc.1' };
 }
 
 const codexSkills = (home) => path.join(home, '.agents', 'skills');
@@ -22,12 +23,171 @@ async function write(file, contents) {
   await fs.writeFile(file, contents);
 }
 
+// Keep repeated transaction cases focused. The migration case also installs the entire real bundle.
+const fixturePackage = await fs.mkdtemp(path.resolve('.agentvigor-test-package-'));
+after(() => fs.rm(fixturePackage, { recursive: true, force: true }));
+for (const relative of [
+  'lib/install.mjs',
+  'skills/agentvigor-agent-doctor/SKILL.md',
+  'skills/agentvigor-diff-guardian/SKILL.md',
+  'skills/agentvigor-grounded-code/SKILL.md',
+  'skills/agentvigor-safe-resume/SKILL.md',
+  'skills/agentvigor-token-budget/SKILL.md',
+  'skills/agentvigor-toolkit/SKILL.md',
+]) {
+  const contents = await fs.readFile(new URL(`../${relative}`, import.meta.url));
+  await write(path.join(fixturePackage, relative), contents);
+}
+const testRouter = path.join(fixturePackage, 'skills', 'agentvigor-toolkit');
+const fixtureReference = '# Nested resource\r\n';
+await write(path.join(testRouter, 'references', 'en', 'fixture.md'), fixtureReference);
+await write(path.join(testRouter, 'scripts', 'fixture.mjs'), 'export const ready = true;\n');
+const { install, rollback, installationStatus } = await import(pathToFileURL(path.join(fixturePackage, 'lib', 'install.mjs')));
+
+async function legacyFixture(options) {
+  const root = codexSkills(options.home);
+  const binding = createHash('sha256').update(process.platform === 'win32' ? root.toLowerCase() : root).digest('hex');
+  const files = {};
+  for (const id of ['agentvigor-grounded-code', 'agentvigor-agent-doctor', 'agentvigor-diff-guardian',
+    'agentvigor-token-budget', 'agentvigor-safe-resume']) {
+    const contents = (await fs.readFile(new URL(`../skills/${id}/SKILL.md`, import.meta.url), 'utf8')).replaceAll('\r\n', '\n');
+    files[id] = Buffer.from(contents).toString('base64');
+    await write(path.join(root, id, 'SKILL.md'), contents);
+  }
+  const entry = { profile: 'rigorous', version: '0.1.0-rc.1', root: binding, files };
+  const basic = Object.fromEntries(Object.entries(files).slice(0, 2));
+  const previous = { ...entry, profile: 'minimal', files: basic };
+  const fixture = { schema: 1, current: { codex: entry }, previous: { codex: previous } };
+  await write(statePath(options.home), JSON.stringify(fixture));
+  return fixture;
+}
+
+test('reads an rc.1 snapshot, migrates only on write, then restores the complete old state', async (t) => {
+  const options = await fixture(t);
+  const legacy = await legacyFixture(options);
+  const migration = { ...options, agents: undefined, update: true };
+  assert.equal((await live.installationStatus(options)).version, '0.1.0-rc.1');
+  const preview = await live.install({ ...migration, dryRun: true });
+  const resource = preview.changes.find(({ skill, path }) => skill === 'agentvigor-toolkit' && path?.includes('/'));
+  assert.ok(resource, 'migration should preview a nested router resource');
+  assert.deepEqual(JSON.parse(await fs.readFile(statePath(options.home), 'utf8')), legacy);
+  await assert.rejects(fs.stat(path.dirname(skill(codexSkills(options.home), 'toolkit'))), { code: 'ENOENT' });
+  assert.equal((await live.install({ ...migration, expectedPlan: preview.planToken })).status, 'installed');
+  const upgraded = JSON.parse(await fs.readFile(statePath(options.home), 'utf8'));
+  assert.equal(upgraded.schema, 2);
+  assert.equal((await live.installationStatus(options)).version, options.version);
+  const bundledRouter = new URL('../skills/agentvigor-toolkit/', import.meta.url);
+  const bundled = (await fs.readdir(bundledRouter, { recursive: true, withFileTypes: true })).filter((file) => file.isFile());
+  const routerPlan = preview.changes.filter(({ skill }) => skill === 'agentvigor-toolkit');
+  assert.equal(routerPlan.length, bundled.length);
+  const installedRouter = path.dirname(skill(codexSkills(options.home), 'toolkit'));
+  for (const { skill, path: relative } of routerPlan) {
+    const source = await fs.readFile(new URL(relative, bundledRouter));
+    const expected = relative === 'SKILL.md' ? Buffer.from(source.toString('utf8').replaceAll('\r\n', '\n')) : source;
+    const actual = await fs.readFile(path.join(codexSkills(options.home), skill, relative));
+    assert.deepEqual(actual, expected);
+  }
+  const provenance = JSON.parse(await fs.readFile(path.join(installedRouter, 'references', 'provenance.json'), 'utf8'));
+  for (const entry of provenance.files) {
+    const installed = await fs.readFile(path.join(installedRouter, entry.destination));
+    const hash = createHash('sha256').update(installed).digest('hex');
+    assert.equal(hash, entry.destinationSha256 ?? entry.sha256, entry.destination);
+  }
+  assert.equal((await live.rollback(options)).status, 'rolled-back');
+  assert.deepEqual(JSON.parse(await fs.readFile(statePath(options.home), 'utf8')), legacy);
+  await assert.rejects(fs.stat(path.dirname(skill(codexSkills(options.home), 'toolkit'))), { code: 'ENOENT' });
+  assert.equal((await rollback(options)).status, 'rolled-back');
+  assert.equal((await installationStatus(options)).profile, 'minimal');
+});
+
+test('status and rollback preserve a nested router resource edited by the user', async (t) => {
+  const options = await fixture(t);
+  const result = await install({ ...options, profile: 'minimal' });
+  const resource = result.changes.find(({ skill, path }) => skill === 'agentvigor-toolkit' && path?.startsWith('references/'));
+  assert.ok(resource);
+  const installedFile = path.join(codexSkills(options.home), resource.skill, resource.path);
+  await fs.writeFile(installedFile, 'personal resource edit');
+  const status = await installationStatus(options);
+  assert.equal(status.status, 'drifted');
+  assert.equal(status.skills.find(({ skill, path }) => skill === resource.skill && path === resource.path).status, 'modified');
+  await assert.rejects(rollback({ ...options, all: true }), { code: 'SKILL_DRIFT' });
+  assert.equal(await fs.readFile(installedFile, 'utf8'), 'personal resource edit');
+});
+
+test('update refuses an unmanaged asset at a new bundled path in an existing router', async (t) => {
+  const options = await fixture(t);
+  const result = await install({ ...options, profile: 'minimal' });
+  const resource = result.changes.find(({ skill, path }) => skill === 'agentvigor-toolkit' && path.startsWith('references/'));
+  const installedFile = path.join(codexSkills(options.home), resource.skill, resource.path);
+  const state = JSON.parse(await fs.readFile(statePath(options.home), 'utf8'));
+  delete state.current.codex.files[`${resource.skill}/${resource.path}`];
+  await write(statePath(options.home), JSON.stringify(state));
+  await fs.writeFile(installedFile, 'unmanaged asset');
+  await assert.rejects(install({ ...options, update: true }), { code: 'UNMANAGED_SKILL' });
+  assert.equal(await fs.readFile(installedFile, 'utf8'), 'unmanaged asset');
+});
+
+test('an interrupted migration removes transaction-created empty nested directories and can be retried', async (t) => {
+  const options = await fixture(t);
+  const before = await legacyFixture(options);
+  const migration = { ...options, agents: undefined, update: true };
+  const result = await install(migration);
+  const after = JSON.parse(await fs.readFile(statePath(options.home), 'utf8'));
+  const router = path.dirname(skill(codexSkills(options.home), 'toolkit'));
+  const dirs = new Set(['codex:agentvigor-toolkit']);
+  for (const { skill, path: relative } of result.changes) {
+    if (skill !== 'agentvigor-toolkit') continue;
+    const parts = relative.split('/');
+    parts.pop();
+    while (parts.length > 0) {
+      dirs.add(`codex:agentvigor-toolkit/${parts.join('/')}`);
+      parts.pop();
+    }
+  }
+  const nested = result.changes.find(({ skill, path }) => skill === 'agentvigor-toolkit' && path.startsWith('references/'));
+  await fs.unlink(path.join(router, nested.path));
+  const neighbor = path.join(codexSkills(options.home), 'unrelated', 'keep.txt');
+  await write(neighbor, 'untouched');
+  await write(statePath(options.home), JSON.stringify(before));
+  await write(journalPath(options.home), JSON.stringify({ schema: 2, before, after, newDirectories: [...dirs] }));
+  assert.equal((await installationStatus(options)).status, 'recovery-required');
+  assert.equal((await rollback(options)).recovered, true);
+  assert.deepEqual(JSON.parse(await fs.readFile(statePath(options.home), 'utf8')), before);
+  await assert.rejects(fs.stat(router), { code: 'ENOENT' });
+  assert.equal(await fs.readFile(neighbor, 'utf8'), 'untouched');
+  assert.equal((await install(migration)).status, 'installed');
+});
+
+test('schema 2 rejects paths that escape the router or collide on a supported filesystem', async (t) => {
+  const options = await fixture(t);
+  await install({ ...options, profile: 'minimal' });
+  const state = JSON.parse(await fs.readFile(statePath(options.home), 'utf8'));
+  const asset = 'YQ==';
+  const invalid = [
+    ['agentvigor-toolkit/references/../../other'],
+    ['agentvigor-toolkit/references/example.txt:stream'],
+    ['agentvigor-toolkit/references/AUX.txt'],
+    ['agentvigor-toolkit/settings.json'],
+    ['agentvigor-grounded-code/scripts/exploit.mjs'],
+    ['agentvigor-toolkit/references/Case/a', 'agentvigor-toolkit/references/case/b'],
+    ['agentvigor-toolkit/references/test', 'agentvigor-toolkit/references/test/file'],
+  ];
+  for (const keys of invalid) {
+    const tampered = structuredClone(state);
+    for (const key of keys) tampered.current.codex.files[key] = asset;
+    await write(statePath(options.home), JSON.stringify(tampered));
+    await assert.rejects(rollback({ ...options, all: true }), { code: 'INVALID_STATE' });
+  }
+  assert.ok((await fs.stat(skill(codexSkills(options.home), 'toolkit'))).isFile());
+});
+
 test('dry-run plans the default Codex profile without changing any files', async (t) => {
   const options = await fixture(t);
   const result = await install({ ...options, dryRun: true });
   assert.equal(result.status, 'planned');
   assert.equal(result.profile, 'balanced');
-  assert.equal(result.changes.length, 4);
+  assert.equal(result.changes.filter(({ path }) => path === 'SKILL.md').length, 5);
+  assert.ok(result.changes.some(({ path }) => path.startsWith('references/')));
   assert(result.changes.every(({ agent, action }) => agent === 'codex' && action === 'add'));
   assert.deepEqual(await fs.readdir(options.home), []);
 });
@@ -40,7 +200,12 @@ test('installs on selected agents, supports a Claude path with spaces, and is id
   const installOptions = { ...options, agents: ['codex', 'claude'], env: { CLAUDE_CONFIG_DIR: claude } };
   const result = await install(installOptions);
   assert.equal(result.status, 'installed');
-  assert.equal(result.changes.length, 8);
+  assert.equal(result.changes.filter(({ path }) => path === 'SKILL.md').length, 10);
+  const nested = result.changes.find(({ path }) => path.startsWith('references/'));
+  assert.ok(nested);
+  const installedResource = (root) => fs.readFile(path.join(root, nested.skill, nested.path), 'utf8');
+  assert.equal(await installedResource(codexSkills(options.home)), fixtureReference);
+  assert.equal(await installedResource(path.join(claude, 'skills')), fixtureReference);
   assert.match(await fs.readFile(skill(codexSkills(options.home)), 'utf8'), /name: agentvigor-grounded-code/);
   assert.match(await fs.readFile(skill(path.join(claude, 'skills')), 'utf8'), /name: agentvigor-grounded-code/);
   assert.equal((await install(installOptions)).status, 'unchanged');
@@ -57,9 +222,9 @@ test('reconfiguring one agent preserves the other and update reuses each selecti
   await install({ ...options, profile: 'minimal' });
   await install({ ...options, agents: ['claude'], profile: 'rigorous' });
   const claudeSkills = path.join(options.home, '.claude', 'skills');
-  assert.equal((await fs.readdir(claudeSkills)).length, 5);
-  assert.equal((await fs.readdir(codexSkills(options.home))).length, 2);
-  const newer = { ...options, agents: undefined, version: '0.1.0-rc.2', update: true };
+  assert.equal((await fs.readdir(claudeSkills)).length, 6);
+  assert.equal((await fs.readdir(codexSkills(options.home))).length, 3);
+  const newer = { ...options, agents: undefined, version: '0.2.0-rc.2', update: true };
   assert.equal((await install(newer)).status, 'installed');
   const status = await installationStatus(options);
   assert.equal(status.profile, null);
@@ -194,7 +359,9 @@ test('an interrupted transaction can restore state before the last successful ch
   await install({ ...options, profile: 'balanced' });
   const after = JSON.parse(await fs.readFile(statePath(options.home), 'utf8'));
   await write(statePath(options.home), JSON.stringify(before));
-  await write(journalPath(options.home), JSON.stringify({ schema: 1, before, after }));
+  await write(journalPath(options.home), JSON.stringify({
+    schema: 2, before, after, newDirectories: ['codex:agentvigor-diff-guardian', 'codex:agentvigor-token-budget']
+  }));
   assert.equal((await installationStatus(options)).status, 'recovery-required');
   await assert.rejects(install(options), { code: 'RECOVERY_REQUIRED' });
   const preview = await rollback({ ...options, dryRun: true });
@@ -209,7 +376,8 @@ test('an interrupted transaction can restore state before the last successful ch
   assert.equal(result.status, 'rolled-back');
   assert.equal(result.recovered, true);
   assert.equal((await installationStatus(options)).profile, 'minimal');
-  assert.deepEqual((await fs.readdir(codexSkills(options.home))).sort(), ['agentvigor-agent-doctor', 'agentvigor-grounded-code']);
+  assert.deepEqual((await fs.readdir(codexSkills(options.home))).sort(),
+    ['agentvigor-agent-doctor', 'agentvigor-grounded-code', 'agentvigor-toolkit']);
 });
 
 test('recovery prunes only empty skill directories planned by the interrupted transaction', async (t) => {
@@ -229,7 +397,7 @@ test('recovery prunes only empty skill directories planned by the interrupted tr
   await write(staging, 'keep untracked staging');
   await write(statePath(options.home), JSON.stringify(before));
   await write(journalPath(options.home), JSON.stringify({
-    schema: 1,
+    schema: 2,
     before,
     after,
     newDirectories: ['codex:agentvigor-diff-guardian', 'codex:agentvigor-token-budget']
