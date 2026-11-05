@@ -26,6 +26,7 @@ const commands = {
   project: '--mode --template --path --dry-run --yes --json',
   quality: '--path --dry-run --yes --json',
   harness: '--path --dry-run --yes --json',
+  integrations: '--tool --agent --mode --json',
 };
 const profiles = ['minimal', 'balanced', 'rigorous'];
 const agentIds = ['codex', 'claude'];
@@ -48,7 +49,7 @@ function parse(args) {
       options: {
         help: { ...bool, short: 'h' }, version: { ...bool, short: 'v' }, lang: string,
         agent: string, profile: string, interval: string, input: string,
-        id: string, mode: string, template: string, path: string,
+        id: string, mode: string, template: string, path: string, tool: string,
         'dry-run': bool, yes: bool, json: bool, once: bool, 'no-clear': bool, all: bool, telemetry: bool,
       },
     });
@@ -78,6 +79,7 @@ function help(t, command) {
     monitor: '--interval <1..3600>  --once  --no-clear',
     benchmark: '--input <file.json>  --json',
     catalog: '--id <workflow>  --mode quick|full  --lang en|pt-BR|es  --json',
+    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan  --json',
     project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
@@ -252,6 +254,13 @@ async function main(args) {
     if (!command || values.help) return help(t, command);
     if (!['22', '24', '26'].includes(process.versions.node.split('.')[0])) throw new UsageError('UNSUPPORTED_NODE');
     const context = { home: homedir(), env, version: pkg.version };
+    if (command === 'integrations') {
+      const { integrations } = await import('../lib/integrations.mjs');
+      const result = await integrations({ ...context, tool: values.tool, agent: values.agent,
+        mode: values.mode });
+      console.log(JSON.stringify(result, null, 2));
+      return;
+    }
     if (command === 'catalog') {
       const { catalog } = await import('../skills/agentvigor-toolkit/scripts/catalog.mjs');
       const result = await catalog({ id: values.id, mode: values.mode, lang: values.lang ?? detectedLanguage });
