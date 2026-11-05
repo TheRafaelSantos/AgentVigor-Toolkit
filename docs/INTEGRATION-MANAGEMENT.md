@@ -1,8 +1,8 @@
 # Optional integration management
 
 The current implementation provides executable inventory, scoped setup plans,
-managed configuration for an existing official RTK 1.1.0 executable, and
-[managed Find Skills installation and offline rollback](FIND-SKILLS-MANAGEMENT.md).
+managed installation and rollback of [RTK 1.1.0](RTK-BINARY-MANAGEMENT.md),
+[Graphify 0.9.102](GRAPHIFY-MANAGEMENT.md), and [Find Skills](FIND-SKILLS-MANAGEMENT.md).
 Run from the AgentVigor checkout or use the installed CLI.
 
 ```text
@@ -24,9 +24,9 @@ classified `INCOMPATIBLE`.
 
 Plans identify native client commands separately from shell commands. They
 include the audited version, license and official setup source. All steps carry
-`executed: false`. RTK has a separate configure/rollback executor below. Find
-Skills has a separate install/rollback executor. The other tools' managed
-lifecycle remains under development. The plan token
+`executed: false`. RTK and Graphify have separate runtime and client operations.
+Find Skills has an install/rollback executor. Superpowers and Ponytail use native
+client procedures. The plan token
 identifies this preview and does not authorize a future installer with broader
 effects. Existing tools and credentials are left to their current owners.
 
@@ -61,7 +61,7 @@ Configuration directories must stay under the account owner's control.
 The official RTK 1.1.0 configure/rollback smoke passed in synthetic Windows
 Codex and Claude roots. Tests cover stale plans, edits, links, initializer
 failure and interrupted rollback. Client discovery and rewriting still require
-observed client sessions. Binary installation remains a separate step.
+observed client sessions. Select `--scope binary` for the separate binary lifecycle.
 
 With official RTK 1.1.0 on PATH, run `node scripts/smoke-rtk.mjs` from the
 checkout to reproduce the disposable two-client test. No client login is needed.
@@ -71,7 +71,8 @@ checkout to reproduce the disposable two-client test. No client login is needed.
 O comando `integrations` inspeciona executáveis e o manifesto do Find Skills,
 com saída JSON. Use `--mode plan`, selecione `--tool` e escolha `--agent codex`
 ou `--agent claude` para consultar o procedimento oficial aplicável. Os passos
-de Superpowers, Ponytail e Graphify aguardam executor, backup e rollback.
+de Superpowers e Ponytail usam os procedimentos nativos. O
+[Graphify gerenciado](GRAPHIFY-MANAGEMENT.md) separa o executável da configuração do cliente.
 O Find Skills já oferece [instalação oficial gerenciada](FIND-SKILLS-MANAGEMENT.md#português-brasileiro)
 com `--mode install` e reversão com `--mode rollback`. Para RTK 1.1.0
 já instalado, use `--mode configure` ou `--mode rollback`, primeiro com
@@ -85,7 +86,8 @@ uma sessão nova. Os estados não observados aparecem como `UNVERIFIED`.
 El comando `integrations` inspecciona ejecutables y el manifiesto de Find
 Skills mediante JSON. Usa `--mode plan`, elige `--tool` y selecciona
 `--agent codex` o `--agent claude` para consultar el procedimiento oficial.
-Los pasos de Superpowers, Ponytail y Graphify esperan ejecutor, copias y reversión.
+Superpowers y Ponytail usan los procedimientos nativos.
+[Graphify gestionado](GRAPHIFY-MANAGEMENT.md) separa el ejecutable de la configuración.
 Find Skills ya ofrece [instalación oficial gestionada](FIND-SKILLS-MANAGEMENT.md#español)
 con `--mode install` y reversión con `--mode rollback`.
 Para RTK 1.1.0 ya instalado, usa `--mode configure` o `--mode rollback`,

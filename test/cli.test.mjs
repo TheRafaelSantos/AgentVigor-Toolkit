@@ -118,3 +118,19 @@ test('Find Skills CLI previews offline and refuses noninteractive installs witho
   assert.equal(run(args, env).status, 2);
   assert.deepEqual(await readdir(home), []);
 });
+
+test('RTK binary CLI previews pinned OSS asset and requires scoped consent', async t => {
+  if (!['win32-x64', 'darwin-arm64', 'darwin-x64', 'linux-x64'].includes(process.platform + '-' + process.arch)) return t.skip();
+  const home = await mkdtemp(join(testDir, '.tmp-rtk-binary-cli-'));
+  t.after(() => rm(home, { recursive: true, force: true }));
+  const env = { HOME: home, USERPROFILE: home };
+  const args = ['integrations', '--tool', 'rtk', '--scope', 'binary', '--mode', 'install', '--json'];
+  const preview = run([...args, '--dry-run'], env);
+  assert.equal(preview.status, 0, preview.stderr);
+  const plan = JSON.parse(preview.stdout);
+  assert.equal(plan.variant, 'oss');
+  assert.equal(plan.license, 'Apache-2.0');
+  assert.match(plan.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(run(args, env).status, 2);
+  assert.deepEqual(await readdir(home), []);
+});

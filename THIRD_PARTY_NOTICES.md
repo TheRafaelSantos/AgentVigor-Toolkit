@@ -31,3 +31,11 @@ tag `v1.7.6`, copyright (c) 2026 Vercel, Inc., under MIT. Exact source and licen
 bytes are in `lib/assets/find-skills`. Managed installation uses the official
 Skills CLI with scoped consent; its downloaded npm dependencies retain their
 respective licenses. See [managed installation](docs/FIND-SKILLS-MANAGEMENT.md).
+
+## Graphify
+
+The optional Graphify integration preserves the upstream Codex and Claude skill
+assets and reference files at commit `59b5ab1151e031fb42e39cfc9a50bf96f2d57ae0`.
+The original [Apache license](lib/assets/graphify/LICENSE),
+[MIT license](lib/assets/graphify/LICENSE-MIT), and [NOTICE](lib/assets/graphify/NOTICE)
+are distributed with the assets. See [managed installation](docs/GRAPHIFY-MANAGEMENT.md).

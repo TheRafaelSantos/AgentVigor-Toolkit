@@ -26,7 +26,7 @@ const commands = {
   project: '--mode --template --path --dry-run --yes --json',
   quality: '--path --dry-run --yes --json',
   harness: '--path --dry-run --yes --json',
-  integrations: '--tool --agent --mode --json --dry-run --yes',
+  integrations: '--tool --agent --mode --scope --variant --json --dry-run --yes',
 };
 const profiles = ['minimal', 'balanced', 'rigorous'];
 const agentIds = ['codex', 'claude'];
@@ -49,7 +49,7 @@ function parse(args) {
       options: {
         help: { ...bool, short: 'h' }, version: { ...bool, short: 'v' }, lang: string,
         agent: string, profile: string, interval: string, input: string,
-        id: string, mode: string, template: string, path: string, tool: string,
+        id: string, mode: string, template: string, path: string, tool: string, scope: string, variant: string,
         'dry-run': bool, yes: bool, json: bool, once: bool, 'no-clear': bool, all: bool, telemetry: bool,
       },
     });
@@ -79,7 +79,7 @@ function help(t, command) {
     monitor: '--interval <1..3600>  --once  --no-clear',
     benchmark: '--input <file.json>  --json',
     catalog: '--id <workflow>  --mode quick|full  --lang en|pt-BR|es  --json',
-    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan|install|configure|rollback  --dry-run  --yes  --json',
+    integrations: '--tool rtk|superpowers|ponytail|find-skills|graphify  --agent codex|claude\n  --mode status|plan|install|configure|verify|rollback  --scope binary  --variant oss|full (RTK)\n  --dry-run  --yes  --json',
     project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
@@ -96,6 +96,8 @@ function show(result, json, t) {
   if (result.destination) console.log(`  ${t('integrationDestination')}: ${result.destination}`);
   if (result.source?.version) console.log(`  ${result.tool} ${result.source.version} · ${result.source.license} · ${result.source.source}`);
   if (result.networkRequired) console.log(`  ${t('integrationNetwork')}: ${result.networkHosts.join(', ')}`);
+  if (result.licenseNotice) console.log(`  ${result.license}: ${result.licenseNotice}`);
+  if (result.executable) console.log(`  ${result.executable}`);
   for (const { agent, profile, version } of result.installations ?? []) {
     console.log(`  ${agent} · ${profile} · ${version}`);
   }
@@ -258,15 +260,53 @@ async function main(args) {
     if (!['22', '24', '26'].includes(process.versions.node.split('.')[0])) throw new UsageError('UNSUPPORTED_NODE');
     const context = { home: homedir(), env, version: pkg.version };
     if (command === 'integrations') {
-      if (['install', 'configure', 'rollback'].includes(values.mode)) {
+      const binary = values.scope === 'binary';
+      if (values.scope !== undefined && !binary || binary && !['rtk', 'graphify'].includes(values.tool) ||
+          binary && (values.agent !== undefined || !['install', 'verify', 'rollback'].includes(values.mode)) ||
+          values.variant !== undefined && (values.tool !== 'rtk' || !['oss', 'full'].includes(values.variant) ||
+            !binary && values.mode !== 'configure')) throw new UsageError('INTEGRATION_MODE');
+      if (binary || ['install', 'configure', 'rollback'].includes(values.mode)) {
         let execute;
-        if (values.tool === 'rtk' && values.mode !== 'install') {
+        const options = { ...context, agent: values.agent, mode: values.mode };
+        if (binary && values.tool === 'rtk') {
+          ({ manageRtkBinary: execute } = await import('../lib/rtk-binary.mjs'));
+          options.variant = values.variant;
+        } else if (binary && values.tool === 'graphify') {
+          const graphify = await import('../lib/graphify-binary.mjs');
+          if (values.mode === 'verify') {
+            if (values['dry-run'] || values.yes) throw new UsageError('INTEGRATION_MODE');
+            return show(await graphify.verifyGraphifyBinary(options), values.json, t);
+          }
+          execute = graphify.manageGraphifyBinary;
+          if (values.mode === 'install') options.uvExecutable = (await detectTools(context)).uv?.path;
+        } else if (values.tool === 'rtk' && values.mode !== 'install') {
           ({ configureRtk: execute } = await import('../lib/rtk-integration.mjs'));
+          if (values.mode === 'configure') {
+            const { manageRtkBinary } = await import('../lib/rtk-binary.mjs');
+            options.executable = await manageRtkBinary({ ...context, mode: 'verify', variant: values.variant })
+              .then(result => result.executable).catch(error => {
+                if (!values.variant && ['RTK_MISSING', 'INCOMPATIBLE'].includes(error.code)) return undefined;
+                throw error;
+              });
+            options.executable ??= (await detectTools(context)).rtk?.path;
+          }
+        } else if (values.tool === 'graphify' && values.mode !== 'install') {
+          ({ configureGraphify: execute } = await import('../lib/graphify-integration.mjs'));
+          if (values.mode === 'configure') {
+            const { verifyGraphifyBinary } = await import('../lib/graphify-binary.mjs');
+            options.executable = await verifyGraphifyBinary(context).then(result => result.executable).catch(error => {
+              if (error.code === 'GRAPHIFY_MISSING') return undefined;
+              throw error;
+            });
+            options.executable ??= (await detectTools(context)).graphify?.path;
+          }
         } else if (values.tool === 'find-skills' && values.mode !== 'configure') {
           ({ manageFindSkills: execute } = await import('../lib/find-skills-integration.mjs'));
         } else throw new UsageError('INTEGRATION_TOOL');
-        const tools = await detectTools(context);
-        const options = { ...context, agent: values.agent, mode: values.mode, executable: tools.rtk?.path };
+        if (values.mode === 'verify') {
+          if (values['dry-run'] || values.yes) throw new UsageError('INTEGRATION_MODE');
+          return show(await execute(options), values.json, t);
+        }
         const preview = await execute({ ...options, dryRun: true });
         if (values['dry-run']) return show(preview, values.json, t);
         if (!values.yes) {
