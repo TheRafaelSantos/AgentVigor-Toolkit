@@ -64,15 +64,15 @@ security-audit
 | Claude Code nativo | BLOCKED | [Homologação Claude](CLAUDE-ACCEPTANCE.md); launcher ausente no PATH e locais padrão verificados nesta retomada | Executar a matriz quando houver cliente e sessão autenticada |
 | Invocação de integrações gerenciadas no cliente | UNVERIFIED | [Inventário](INTEGRATION-MANAGEMENT.md) e provas delimitadas no [registro nativo](NATIVE-CLIENT-VALIDATION.md) | Separar descoberta pessoal, instalação gerenciada e execução real por integração |
 | Segurança de produção, scanners e advisories | UNVERIFIED | Auditoria nativa em fixture sintética; [política de segurança](../SECURITY.md) | Nenhuma certificação de produção ou varredura geral nesta retomada |
-| Instalação limpa do pacote rc.3 | PASS | Smoke Windows isolado, 320 arquivos, CLI, ambos os roots, catálogo QUICK/FULL, instalação repetida, update idempotente e rollback | A CI final ainda precisa empacotar e validar a mesma revisão |
+| Instalação limpa do pacote rc.3 | PASS | Smoke Windows isolado, 320 arquivos, CLI, ambos os roots, catálogo QUICK/FULL, instalação repetida, update idempotente e rollback | Nenhuma pendência local do pacote |
 | Suíte local completa | PASS | `npm.cmd test`: 116 aprovados, zero falhas, ignorados ou cancelados nesta revisão candidata | Nenhuma; repetir somente se o código mudar |
 | CI de seis plataformas em `df74976` | PASS | [Run 41991406823](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41991406823) | Essa CI antecede o candidato rc.3 |
-| CI final do candidato rc.3 | UNVERIFIED | Será executada na revisão candidata publicada para avaliação | Aguardar os seis jobs antes de publicar o pré-release |
+| CI do código candidato rc.3 | PASS | [Run 41997881118](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41997881118), seis jobs verdes no commit `3a8aae4` | O follow-up de publicação altera somente documentação de status |
 | Coerência dos documentos EN/PT-BR/ES | PASS | READMEs, relatório, política de segurança, PostgreSQL e homologação Claude revisados | Claude continua sem homologação nativa |
 | Economia total de tokens | UNVERIFIED | Ilustração conceitual nos READMEs; benchmark pareado não medido | Não anunciar percentual como resultado do AgentVigor |
 | Estável v1.0.0 | BLOCKED | Claude real e gates finais de candidato pendentes | Não publicar estável enquanto requisitos essenciais estiverem bloqueados |
 
-O [v0.3.0-rc.2](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2) e seus assets permanecem preservados. O candidato rc.3 foi validado localmente; sua publicação depende da CI de seis plataformas. A aceitação completa do Vibe Toolkit não é reivindicada.
+O [v0.3.0-rc.2](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/releases/tag/v0.3.0-rc.2) e seus assets permanecem preservados. O código candidato rc.3 passou a suíte local e os seis jobs de CI; o commit de follow-up registra somente o resultado e não altera código. A aceitação completa do Vibe Toolkit não é reivindicada.
 
 ### Reprodução em PowerShell
 
@@ -98,14 +98,15 @@ The A–J table above links the requested deliverables and their evidence. All
 AgentVigor adds global skills, five original specialists, the CLI, scoped plans,
 optional integration management and rollback to the upstream Vibe resources.
 
-The prior checkpoint records six passing CI jobs on commit `df74976`; this
-candidate's 116-test local suite and package smoke also passed.
+The prior checkpoint records six passing CI jobs on commit `df74976`. Candidate
+rc.3 passed the 116-test local suite, package smoke and six CI jobs on code
+commit `3a8aae4` ([run 41997881118](https://github.com/TheRafaelSantos/AgentVigor-Toolkit/actions/runs/41997881118)).
 The native FULL audit, two-worker wave and live PostgreSQL migration also passed
 in bounded fixtures. Claude Code acceptance is BLOCKED because no client
 launcher was found during the 2026-11-05 retake. Managed integration invocation,
 production security scanning and the final candidate's package/CI gates remain
-UNVERIFIED. The pause checkpoint itself has no CI; the rc.3 matrix remains to
-run before publication.
+UNVERIFIED. The pause checkpoint itself had no CI. The rc.3 code candidate
+passed; a following documentation-only commit records that result.
 The local inventory separates installation from configuration, discovery and
 invocation. Windows official smokes and the six-job package/code matrix cover
 different validation scopes. The [PostgreSQL record](NEXT-POSTGRES-PRESET.md)
@@ -113,9 +114,10 @@ includes a real PostgreSQL 16.15 migration in WSL/Linux, repeat migration and
 transaction rollback. Total token savings have not been measured.
 
 The rc.1 and rc.2 pre-release artifacts remain preserved. Candidate rc.3 updates
-acceptance records and security/reporting guidance; its local suite and isolated
-package smoke passed. Publication still requires its six-job CI matrix. Use the
-reproduction commands above with `npm` on macOS/Linux.
+acceptance records and security/reporting guidance. Its local suite, isolated
+package smoke and six CI jobs passed on code commit `3a8aae4`; the follow-up
+commit only records the result. Use the reproduction commands above with `npm`
+on macOS/Linux.
 
 ## Español
 
@@ -137,6 +139,7 @@ PostgreSQL 16.15 en WSL/Linux, repetición y rollback transaccional. El ahorro
 total de tokens sigue sin medición controlada.
 
 Los artefactos pre-release rc.1 y rc.2 siguen intactos. El candidato rc.3
-actualiza los registros de aceptación y la política de seguridad; la suite local
-y el smoke aislado del paquete pasaron. Aún requiere la matriz CI de seis jobs.
-Usa los comandos anteriores con `npm` en macOS/Linux.
+actualiza los registros de aceptación y la política de seguridad. La suite local,
+el smoke aislado y los seis trabajos CI pasaron en el commit de código `3a8aae4`;
+el commit siguiente solo registra el resultado. Usa los comandos anteriores con
+`npm` en macOS/Linux.
