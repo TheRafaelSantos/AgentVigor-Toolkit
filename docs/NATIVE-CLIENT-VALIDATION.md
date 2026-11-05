@@ -210,6 +210,16 @@ file, and produced all four structured artifacts, but the client exited one
 before final validation. It remains a failure, with `passed: false`; artifacts
 and the pre-extraction receipt are retained. No full-audit acceptance is claimed.
 
+After rc.2, the audit verifier was tightened to inspect only artifacts collected
+from the current fixture. A retained JSON file from an older attempt cannot
+satisfy a missing current artifact. It checks four nonempty files, unique finding
+IDs, cross-references in all three Markdown reports, required evidence fields
+and both seeded defects. Regression tests reject missing/malformed JSON,
+duplicate IDs, inconsistent handoff IDs and a missing seeded defect. The native
+runner also retains terminal error events privately for diagnosis. An artificial
+24-KiB report limit was removed because it caused report rewriting and is not an
+upstream acceptance requirement. This does not waive any procedure check.
+
 The runner requires no existing managed AgentVigor installation, temporarily
 installs the six skills and restores the prior state in `finally`. Reports and
 observations stay in ignored `out/`. A timeout or missing observation remains a

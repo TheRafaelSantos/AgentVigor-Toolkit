@@ -62,11 +62,17 @@ npm.cmd test
 node scripts/smoke-find-skills.mjs --allow-network
 ```
 
-The official Windows smoke covers both native destinations, version/integrity,
+The official Windows and Ubuntu/WSL smokes cover both native destinations, version/integrity,
 manifest registration, idempotency and offline rollback. It does not open either
 client, authenticate a user or prove a skill invocation. Cross-platform CI tests
 the transaction with an injected installer; those tests do not prove the official
 CLI on platforms where the network smoke has not run.
+
+On 2026-11-05 the unchanged official smoke also passed under Ubuntu/WSL with
+Linux Node 24.15.0, the official Skills CLI, native Git and a Linux-only PATH.
+Both Codex and Claude destinations passed install, pinned manifest, registration,
+offline repeat and offline rollback. The test created only disposable profiles;
+no native Claude client was invoked. macOS official CLI acceptance remains pending.
 
 Validation record for this change (2026-11-04, Brazil time): the complete Windows
 suite passed 91/91 tests; the nine RTK/Find Skills transaction tests also passed
@@ -132,7 +138,8 @@ Se restar um bloqueio, confirme que nenhum instalador está ativo antes de remov
 somente a pasta vazia `write.lock`. As pastas devem permanecer sob controle do
 dono da conta durante a execução. O teste oficial acima instala e desfaz em
 perfis descartáveis e exige autorização de rede explícita. Ele valida os dois
-destinos no Windows, mas não abre Codex/Claude nem comprova invocação real.
+destinos no Windows e no Ubuntu/WSL (Node Linux 24.15.0), mas não abre
+Codex/Claude nem comprova invocação real. O smoke oficial de macOS segue pendente.
 O CI usa um instalador simulado para testar a transação nos outros sistemas.
 A funcionalidade está na branch `main`, posterior à versão `v0.2.0-rc.1`.
 
@@ -178,6 +185,7 @@ node scripts/smoke-find-skills.mjs --allow-network
 Una interrupción requiere rollback con la misma raíz. Si queda un bloqueo,
 confirma que ningún instalador está activo antes de eliminar únicamente su
 directorio vacío `write.lock`. El smoke oficial requiere consentimiento de red
-y usa perfiles desechables. Comprueba ambos destinos en Windows; no abre clientes
+y usa perfiles desechables. Comprueba ambos destinos en Windows y Ubuntu/WSL
+(Node Linux 24.15.0); macOS sigue pendiente. No abre clientes
 ni prueba invocaciones. CI usa un instalador simulado para las transacciones de
 otros sistemas. Esta capacidad está en `main`, después de `v0.2.0-rc.1`.

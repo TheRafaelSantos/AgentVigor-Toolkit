@@ -8,6 +8,7 @@ import { detectTools } from '../lib/platform.mjs';
 import { runFile } from '../lib/process.mjs';
 import { readProjectFile } from '../skills/agentvigor-toolkit/scripts/process.mjs';
 import pkg from '../package.json' with { type: 'json' };
+import { validateAuditArtifacts } from './audit-artifacts.mjs';
 
 const executable = process.argv[2];
 assert.ok(isAbsolute(executable || '') && process.argv.includes('--allow-live'),
@@ -54,7 +55,7 @@ const cases = [
   { id: 'panel', workflow: 'multi-agent-code-review', sourceFile: '03-multi-agent-code-review.md',
     sandbox: 'read-only', prompt: 'Review the unstaged Git diff against HEAD using the full original multi-agent-code-review procedure. Establish the base commit and freeze the current working-tree snapshot before dispatch. Use one independent general-quality reviewer and one security reviewer in the same dispatch batch. Pure JavaScript backend without a framework permits dropping static-typing/framework lenses with reasons. Each reviewer is read-only. After both report, verify against the connected caller contract and tests, deduplicate by cause and produce one ranked report with reviewer attribution, failure scenarios, checks and limits. One panel round is authorized. Do not fix files or publish anything.' },
   { id: 'audit', workflow: 'security-audit', sourceFile: '16-security-audit.md',
-    sandbox: 'workspace-write', prompt: 'Execute the full security-audit procedure in AUDIT mode for this entire small synthetic repository. Authorize only local static analysis and safe in-memory Node checks after inspecting the test source. Write all four prescribed artifacts in private-audit/ after verifying its Git-ignore status. Produce SECURITY-AUDIT.md, SECURITY-FINDINGS.json (schemaVersion 1 and a findings array), REMEDIATION-PROMPTS.md and AUDIT-HANDOFF.md. Keep stable finding IDs, severity, confidence, concrete evidence, counterevidence, coverage and first-batch remediation. Inventory all interfaces, dependencies and runtime. Mark nonexistent HTTP, browser, deployment and account surfaces N/A with reasons. SOURCES.md records current public guidance checked by the coordinator. Document unavailable scans and advisory coverage explicitly. Limit report writes to private-audit/. Preserve every source/config/test file and do not apply fixes or install anything. The entire fixture has only six files and no dependencies. Keep the combined reports under 24 KiB, using concise evidence tables and references between artifacts instead of repeating prose. Do not create fictional surfaces or findings to fill a checklist. Complete the four reports and verify JSON syntax and finding-ID consistency before the final answer.' },
+    sandbox: 'workspace-write', prompt: 'Execute the full security-audit procedure in AUDIT mode for this entire small synthetic repository. Authorize only local static analysis and safe in-memory Node checks after inspecting the test source. Write all four prescribed artifacts in private-audit/ after verifying its Git-ignore status. Produce SECURITY-AUDIT.md, SECURITY-FINDINGS.json (schemaVersion 1 and a findings array), REMEDIATION-PROMPTS.md and AUDIT-HANDOFF.md. Keep stable finding IDs, severity, confidence, concrete evidence, counterevidence, coverage and first-batch remediation. Inventory all interfaces, dependencies and runtime. Mark nonexistent HTTP, browser, deployment and account surfaces N/A with reasons. SOURCES.md records current public guidance checked by the coordinator. Document unavailable scans and advisory coverage explicitly. Limit report writes to private-audit/. Preserve every source/config/test file and do not apply fixes or install anything. The entire fixture has only six files and no dependencies. Use concise evidence tables and references between artifacts instead of repeating prose. Report completeness and final validation take priority over an arbitrary output size. Do not create fictional surfaces or findings to fill a checklist. Complete the four reports and verify JSON syntax and finding-ID consistency before the final answer.' },
 ];
 let installed = false;
 let failed = false;
@@ -98,6 +99,9 @@ try {
       const completed = events.filter(event => event.type === 'item.completed').map(event => event.item);
       const commands = completed.filter(item => item?.type === 'command_execution' && item.exit_code === 0);
       const final = completed.filter(item => item?.type === 'agent_message').at(-1)?.text ?? '';
+      const failures = events.filter(event => event.type === 'error' || event.type === 'turn.failed')
+        .map(event => ({ type: event.type, message: event.message ?? event.error?.message ?? null }));
+      await writeFile(resolve(`out/codex-full-${sample.id}-failures.json`), JSON.stringify(failures, null, 2), { mode: 0o600 });
       const observed = { case: sample.id, code: result.code,
         ...(result.processError ? { processError: result.processError } : {}),
         fullRead: commands.some(command => command.command.includes(sample.sourceFile)),
@@ -114,22 +118,20 @@ try {
       } else {
         const names = ['SECURITY-AUDIT.md', 'SECURITY-FINDINGS.json', 'REMEDIATION-PROMPTS.md', 'AUDIT-HANDOFF.md'];
         observed.artifacts = [];
+        const currentArtifacts = {};
         const output = resolve('out', 'full-security-artifacts');
         await mkdir(output, { recursive: true });
         for (const name of names) {
           try {
             const bytes = await readProjectFile(cwd, `private-audit/${name}`, 256 * 1024, 'AUDIT_ARTIFACT_INVALID');
             if (!bytes) continue;
+            currentArtifacts[name] = bytes.toString('utf8');
             await writeFile(join(output, name), bytes, { mode: 0o600 });
             observed.artifacts.push({ name, bytes: bytes.length, sha256: digest(bytes) });
           } catch (error) { if (error.code !== 'ENOENT') throw error; }
         }
         observed.fourArtifacts = observed.artifacts.length === 4;
-        try {
-          const data = JSON.parse(await readFile(join(output, 'SECURITY-FINDINGS.json'), 'utf8'));
-          observed.structuredFindings = data.schemaVersion === 1 && Array.isArray(data.findings) &&
-            data.findings.some(finding => /tenant/i.test(JSON.stringify(finding)));
-        } catch { observed.structuredFindings = false; }
+        observed.structuredFindings = validateAuditArtifacts(currentArtifacts);
       }
       observed.passed = observed.code === 0 && Object.values(observed).every(value => value !== false);
       await writeFile(resolve(`out/codex-full-${sample.id}.json`), JSON.stringify({ ...observed, final, eventItemTypes: [...new Set(completed.map(item => item?.type))] }, null, 2));
