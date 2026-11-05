@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add explicit QUICK and FULL catalog modes. FULL includes localized guidance and the complete pinned upstream procedure in its original language.
+- Distribute the entire upstream snapshot offline with per-file hashes, local prompt/guide link checks and MIT attribution. Store the original gitignore as gitignore.txt for npm packaging.
+- Add a parity matrix separating complete instructions, adapted executors, external prerequisites and pending client verification.
+- Verify 79 tests and a 275-file installed package on Windows for this increment.
+
 ## 0.2.0-rc.1
 
 - Incorporate the audited Vibe Coding Toolkit workflows and selected MIT templates and code, with attribution to Matheus Gomes and per-file provenance.

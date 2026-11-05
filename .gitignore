@@ -4,6 +4,7 @@ node_modules/
 .env
 .env.*
 !skills/agentvigor-toolkit/references/upstream/templates/next/.env.example
+!skills/agentvigor-toolkit/references/full/source/templates/next/.env.example
 .agentvigor-test-*/
 .runtime fixtures */
 test/.tmp-*/

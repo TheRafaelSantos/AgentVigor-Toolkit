@@ -22,7 +22,7 @@ const commands = {
   update: '--dry-run --yes --json',
   benchmark: '--input --json',
   rollback: '--all --dry-run --yes --json',
-  catalog: '--id --json',
+  catalog: '--id --mode --json',
   project: '--mode --template --path --dry-run --yes --json',
   quality: '--path --dry-run --yes --json',
   harness: '--path --dry-run --yes --json',
@@ -77,7 +77,7 @@ function help(t, command) {
     install: '--agent auto|codex|claude|both  --profile minimal|balanced|rigorous\n  --dry-run  --yes  --json  --telemetry',
     monitor: '--interval <1..3600>  --once  --no-clear',
     benchmark: '--input <file.json>  --json',
-    catalog: '--id <workflow>  --lang en|pt-BR|es  --json',
+    catalog: '--id <workflow>  --mode quick|full  --lang en|pt-BR|es  --json',
     project: '--mode init|adopt|status|rollback  --template docs|eslint|harness|next\n  --path <directory>  --dry-run  --yes  --json',
   };
   console.log(`AgentVigor Toolkit ${pkg.version}\n\n${t('usage')}\n  agentvigor ${command ?? '<command>'} [options]`);
@@ -254,7 +254,7 @@ async function main(args) {
     const context = { home: homedir(), env, version: pkg.version };
     if (command === 'catalog') {
       const { catalog } = await import('../skills/agentvigor-toolkit/scripts/catalog.mjs');
-      const result = await catalog({ id: values.id, lang: values.lang ?? detectedLanguage });
+      const result = await catalog({ id: values.id, mode: values.mode, lang: values.lang ?? detectedLanguage });
       if (values.json) console.log(JSON.stringify(result, null, 2));
       else if (result.content) console.log(result.content.trimEnd());
       else for (const entry of result.entries) console.log(`  ${entry.id}  ${entry.title ?? entry.description}`);

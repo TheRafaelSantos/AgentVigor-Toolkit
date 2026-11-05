@@ -28,7 +28,8 @@ try {
   assert.equal(packed.entryCount, packed.files.length);
   for (const { path } of packed.files) {
     assert.match(path, /^(LICENSE$|README[^/]*\.md$|CHANGELOG\.md$|CONTRIBUTING\.md$|THIRD_PARTY_NOTICES\.md$|package\.json$|(?:bin|lib|skills|docs|benchmarks)\/)/);
-    if (path === 'skills/agentvigor-toolkit/references/upstream/templates/next/.env.example') continue;
+    if (['skills/agentvigor-toolkit/references/upstream/templates/next/.env.example',
+      'skills/agentvigor-toolkit/references/full/source/templates/next/.env.example'].includes(path)) continue;
     assert.doesNotMatch(path, /(?:^|\/)(?:\.env(?:\.|$)|.*\.(?:db|sqlite|pem|log|key)$)/i);
   }
   const tarball = join(temp, packed.filename);
@@ -67,6 +68,12 @@ try {
   }
   const catalog = JSON.parse(node([entry, 'catalog', '--lang', 'es', '--json'], env));
   assert.equal(catalog.entries.length, 16);
+  const full = JSON.parse(node([entry, 'catalog', '--id', 'development-environment-setup',
+    '--mode', 'full', '--lang', 'pt-BR', '--json'], env));
+  assert.equal(full.mode, 'full');
+  assert.ok(full.content.length > 10000);
+  await access(join(home, '.agents', 'skills', 'agentvigor-toolkit', 'references', 'full',
+    'source', 'templates', 'next', '.env.example'));
   const project = join(temp, 'example project');
   await mkdir(project);
   node([entry, 'project', '--mode', 'init', '--path', project, '--template', 'docs', '--yes'], env);

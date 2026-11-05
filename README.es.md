@@ -1,5 +1,7 @@
 # AgentVigor Toolkit
 
+Los procedimientos completos están disponibles offline con `agentvigor catalog --id development-environment-setup --mode full --lang es`. QUICK sigue como predeterminado. FULL conserva el idioma original y añade orientaciones localizadas. Consulta la [auditoría de paridad](docs/upstream-audit/PARITY.md) para ver evidencias y pendientes.
+
 [English](README.md) · [Português brasileiro](README.pt-BR.md) · [Español](README.es.md)
 
 Candidato `0.2.0-rc.1`. Consulta la [guía de integración de Vibe](docs/es/VIBE-INTEGRATION.md) y la [matriz de funcionalidades](docs/upstream-audit/MATRIX.md). El [registro inicial](docs/RELEASE-CANDIDATE.md) documenta `0.1.0-rc.1`.
